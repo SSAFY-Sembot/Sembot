@@ -1,6 +1,6 @@
 ## 이슈
 
-Jira 이슈 : [S11P21S102-4](https://ssafy.atlassian.net/browse/S11P31S102-4)
+Jira 이슈 : [S11P31S102-](https://ssafy.atlassian.net/browse/S11P31S102-)
 
 ## 개요
 이 Merge Request는 사용자 로그인 기능을 추가합니다.
