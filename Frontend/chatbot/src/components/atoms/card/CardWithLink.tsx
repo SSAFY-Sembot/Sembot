@@ -1,7 +1,7 @@
 import linkIcon from '@/assets/icons/link.svg';
 import React from 'react' ;
 
-interface CardWithLinkProps{
+export interface CardWithLinkProps{
     content: string;
     resourceLink: string;
 }
@@ -17,3 +17,5 @@ const CardWithLink: React.FC<CardWithLinkProps> = ({content, resourceLink}) =>{
         </div>
     )
 }
+
+export default CardWithLink;
