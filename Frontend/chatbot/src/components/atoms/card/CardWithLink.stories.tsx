@@ -1,17 +1,31 @@
-// src/CardWithLink.stories.tsx
 import React from 'react';
-import CardWithLink, { CardWithLinkProps } from '@components/atoms/card/CardWithLink';
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
+import CardWithLink, { CardWithLinkProps } from './CardWithLink';
 
-export default {
-    title: 'Example/CardWithLink',
-    component: CardWithLink,
-} as Meta;
+const meta: Meta<typeof CardWithLink> = {
+  title: 'Components/CardWithLink',
+  component: CardWithLink,
+  tags: ['autodocs'],  // 자동 문서화를 위해 사용
+  argTypes: {
+    content: { control: 'text' },
+    resourceLink: { control: 'text' },
+  },
+};
 
-const Template: StoryFn<CardWithLinkProps> = (args) => <CardWithLink {...args} />;
+export default meta;
 
-export const Default = Template.bind({});
-Default.args = {
-    content: '이것은 카드의 내용입니다.',
-    resourceLink: 'https://www.example.com',
+type Story = StoryObj<CardWithLinkProps>;
+
+export const Default: Story = {
+  args: {
+    content: '테스트 콘텐츠',
+    resourceLink: 'https://example.com',
+  },
+};
+
+export const NoLink: Story = {
+  args: {
+    content: '링크가 없는 카드',
+    resourceLink: '',
+  },
 };
