@@ -9,13 +9,13 @@ interface TableHeaderProps {
 
 const TableHeader: React.FC<TableHeaderProps> = ({ 
   columns,
-  width = "6rem"
+  width = "auto"
 }) => {
   return (
     <thead>
       <tr>
         {columns.map((column, index) => (
-          <th key={index} className={`w-[${width}]`}>
+          <th key={index} style={{width}} className={`text-left px-4 py-2`}>
             {column}
           </th>
         ))}
