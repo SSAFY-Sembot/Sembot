@@ -22,10 +22,3 @@ export const Default: Story = {
     resourceLink: 'https://example.com',
   },
 };
-
-export const NoLink: Story = {
-  args: {
-    content: '링크가 없는 카드',
-    resourceLink: '',
-  },
-};
