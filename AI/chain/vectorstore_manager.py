@@ -37,7 +37,7 @@ def create_vectorstore(pdf_path, vectorstore_path, embeddings):
     return vectorstore
 
 
-def create_conversion_memory(memory_key, output_key):
+def create_conversaion_memory(memory_key, output_key):
     # 메모리 컴포넌트 생성
     memory = ConversationBufferWindowMemory(
         return_messages=True,
