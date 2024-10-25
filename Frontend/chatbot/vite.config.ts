@@ -7,8 +7,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@Components': path.resolve(__dirname, 'src/components')
-    
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@': path.resolve(__dirname, 'src'), // '@'를 'src'로 매핑
     },
   },
 });
