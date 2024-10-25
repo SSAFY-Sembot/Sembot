@@ -20,5 +20,14 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+ 
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "src", // src 폴더를 기준으로 설정
+    "paths": {
+      "@components/*": ["components/*"] // 절대 경로 설정 예시
+    }
+  },
+  "include": ["src/**/*"], // 포함할 파일 경로
+  "exclude": ["node_modules", "build"] // 제외할 파일 경로
 }
