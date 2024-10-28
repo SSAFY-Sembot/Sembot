@@ -10,6 +10,9 @@ const Devpage = () => {
 				<li>
 					<Link to="/buttonicon">btn-w-icon</Link>
 				</li>
+				<li>
+					<Link to="/paging">paging</Link>
+				</li>
 			</ul>
 		</div>
 	);
