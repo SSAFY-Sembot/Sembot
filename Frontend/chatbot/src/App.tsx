@@ -13,14 +13,19 @@ function App() {
 				<Route path="/" element={<Devpage />} />
 				<Route
 					path="/button"
-					element={<ButtonPrimary btnName="Hello" bgColor="bg-slate-300" />}
+					element={
+						<ButtonPrimary
+							btnName="Hello"
+							styleName="bg-slate-500 rounded-lg py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md hover:shadow-lg"
+						/>
+					}
 				/>
 				<Route
 					path="/buttonicon"
 					element={
 						<ButtonWithIcon
 							btnName="Hello"
-							bgColor="bg-slate-300"
+							styleName="flex items-center justify-center middle none center rounded-lg bg-slate-300 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
 							icon={plus}
 						/>
 					}
