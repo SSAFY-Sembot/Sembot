@@ -16,6 +16,6 @@ export const Board = {
   args: {
     columns: ["","작성자","제목","등록일"],
     iconPath: "/src/assets/icons/favorite.svg",
-    iconOnClick: ()=>console.log("즐겨찾기 토글")
+    onIconClick: ()=>console.log("즐겨찾기 토글")
   },
 };
