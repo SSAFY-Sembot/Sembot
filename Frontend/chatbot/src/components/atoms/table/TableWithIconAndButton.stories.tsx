@@ -29,7 +29,7 @@ export const User = {
         iconPath: "/src/assets/icons/user-profile-ex.svg"
       }
     ],
-    buttonOnClick: ()=>console.log("정보 변경 모달 생성")
+    onButtonClick: ()=>console.log("정보 변경 모달 생성")
   },
   parameters: {
     backgrounds: {

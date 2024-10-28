@@ -11,7 +11,7 @@ interface TableRowWithIconAndButtonProps {
   /** 아이콘 경로 */
   iconPath : string;
   /** 아이콘 click handler */
-  iconOnClick?: () => void;
+  onIconClick?: () => void;
 }
 
 const TableRowWithIconAndButton: React.FC<TableRowWithIconAndButtonProps> = ({ 
@@ -19,12 +19,12 @@ const TableRowWithIconAndButton: React.FC<TableRowWithIconAndButtonProps> = ({
   width = "auto",
   textColor = "#000000",
   iconPath,
-  iconOnClick
+  onIconClick
 }) => {
   return (
     <tr className='text-left bg-white'>
       <td className='pl-5 max-w-[6rem]'>
-        <ButtonOnlyIcon icon={iconPath} onClick={iconOnClick}/>
+        <ButtonOnlyIcon icon={iconPath} onClick={onIconClick}/>
       </td>
       {columns.map((column, index) => (
         <td key={index} style={{width, color: textColor}} className='px-4 py-2 max-w-[50rem] truncate'>

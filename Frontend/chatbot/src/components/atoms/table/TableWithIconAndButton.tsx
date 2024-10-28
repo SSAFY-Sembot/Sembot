@@ -19,7 +19,7 @@ interface TableWithIconAndButtonProps {
   /** 테이블 data 버튼 라벨 */
   buttonLabel? : string;
   /** 테이블 data 버튼 click handler */
-  buttonOnClick?: () => void;
+  onButtonClick?: () => void;
 }
 
 const TableWithIconAndButton: React.FC<TableWithIconAndButtonProps> = ({ 
@@ -27,7 +27,7 @@ const TableWithIconAndButton: React.FC<TableWithIconAndButtonProps> = ({
   rows,
   width = "auto",
   buttonLabel = "정보 변경",
-  buttonOnClick,
+  onButtonClick,
 }) => {
   return (
     <table className="min-w-full border-separate border-spacing-y-1">
@@ -40,7 +40,7 @@ const TableWithIconAndButton: React.FC<TableWithIconAndButtonProps> = ({
               width={width}
               iconPath={row.iconPath}
               buttonLabel={buttonLabel} 
-              buttonOnClick={buttonOnClick}
+              onButtonClick={onButtonClick}
             />
           ))}
         </tbody>
