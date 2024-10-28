@@ -11,6 +11,8 @@ interface DropdownProps {
   searchPlaceholder?: string;
   /** 아이템 선택 시 실행될 콜백 함수 */
   onSelect?: (item: string) => void;
+  /** 추가될 속성값 */
+  className?: string;
 }
 
 /**
@@ -21,22 +23,18 @@ interface DropdownProps {
  * - 선택된 항목이 버튼에 표시됨
  */
 const Dropdown: React.FC<DropdownProps> = ({
-  // 아이템이 제공되지 않았을 때의 기본값
+  /** 기본 값 할당 */
   items = [],
   buttonLabel = "전체",
   width = "10rem",
   searchPlaceholder = "검색",
   onSelect,
+  className = "",
 }) => {
-  // 드롭다운의 열림 / 닫힘 상태를 관리
-  const [isOpen, setIsOpen] = useState(false);
-  // 검색어 관리
-  const [searchTerm, setSearchTerm] = useState("");
-  // 현재 선택된 항목 관리
-  const [selectedItem, setSelectedItem] = useState(buttonLabel);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedItem, setSelectedItem] = useState<string>(buttonLabel);
 
-  // 검색어에 따라 아이템 필터링 로직
-  // 대소문자 구분 없이 검색어를 포함하는 아이템만 필터링
   const filteredItems = items.filter((item) =>
     item.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -71,17 +69,14 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <div
-      className="relative group inline-block dropdown-container"
+      className={`relative group items-center inline-block dropdown-container border border-gray-300 rounded-md ${className}`}
       style={{ width }}
     >
-      {/** 드롭다운 열고 닫는 버튼 */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
+        className="h-12 inline-flex justify-center w-full px-5 py-4 text-sm font-medium text-gray-700 bg-white focus:outline-none focus:ring-0 "
       >
         <span className="mr-2 truncate">{selectedItem}</span>
-
-        {/** 드롭다운 화살표 아이콘 (열림 / 닫힘 상태에 따라 180도 회전) */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={`w-5 h-5 ml-2 -mr-1 transition-transform duration-200 ${
@@ -99,27 +94,23 @@ const Dropdown: React.FC<DropdownProps> = ({
         </svg>
       </button>
 
-      {/** 드롭다운 메뉴 (열렸을 때만 표시) */}
       {isOpen && (
-        <div className="absolute right-0 w-full mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1 z-50">
-          {/** 검색 입력창 */}
+        <div className="absolute right-0 w-full mt-2 rounded-md shadow-lg bg-white ring-0 ring-black ring-opacity-5 p-1 space-y-1 z-50">
           <input
-            className="block w-full px-4 py-2 text-gray-800 border rounded-md border-gray-300 focus:outline-none"
+            className="block w-full px-4 py-2 text-gray-800 border rounded-md border-gray-300 focus:outline-none focus:ring-0 hover:bg-transparent"
             type="text"
             placeholder={searchPlaceholder}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            onClick={(e) => e.stopPropagation()} // 입력창 클릭 시 드롭다운이 닫히지 않도록 함
+            onClick={(e) => e.stopPropagation()}
           />
 
-          {/** 필터링된 아이템 목록을 표시하는 영역 */}
           <div className="max-h-60 overflow-auto">
             {filteredItems.length > 0 ? (
-              // 필터링된 아이템이 있는 경우
               filteredItems.map((item, index) => (
                 <div
                   key={index}
-                  className={`block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md ${
+                  className={`block px-4 py-2 text-gray-700 cursor-pointer rounded-md ${
                     selectedItem === item ? "bg-gray-100" : ""
                   }`}
                   onClick={() => handleSelect(item)}
@@ -128,7 +119,6 @@ const Dropdown: React.FC<DropdownProps> = ({
                 </div>
               ))
             ) : (
-              // 필터링된 아이템이 없는 경우
               <div className="px-4 py-2 text-gray-500 text-center">
                 검색 결과가 없습니다
               </div>
