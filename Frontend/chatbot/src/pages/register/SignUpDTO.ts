@@ -4,6 +4,6 @@ export interface SignUpDTO{
     nickname: string;
     department: string;
     password: string;
-    passwordcheck: string;
+    passwordVerify: string;
     
 }

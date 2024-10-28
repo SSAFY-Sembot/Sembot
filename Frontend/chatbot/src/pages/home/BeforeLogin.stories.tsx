@@ -9,10 +9,7 @@ const meta: Meta<typeof Layout> = {
     title: 'COMPONENTS/PAGES/HOME/BEFORELOGIN',
     component: BeforeLogin,
     tags: ['autodocs'],  // 자동 문서화를 위해 사용
-    argTypes: {
-      content: { control: 'text' },
-      resourceLink: { control: 'text' },
-    },
+   
 }
 
 export default meta;
