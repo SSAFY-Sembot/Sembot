@@ -13,7 +13,7 @@ interface TableRowWithIconAndButtonProps {
   /** 버튼 라벨 */
   buttonLabel : string;
   /** 버튼 click handler */
-  buttonOnClick?: () => void;
+  onButtonClick?: () => void;
 }
 
 const TableRowWithIconAndButton: React.FC<TableRowWithIconAndButtonProps> = ({ 
@@ -22,7 +22,7 @@ const TableRowWithIconAndButton: React.FC<TableRowWithIconAndButtonProps> = ({
   textColor = "#718EBF",
   iconPath,
   buttonLabel,
-  buttonOnClick
+  onButtonClick
 }) => {
   return (
     <tr className='text-left bg-white'>
@@ -35,8 +35,8 @@ const TableRowWithIconAndButton: React.FC<TableRowWithIconAndButtonProps> = ({
         </td>
       ))}
       <td style={{width}} className='px-2 py-2 rounded-r-2xl max-w-[10rem]'>
-        {/* <button className='border-indigo-300' onClick={buttonOnClick}>{buttonLabel}</button> */}
-        <ButtonPrimary btnName={buttonLabel} styleName='border-indigo-400 text-indigo-400 py-1 px-4 rounded-2xl hover:bg-indigo-400 hover:text-white' onClick={buttonOnClick}/>
+        {/* <button className='border-indigo-300' onClick={onButtonClick}>{buttonLabel}</button> */}
+        <ButtonPrimary btnName={buttonLabel} styleName='border-indigo-400 text-indigo-400 py-1 px-4 rounded-2xl hover:bg-indigo-400 hover:text-white' onClick={onButtonClick}/>
       </td>
     </tr>
   );

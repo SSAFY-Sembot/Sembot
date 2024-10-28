@@ -27,7 +27,7 @@ export const User = {
       }
     ],
     iconPath: "/src/assets/icons/favorite.svg",
-    iconOnClick: ()=>console.log("즐겨찾기 생성")
+    onIconClick: ()=>console.log("즐겨찾기 생성")
   },
   parameters: {
     backgrounds: {
