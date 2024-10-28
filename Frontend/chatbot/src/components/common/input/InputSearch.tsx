@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 interface InputSearchProps {
+  /** Input란에 띄워질 메세지 */
   placeholder?: string;
 }
 
@@ -18,7 +19,7 @@ const InputSearch: React.FC<InputSearchProps> = ({ placeholder = "Search" }) => 
         value={inputValue}
         onChange={handleInputChange}
         placeholder={placeholder}
-        className="bg-gray-100 h-12 w-full px-5 pr-10 text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="rounded-md h-12 w-full px-5 pr-10 text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       <button type="submit" className="absolute right-0 top-0 mt-1 mr-2">
         <svg
