@@ -21,7 +21,7 @@ export const Chat: Story = {
   args: {
     placeholder: "입력하는 곳",
     iconPath: "/src/assets/icons/send.svg",
-    onIconClick: (message: string) => console.log(message),
-    className: "sm:w-[20rem] md:w-[30rem] lg:w-[50rem]",
+    onIconClick: (message : string)=>console.log(message),
+    className: ""
   },
 };
