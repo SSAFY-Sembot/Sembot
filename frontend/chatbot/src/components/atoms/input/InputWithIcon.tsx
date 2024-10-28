@@ -49,7 +49,7 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         style={{backgroundColor:bgColor,borderColor,color:textColor}}
-        className={`rounded-md h-12 w-full max-w-3xl px-5 pr-10 text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
+        className={`rounded-md h-12 sm:w-[20rem] md:w-[30rem] lg:w-[50rem] w-full max-w-3xl px-5 pr-10 text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
       />
       <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pr-3">
         <ButtonWithIcon icon={iconPath} onClick={onClick}/>
