@@ -3,7 +3,7 @@ import type { Meta } from '@storybook/react';
 import TableWithIconAndButton from './TableWithIconAndButton';
 
 const meta: Meta<typeof TableWithIconAndButton> = {
-  title: 'COMPONENTS/TABLE/TableWithIconAndButton',
+  title: 'COMPONENTS/ATOMS/TABLE/TableWithIconAndButton',
   component: TableWithIconAndButton,
   parameters: {
     layout: 'centered',

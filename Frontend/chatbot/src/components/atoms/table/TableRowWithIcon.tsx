@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonOnlyIcon from '../../button/ButtonOnlyIcon';
+import ButtonOnlyIcon from '../button/ButtonOnlyIcon';
 
 interface TableRowWithIconAndButtonProps {
   /** 컬럼에 입력되는 정보 */

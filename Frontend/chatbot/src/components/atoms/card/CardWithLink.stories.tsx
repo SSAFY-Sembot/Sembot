@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import CardWithLink, { CardWithLinkProps } from './CardWithLink';
 
 const meta: Meta<typeof CardWithLink> = {
-  title: 'Components/CardWithLink',
+  title: 'COMPONENTS/ATOMS/CARD/CardWithLink',
   component: CardWithLink,
   tags: ['autodocs'],  // 자동 문서화를 위해 사용
   argTypes: {

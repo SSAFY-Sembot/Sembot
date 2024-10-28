@@ -3,7 +3,7 @@ import type { Meta } from "@storybook/react";
 import TableHeader from "./TableHeader";
 
 const meta: Meta<typeof TableHeader> = {
-  title: 'COMPONENTS/TABLE/TableHeader',
+  title: 'COMPONENTS/ATOMS/TABLE/TableHeader',
   component: TableHeader,
   parameters: {
     layout: 'centered',

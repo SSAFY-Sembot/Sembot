@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import CardWithButton, { CardWithButtonProps } from "./CardWithButton";
 
 const meta: Meta<typeof CardWithButton> = {
-title: 'Components/CardWithButton',
+title: 'COMPONENTS/ATOMS/CARD/CardWithButton',
 component: CardWithButton,
 tags: ['autodocs'],
 argTypes: {
