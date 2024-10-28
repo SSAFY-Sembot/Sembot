@@ -17,7 +17,7 @@ interface TableRowWithIconProps {
   /** 테이블 row 아이콘 */
   iconPath? : string;
   /** 테이블 row 아이콘 click handler */
-  iconOnClick?: () => void;
+  onIconClick?: () => void;
 }
 
 const TableWithIconAndButton: React.FC<TableRowWithIconProps> = ({ 
@@ -25,7 +25,7 @@ const TableWithIconAndButton: React.FC<TableRowWithIconProps> = ({
   rows,
   width = "auto",
   iconPath = "정보 변경",
-  iconOnClick,
+  onIconClick,
 }) => {
   return (
     <table className="min-w-full border-collapse">
@@ -37,7 +37,7 @@ const TableWithIconAndButton: React.FC<TableRowWithIconProps> = ({
               columns={row.columns}
               width={width}
               iconPath={iconPath}
-              iconOnClick={iconOnClick}
+              onIconClick={onIconClick}
             />
           ))}
         </tbody>

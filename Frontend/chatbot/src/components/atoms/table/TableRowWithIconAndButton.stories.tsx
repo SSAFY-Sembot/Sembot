@@ -17,6 +17,6 @@ export const User = {
     columns: ["사번","이름","부서","회원레벨"],
     iconPath: "/src/assets/icons/user-profile-ex.svg",
     buttonLabel: "정보 변경",
-    buttonOnClick: ()=>console.log("정보 변경 모달 생성")
+    onButtonClick: ()=>console.log("정보 변경 모달 생성")
   },
 };
