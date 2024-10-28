@@ -4,7 +4,7 @@ import { Meta, Story } from "@storybook/react";
 import FeedbackCardWithHashtag from "./FeedbackCardWithHashtag";
 
 export default {
-  title: "chatbot/FeedbackCardWithHashtag",
+  title: "COMPONENTS/ATOMS/CARD/FeedbackCardWithHashtag",
   component: FeedbackCardWithHashtag,
 } as Meta;
 

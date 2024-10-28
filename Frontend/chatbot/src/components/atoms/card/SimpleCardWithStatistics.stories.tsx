@@ -5,7 +5,7 @@ import SimpleCardWithStatistics from "./SimpleCardWithStatistics";
 import lightBulb from "/src/assets/icons/light-bulb.svg";
 
 export default {
-  title: "Chatbot/SimpleCardWithStatistics",
+  title: "COMPONENTS/ATOMS/CARD/SimpleCardWithStatistics",
   component: SimpleCardWithStatistics,
 } as Meta;
 

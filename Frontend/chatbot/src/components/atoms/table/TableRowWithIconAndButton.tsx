@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonPrimary from '../../button/ButtonPrimary';
+import ButtonPrimary from '../button/ButtonPrimary';
 
 interface TableRowWithIconAndButtonProps {
   /** 컬럼에 입력되는 정보 */

@@ -3,7 +3,7 @@ import Card, { CardProps }  from './Card'; // CardProps를 import합니다.
 
 // Storybook에서 컴포넌트를 정의
 export default {
-  title: 'Atoms/Card', // 스토리북에서 보여줄 카테고리와 컴포넌트 이름
+  title: 'COMPONENTS/ATOMS/CARD/Card', // 스토리북에서 보여줄 카테고리와 컴포넌트 이름
   component: Card,
 };
 

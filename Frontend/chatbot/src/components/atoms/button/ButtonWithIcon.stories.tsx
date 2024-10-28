@@ -2,7 +2,7 @@ import React from "react";
 import ButtonWithIcon, { ButtonProps } from "./ButtonWithIcon";
 
 export default {
-	title: "Chatbot/ButtonWithIcon",
+	title: "COMPONENTS/ATOMS/BUTTON/ButtonWithIcon",
 	component: ButtonWithIcon,
 	// 여기서 기본 args를 설정합니다.
 	args: {
