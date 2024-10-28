@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Paging, { PagingProps } from "./Paging";
 
 export default {
-	title: "Chatbot/Paging",
+	title: "COMPONENTS/ATOMS/PAGING/Paging",
 	component: Paging,
 	// Storybook Controls를 통해서 수정 가능한 부분을 argTypes로 설정
 	argTypes: {

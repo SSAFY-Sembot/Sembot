@@ -1,10 +1,10 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import ButtonPrimary from "./components/common/button/ButtonPrimary";
-import ButtonWithIcon from "./components/common/button/ButtonWithIcon";
+import ButtonPrimary from "./components/atoms/button/ButtonPrimary";
+import ButtonWithIcon from "./components/atoms/button/ButtonWithIcon";
 import plus from "./assets/icons/plus.svg";
 import Devpage from "./Devpage";
-import Paging from "@components/common/paging/Paging";
+import Paging from "@components/atoms/paging/Paging";
 import { useState } from "react";
 
 function App() {
