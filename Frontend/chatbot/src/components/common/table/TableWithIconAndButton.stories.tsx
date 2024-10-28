@@ -35,7 +35,7 @@ export const User = {
     backgrounds: {
       default: 'black-bg', // 커스텀 배경 이름 설정
       values: [
-        { name: 'black-bg', value: '#000000' }, // 원하는 배경색 지정
+        { name: 'black-bg', value: '#888888' }, // 원하는 배경색 지정
       ],
     },
   },
