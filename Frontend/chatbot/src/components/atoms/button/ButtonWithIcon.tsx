@@ -1,13 +1,17 @@
-export type ButtonProps = {
+export interface ButtonProps {
 	btnName: string;
 	styleName: string;
 	icon: string;
 	// width: string
 	// TODO
 	// onClick: () => void;
-};
+}
 
-const ButtonWithIcon = ({ btnName, styleName, icon }: ButtonProps) => {
+const ButtonWithIcon: React.FC<ButtonProps> = ({
+	btnName,
+	styleName,
+	icon,
+}) => {
 	console.log(icon);
 	return (
 		<div

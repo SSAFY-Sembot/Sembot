@@ -1,18 +1,24 @@
 export type ButtonProps = {
 	btnName: string;
-	styleName: string;
+	styleName?: string;
 	// TODO
-	// onClick: () => void;
+	handleClick?: () => void;
+	isDisabled?: boolean;
 };
 
-const ButtonPrimary = ({ btnName, styleName }: ButtonProps) => {
-	console.log(styleName);
+const ButtonPrimary = ({
+	btnName,
+	styleName = "bg-white-100",
+	handleClick,
+	isDisabled = false,
+}: ButtonProps) => {
 	return (
 		<div>
 			<button
 				className={styleName}
 				data-ripple-light="true"
-				// onClick={onClick}
+				onClick={handleClick}
+				disabled={isDisabled}
 			>
 				{btnName}
 			</button>
