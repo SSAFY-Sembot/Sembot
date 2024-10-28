@@ -24,7 +24,7 @@ const TableRowWithIconAndButton: React.FC<TableRowWithIconAndButtonProps> = ({
   return (
     <tr className='text-left bg-white'>
       <td className='pl-5 max-w-[6rem]'>
-        <ButtonOnlyIcon icon={iconPath}/>
+        <ButtonOnlyIcon icon={iconPath} onClick={iconOnClick}/>
       </td>
       {columns.map((column, index) => (
         <td key={index} style={{width, color: textColor}} className='px-4 py-2 max-w-[50rem] truncate'>
