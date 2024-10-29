@@ -22,8 +22,8 @@ const ButtonWithIcon: React.FC<ButtonProps> = ({
 		: "bg-gray-400 text-semesBlue";
 
 	const footerStyle = isFooter ? "bg-semesBlue text-white" : "";
-	const combinedStyle = `${styleName} ${activeStyle}`;
-	const combinedFooterStyle = `${styleName} ${footerStyle}`;
+	const combinedStyle = `space-x-2 ${styleName} ${activeStyle}`;
+	const combinedFooterStyle = `space-x-2 ${styleName} ${footerStyle}`;
 
 	return (
 		<div
@@ -31,8 +31,8 @@ const ButtonWithIcon: React.FC<ButtonProps> = ({
 			data-ripple-light="true"
 			onClick={handleClick}
 		>
-			<img src={icon} alt="icon" />
-			{btnName}
+			<img width="15rem" src={icon}></img>
+			<div>{btnName}</div>
 		</div>
 	);
 };
