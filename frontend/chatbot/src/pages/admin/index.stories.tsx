@@ -2,6 +2,7 @@ import React from "react";
 import { Meta, Story } from "@storybook/react";
 import Index from "./index"; // Adjust the import path if necessary
 import { SidebarProps } from "@components/atoms/sidebar/Sidebar";
+import "../../global.css";
 
 // 기본 Sidebar 버튼과 푸터 버튼 목록
 const SidebarButtons = [
