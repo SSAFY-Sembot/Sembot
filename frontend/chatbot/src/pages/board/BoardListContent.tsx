@@ -36,10 +36,10 @@ const BoardListContent: React.FC = () => {
 
   // 아이콘 클릭 시 해당 행의 아이콘 경로만 토글하는 함수
   const clickEvent = (rowId: number) => {
-    setIconPaths((prevIconPaths) => ({
-      ...prevIconPaths,
+    setIconPaths((currentIconPaths) => ({
+      ...currentIconPaths,
       [rowId]:
-        prevIconPaths[rowId] === favoritePath ? favoritedPath : favoritePath,
+        currentIconPaths[rowId] === favoritePath ? favoritedPath : favoritePath,
     }));
   };
 
