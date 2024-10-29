@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../Layout";
+import SembotLayout from "../SembotLayout";
 import ButtonOnlyIcon from "@components/atoms/button/ButtonOnlyIcon";
 import ButtonWithIcon from "@components/atoms/button/ButtonWithIcon";
 
@@ -44,7 +44,7 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
   };
 
   return (
-    <Layout title="규정 정보">
+    <SembotLayout title="규정 정보">
       <div className="bg-white rounded-lg px-6 space-y-6">
         {/* 게시판 상단 버튼 */}
         <div className="flex items-center space-x-4">
@@ -121,7 +121,7 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
           />
         </div>
       </div>
-    </Layout>
+    </SembotLayout>
   );
 };
 
