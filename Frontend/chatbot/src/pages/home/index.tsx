@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '@/assets/images/logo-main.png';
 import Sidebar from '@components/atoms/sidebar/Sidebar';
 import { ButtonProps } from '@components/atoms/button/ButtonWithIcon'; // Adjust imports if needed
+import styles from "./index.module.css"
 
 export interface LayoutProps {
   logoSrc: string;
@@ -14,14 +15,16 @@ const Layout: React.FC<LayoutProps> = ({ components, footerComponents, isRule })
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
+      <div className={styles.sidebarContainer}>
       <Sidebar 
         components={components} 
         footerComponents={footerComponents} 
         isRule={isRule} 
       />
+      </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center bg-gray-100">
+      <div className="flex-1 flex items-center justify-center">
         <div className="w-full max-w-[438px] text-center">
           <img 
             src={logo}

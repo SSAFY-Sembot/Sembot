@@ -7,8 +7,7 @@ import Layout from '.';
 
 const meta: Meta<typeof Layout> = {
     title: 'PAGES/HOME/BEFORELOGIN',
-    component: index,
-    tags: ['autodocs'],  // 자동 문서화를 위해 사용
+    component: index
    
 }
 

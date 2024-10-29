@@ -5,7 +5,7 @@ import { SignUpDTO } from "./SignUpDTO";
 
 
 const meta: Meta<typeof SignUpForm> ={
-    title: 'Pages/SignUpForm',
+    title: 'Pages/SignUp/SIGNUPFORM',
     component: SignUpForm,
 };
 
