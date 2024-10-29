@@ -77,7 +77,7 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
         {/* 게시판 상단 버튼 */}
         <div className="flex items-center space-x-4">
           <ButtonOnlyIcon
-            key="right"
+            key="move-prev-board"
             icon="/src/assets/icons/go-to-prev.svg"
             styleName="p-2 hover:bg-gray-100 rounded"
           />
@@ -96,7 +96,7 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
             onClick={toggleFavorite}
           />
           <ButtonOnlyIcon
-            key="right"
+            key="delete"
             icon="/src/assets/icons/delete.svg"
             width="20rem"
             styleName="p-2 hover:bg-gray-100 rounded"
