@@ -5,6 +5,7 @@ import ButtonWithIcon from "./components/atoms/button/ButtonWithIcon";
 import plus from "./assets/icons/plus.svg";
 import Devpage from "./Devpage";
 import Paging from "@components/atoms/paging/Paging";
+import AdminPage from "../src/pages/admin/index";
 import { useState } from "react";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
 						<Paging curPage={curPage} totalPage={8} onPageChange={setCurPage} />
 					}
 				/>
+				<Route path="/adminPage" element={<AdminPage />} />
 			</Routes>
 		</>
 	);
