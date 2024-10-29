@@ -90,9 +90,7 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
                 : "/src/assets/icons/favorite.svg"
             }
             width="20rem"
-            styleName={`p-2 hover:bg-gray-100 rounded ${
-              isFavorited ? "text-red-500" : "text-gray-500"
-            }`}
+            styleName={`p-2 hover:bg-gray-100 rounded`}
             onClick={toggleFavorite}
           />
           <ButtonOnlyIcon
