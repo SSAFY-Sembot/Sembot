@@ -58,12 +58,12 @@ const footerComponentsList = [
 // Meta information for Storybook
 export default {
 	title: "COMPONENTS/ATOMS/SIDEBAR/Siderbar",
-	component: Sidebar,
+	component: Siderbar,
 } as Meta;
 
 // Template for the story
 const Template: Story = () => (
-	<Sidebar
+	<Siderbar
 		components={componentsList}
 		footerComponents={footerComponentsList}
 		isRule={false}

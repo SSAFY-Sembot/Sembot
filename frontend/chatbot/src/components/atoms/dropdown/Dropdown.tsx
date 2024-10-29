@@ -74,12 +74,12 @@ const Dropdown: React.FC<DropdownProps> = ({
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="h-12 inline-flex justify-center w-full px-5 py-4 text-sm font-medium text-gray-700 bg-white focus:outline-none focus:ring-0 "
+        className="inline-flex justify-center w-full px-5 py-4 text-sm font-medium text-gray-700 bg-white focus:outline-none focus:ring-0 "
       >
         <span className="mr-2 truncate">{selectedItem}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className={`w-5 h-5 ml-2 -mr-1 transition-transform duration-200 ${
+          className={`w-5 h-5 ml-2 mr-1 transition-transform duration-200 ${
             isOpen ? "transform rotate-180" : ""
           }`}
           viewBox="0 0 20 20"
