@@ -1,20 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import SembotLayout from "../SembotLayout";
 import ButtonOnlyIcon from "@components/atoms/button/ButtonOnlyIcon";
 import ButtonWithIcon from "@components/atoms/button/ButtonWithIcon";
 
 interface RegulationPageProps {
+  /** 전체 제목 */
   title?: string;
+  /** 작성자 이미지 URL */
   userImage?: string;
+  /** 작성자 이름 */
   userName?: string;
+  /** 작성자 사번 */
   userNumber?: string;
+  /** PDF URL */
   pdfUrl?: string;
+  /** 작성자 이메일 */
+  userEmail?: string;
+  /** 게시글 등록 날짜 */
+  date?: string;
+  /** 게시글 제목 */
+  boardTitle?: string;
+  /** 게시글 접근 레벨 */
+  level?: string;
+  /** 게시글 요약 */
+  summary?: string;
 }
 
 const RegulationPage: React.FC<RegulationPageProps> = ({
   userImage = "/src/assets/icons/user-profile-ex.svg",
   pdfUrl = "/src/assets/icons/user-profile-ex.svg",
+  title = "규정 정보",
+  userEmail = "semes@semes.com",
+  date = "June 25, 2018, 3:26PM",
+  boardTitle = "임직원 휴가 지침",
+  level = "1",
+  summary = "업로드 된 pdf or hwp에 대한 간단 요약입니다.",
 }) => {
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  // 즐겨찾기 여부에 따른 아이콘 표시
+  const toggleFavorite = () => {
+    setIsFavorited(!isFavorited);
+  };
+
   // PDF 다운로드 처리 함수
   const handleDownloadPDF = async () => {
     try {
@@ -44,7 +72,7 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
   };
 
   return (
-    <SembotLayout title="규정 정보">
+    <SembotLayout title={title}>
       <div className="bg-white rounded-lg px-6 space-y-6">
         {/* 게시판 상단 버튼 */}
         <div className="flex items-center space-x-4">
@@ -54,10 +82,18 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
             styleName="p-2 hover:bg-gray-100 rounded"
           />
           <ButtonOnlyIcon
-            key="right"
-            icon="/src/assets/icons/favorite.svg"
+            key="favorite"
+            icon={
+              isFavorited
+                ? // 값에 따라 아이콘 변경
+                  "/src/assets/icons/favorited.svg"
+                : "/src/assets/icons/favorite.svg"
+            }
             width="20rem"
-            styleName="p-2 hover:bg-gray-100 rounded"
+            styleName={`p-2 hover:bg-gray-100 rounded ${
+              isFavorited ? "text-red-500" : "text-gray-500"
+            }`}
+            onClick={toggleFavorite}
           />
           <ButtonOnlyIcon
             key="right"
@@ -69,9 +105,9 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
 
         {/* 레벨 태그 */}
         <div className="flex">
-          <div className="text-medium font-semibold">임직원 휴가 지침</div>
+          <div className="text-medium font-semibold">{boardTitle}</div>
           <span className="inline-flex items-center ml-4 px-2 py-1 rounded-full text-xs font-medium bg-gray-100">
-            답변 레벨
+            답변 레벨 : {level}
           </span>
         </div>
 
@@ -80,31 +116,27 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <img className="h-8 w-8 rounded-full" src={userImage} alt="" />
-              <span className="font-medium">작성자</span>
-              <span className="text-gray-500 text-xs">
-                &lt;semes@semes.com&gt;
-              </span>
+              <span className="font-medium">{userEmail}</span>
+              <span className="text-gray-500 text-xs">&lt;{userEmail}&gt;</span>
             </div>
             <div>
-              <div className="text-xs text-gray-500">June 25, 2018, 3:26PM</div>
+              <div className="text-xs py-2 text-gray-500">{date}</div>
 
               {/* 파일 표시 및 다운로드 */}
               <div
-                className="flex space-x-2 text-sm text-blue-600 pt-2 cursor-pointer hover:text-blue-800"
+                className="flex justify-end space-x-2 text-sm text-blue-600 pt-2 py-2 cursor-pointer hover:text-blue-800"
                 onClick={handleDownloadPDF}
               >
                 <ButtonWithIcon
-                  btnName="이전 게시글 보기"
-                  styleName="items-center text-center justify-center content-center item-center text-sm flex py-2 px-4 rounded space-x-2"
+                  btnName="파일 다운로드"
+                  styleName="items-center text-center text-sm flex rounded"
                   icon="/src/assets/icons/document-download.svg"
                 />
               </div>
             </div>
           </div>
 
-          <div className="text-sm text-gray-700">
-            업로드 된 pdf or hwp에 대한 간단 요약입니다.
-          </div>
+          <div className="text-sm text-gray-700">{summary}</div>
         </div>
         <hr />
 
