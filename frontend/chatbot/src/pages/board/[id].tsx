@@ -72,6 +72,86 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
     }
   };
 
+  const getChildren = () => (
+    <div className="bg-white rounded-lg px-6 space-y-6">
+      {/* 게시판 상단 버튼 */}
+      <div className="flex items-center space-x-4">
+        <ButtonOnlyIcon
+          key="move-prev-board"
+          icon="/src/assets/icons/go-to-prev.svg"
+          styleName="p-2 hover:bg-gray-100 rounded"
+        />
+        <ButtonOnlyIcon
+          key="favorite"
+          icon={
+            isFavorited
+              ? "/src/assets/icons/favorited.svg"
+              : "/src/assets/icons/favorite.svg"
+          }
+          width="20rem"
+          styleName="p-2 hover:bg-gray-100 rounded"
+          onClick={toggleFavorite}
+        />
+        <ButtonOnlyIcon
+          key="delete"
+          icon="/src/assets/icons/delete.svg"
+          width="20rem"
+          styleName="p-2 hover:bg-gray-100 rounded"
+        />
+      </div>
+
+      <div className="flex">
+        <div className="text-medium font-semibold">{boardTitle}</div>
+        {/* 레벨 태그 */}
+        <span className="inline-flex items-center ml-4 px-2 py-1 rounded-full text-xs font-medium bg-gray-100">
+          답변 레벨 : {level}
+        </span>
+      </div>
+
+      {/* 컨텐츠 란 */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <img className="h-8 w-8 rounded-full" src={userImage} alt="" />
+            <span className="font-medium font-semibold">{userName}</span>
+            <span className="text-gray-500 text-xs">&lt;{userEmail}&gt;</span>
+          </div>
+          <div>
+            <div className="text-xs py-2 text-gray-500">{date}</div>
+
+            {/* 파일 표시 및 다운로드 */}
+            <div
+              className="flex justify-end space-x-2 text-sm text-blue-600 pt-2 py-2 cursor-pointer hover:text-blue-800"
+              onClick={handleDownloadPDF}
+            >
+              <ButtonWithIcon
+                btnName="파일 다운로드"
+                styleName="items-center text-center text-sm flex rounded"
+                icon="/src/assets/icons/document-download.svg"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="text-sm text-gray-700">{summary}</div>
+      </div>
+      <hr />
+
+      <div className="flex space-x-2 bottom-2">
+        <ButtonWithIcon
+          btnName="이전 게시글 보기"
+          styleName="text-xs flex py-2 px-4 rounded space-x-2 rounded-md border-solid border-gray-700 border"
+          icon="/src/assets/icons/prev-board.svg"
+        />
+        <ButtonWithIcon
+          btnName="다음 게시글 보기"
+          styleName="text-xs flex py-2 px-4 rounded space-x-2 rounded-md border-solid border-gray-700 border"
+          icon="/src/assets/icons/next-board.svg"
+        />
+      </div>
+    </div>
+  );
+
   const sidebarComponents = [
     {
       btnName: "규정목록",
@@ -108,86 +188,8 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
       title={title}
       sidebarComponents={sidebarComponents}
       footerComponents={footerComponents}
-    >
-      <div className="bg-white rounded-lg px-6 space-y-6">
-        {/* 게시판 상단 버튼 */}
-        <div className="flex items-center space-x-4">
-          <ButtonOnlyIcon
-            key="move-prev-board"
-            icon="/src/assets/icons/go-to-prev.svg"
-            styleName="p-2 hover:bg-gray-100 rounded"
-          />
-          <ButtonOnlyIcon
-            key="favorite"
-            icon={
-              isFavorited
-                ? // 값에 따라 아이콘 변경
-                  "/src/assets/icons/favorited.svg"
-                : "/src/assets/icons/favorite.svg"
-            }
-            width="20rem"
-            styleName={`p-2 hover:bg-gray-100 rounded`}
-            onClick={toggleFavorite}
-          />
-          <ButtonOnlyIcon
-            key="delete"
-            icon="/src/assets/icons/delete.svg"
-            width="20rem"
-            styleName="p-2 hover:bg-gray-100 rounded"
-          />
-        </div>
-
-        {/* 레벨 태그 */}
-        <div className="flex">
-          <div className="text-medium font-semibold">{boardTitle}</div>
-          <span className="inline-flex items-center ml-4 px-2 py-1 rounded-full text-xs font-medium bg-gray-100">
-            답변 레벨 : {level}
-          </span>
-        </div>
-
-        {/* 컨텐츠 란 */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <img className="h-8 w-8 rounded-full" src={userImage} alt="" />
-              <span className="font-medium font-semibold">{userName}</span>
-              <span className="text-gray-500 text-xs">&lt;{userEmail}&gt;</span>
-            </div>
-            <div>
-              <div className="text-xs py-2 text-gray-500">{date}</div>
-
-              {/* 파일 표시 및 다운로드 */}
-              <div
-                className="flex justify-end space-x-2 text-sm text-blue-600 pt-2 py-2 cursor-pointer hover:text-blue-800"
-                onClick={handleDownloadPDF}
-              >
-                <ButtonWithIcon
-                  btnName="파일 다운로드"
-                  styleName="items-center text-center text-sm flex rounded"
-                  icon="/src/assets/icons/document-download.svg"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="text-sm text-gray-700">{summary}</div>
-        </div>
-        <hr />
-
-        <div className="flex space-x-2 bottom-2">
-          <ButtonWithIcon
-            btnName="이전 게시글 보기"
-            styleName="text-xs flex py-2 px-4 rounded space-x-2 rounded-md border-solid border-gray-700 border"
-            icon="/src/assets/icons/prev-board.svg"
-          />
-          <ButtonWithIcon
-            btnName="다음 게시글 보기"
-            styleName="text-xs flex py-2 px-4 rounded space-x-2 rounded-md border-solid border-gray-700 border"
-            icon="/src/assets/icons/next-board.svg"
-          />
-        </div>
-      </div>
-    </SembotLayout>
+      children={getChildren()}
+    />
   );
 };
 
