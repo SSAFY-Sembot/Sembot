@@ -1,15 +1,15 @@
 export type ButtonProps = {
 	icon: string;
 	styleName?: string;
-	// width: string
+	width?: string
 	// TODO
 	onClick?: () => void;
 };
 
-const ButtonWithIcon = ({ icon, styleName, onClick }: ButtonProps) => {
+const ButtonWithIcon = ({ icon, styleName, width, onClick }: ButtonProps) => {
 	return (
 		<div data-ripple-light="true" className={styleName} onClick={onClick}>
-			<img src={icon}></img>
+			<img src={icon} width={width}></img>
 		</div>
 	);
 };
