@@ -7,16 +7,22 @@ const componentsList = [
 		btnName: "새채팅",
 		styleName: "flex bg-blue-500 text-white py-2 px-4 rounded mx-1",
 		icon: "/src/assets/icons/plus.svg",
+		handleClick: () => {},
+		isActive: false,
 	},
 	{
 		btnName: "채팅방1",
 		styleName: "flex bg-blue-500 text-white py-2 px-4 rounded mx-1",
 		icon: "/src/assets/icons/plus.svg",
+		handleClick: () => {},
+		isActive: false,
 	},
 	{
 		btnName: "채팅방2",
 		styleName: "flex bg-blue-500 text-white py-2 px-4 rounded mx-1",
 		icon: "/src/assets/icons/plus.svg",
+		handleClick: () => {},
+		isActive: false,
 	},
 	// 추가 컴포넌트 데이터들
 ];
@@ -46,11 +52,15 @@ const footerComponentsList = [
 		btnName: "footer Click Me 1",
 		styleName: "flex bg-blue-500 text-white py-2 px-4 rounded mx-1",
 		icon: "/src/assets/icons/plus.svg",
+		handleClick: () => {},
+		isActive: false,
 	},
 	{
 		btnName: "footer Click Me 2",
 		styleName: "flex bg-blue-500 text-white py-2 px-4 rounded mx-1",
 		icon: "/src/assets/icons/plus.svg",
+		handleClick: () => {},
+		isActive: false,
 	},
 	// 추가 컴포넌트 데이터들
 ];
@@ -58,12 +68,12 @@ const footerComponentsList = [
 // Meta information for Storybook
 export default {
 	title: "COMPONENTS/ATOMS/SIDEBAR/Siderbar",
-	component: Siderbar,
+	component: Sidebar,
 } as Meta;
 
 // Template for the story
 const Template: Story = () => (
-	<Siderbar
+	<Sidebar
 		components={componentsList}
 		footerComponents={footerComponentsList}
 		isRule={false}
