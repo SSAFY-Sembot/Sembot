@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import Siderbar from "./Siderbar"; // Adjust path if necessary
+import Sidebar from "./Sidebar"; // Adjust path if necessary
 
 // main page가 채팅방
 const componentsList = [
@@ -57,13 +57,13 @@ const footerComponentsList = [
 
 // Meta information for Storybook
 export default {
-  title: "COMPONENTS/ATOMS/SIDEBAR/Siderbar",
-  component: Siderbar,
+  title: "COMPONENTS/ATOMS/SIDEBAR/Sidebar",
+  component: Sidebar,
 } as Meta;
 
 // Template for the story
 const Template: Story = () => (
-  <Siderbar
+  <Sidebar
     components={componentsList}
     footerComponents={footerComponentsList}
     isRule={false}
