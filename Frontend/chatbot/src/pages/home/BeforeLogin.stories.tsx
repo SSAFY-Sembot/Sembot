@@ -1,13 +1,13 @@
 // Layout.tsx
 import React from 'react';
 import {Meta, StoryObj} from '@storybook/react';
-import BeforeLogin, { LayoutProps } from './BeforeLogin';
-import Layout from './BeforeLogin';
+import index, { LayoutProps } from '.';
+import Layout from '.';
 
 
 const meta: Meta<typeof Layout> = {
-    title: 'COMPONENTS/PAGES/HOME/BEFORELOGIN',
-    component: BeforeLogin,
+    title: 'PAGES/HOME/BEFORELOGIN',
+    component: index,
     tags: ['autodocs'],  // 자동 문서화를 위해 사용
    
 }
