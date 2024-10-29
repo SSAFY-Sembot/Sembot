@@ -45,7 +45,7 @@ const InputSearch: React.FC<InputSearchProps> = ({
 
   return (
     <div
-      className="flex items-center space-x-2 relative text-gray-600 w-full max-w-lg border border-gray-300 rounded-md"
+      className="flex items-center space-x-2 relative text-gray-600 w-full border border-gray-300 rounded-md"
       style={{ width }}
     >
       <Dropdown width="10rem" className="border-none" />
