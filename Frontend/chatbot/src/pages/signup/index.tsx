@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { SignUpDTO } from './SignUpDTO';
 import logo from '@/assets/images/head-register.png';
-import headerLogo from '@/assets/images/head-logo-group.png'; // headerLogo import
 import ButtonPrimary from '@components/atoms/button/ButtonPrimary';
 
 export interface SignUpFormProps {
@@ -14,6 +13,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
     const [department, setDepartment] = useState('');
     const [password, setPassword] = useState('');
     const [passwordVerify, setPasswordVerify] = useState('');
+    const [termsAccepted, setTermsAccepted] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -22,8 +22,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
     };
 
     return (
-        <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded relative"> {/* relative 추가 */}
-            
+        <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded relative">
+
             <div className="text-center mb-6">
                 <img 
                     src={logo} 
@@ -31,9 +31,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
                     className="mx-auto mb-2 w-full max-h-32 h-auto object-contain" 
                 />
             </div>
-        
+            
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-                <div className="mb-4">
+                <div className="mb-4 ">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">이메일</label>
                     <input
                         type="email"
@@ -43,11 +43,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
                         className="border p-2 w-full" 
                         required
                     />
-                    <ButtonPrimary
-                        btnName="중복 확인"
-                        styleName='flex bg-blue-500 text-white py-2 px-4'
-                    />
                 </div>
+
+
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700">이름</label>
                     <input
@@ -97,7 +95,17 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
                         required
                     />
                 </div>
-                <button type="submit" className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
+                <div className="mb-4 flex items-center">
+                    <input 
+                        type="checkbox" 
+                        id="terms" 
+                        checked={termsAccepted} 
+                        onChange={() => setTermsAccepted(!termsAccepted)} 
+                        required
+                    />
+                    <label htmlFor="terms" className="ml-2 text-sm text-gray-600">이용 약관의 동의합니다.</label>
+                </div>
+                <button type="submit" className="bg-[#004F9F] text-white p-2 rounded hover:bg-blue-700">
                     회원가입
                 </button>
             </form>
