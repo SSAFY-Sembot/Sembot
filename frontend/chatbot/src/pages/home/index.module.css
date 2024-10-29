@@ -1,0 +1,9 @@
+.sidebarContainer {
+    width: 14%;  /*Sidebar 너비를 전체 뷰포트의 20%로 설정 */
+    height: 100%; /* 뷰포트 높이 100% */
+    position: fixed; /* 뷰포트 왼쪽에 고정 */
+    left: 0;
+    top: 0;
+    background-color: #f5f5f5; /* 원하는 배경색 */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
+}

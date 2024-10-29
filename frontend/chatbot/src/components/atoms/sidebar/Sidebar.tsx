@@ -11,9 +11,9 @@ interface SidebaProps {
 }
 
 const Sidebar: React.FC<SidebaProps> = ({
-	components,
-	footerComponents,
-	isRule,
+  components = [], // Default to empty array
+  footerComponents = [], // Default to empty array
+  isRule,
 }) => {
 	return (
 		<div>
@@ -40,20 +40,33 @@ const Sidebar: React.FC<SidebaProps> = ({
 						</div>
 					</div>
 
-					{/* footer */}
-					<div>
-						{/* 구분선 */}
-						<hr className="mb-3 border border-gray-500" />
-						<div className="w-full mb-3 flex flex-col space-y-2">
-							{footerComponents.map((buttonProps, index) => (
-								<ButtonWithIcon key={index} {...buttonProps} />
-							))}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+          {/* Components */}
+          <div className="w-full flex flex-col space-y-2">
+            <hr className="mb-3 border border-gray-500" />
+            {/* {components.map((buttonProps, index) => (
+              <React.Fragment key={index}>
+                <ButtonWithIcon key={index} {...buttonProps} />
+                {index === 0 && isRule ? <div className="text-white text-xl ml-4">규정 즐겨찾기</div> : null}
+              </React.Fragment>
+            ))} */}
+            {footerComponents.map((buttonProps, index) => (
+              <ButtonWithIcon key={index} {...buttonProps} />
+            ))}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div>
+          <hr className="mb-3 border border-gray-500" />
+          <div className="w-full mb-3 flex flex-col space-y-2">
+            {footerComponents.map((buttonProps, index) => (
+              <ButtonWithIcon key={index} {...buttonProps} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Sidebar;
