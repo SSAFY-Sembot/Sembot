@@ -4,20 +4,21 @@ export interface ButtonProps {
 	icon: string;
 	// width: string
 	// TODO
-	// onClick: () => void;
+	onClick?: () => void;
 }
 
 const ButtonWithIcon: React.FC<ButtonProps> = ({
 	btnName,
 	styleName,
 	icon,
+	onClick
 }) => {
 	console.log(icon);
 	return (
 		<div
 			className={`space-x-2 ${styleName}`}
 			data-ripple-light="true"
-			// onClick={onClick}
+			onClick={onClick}
 		>
 			<img width="15rem" src={icon}></img>
 			<div>{btnName}</div>
