@@ -16,13 +16,28 @@ const Sidebar: React.FC<SidebaProps> = ({
   isRule,
 }) => {
   return (
-    <div className="w-48 sidebar border-r bg-semesBlue"> {/* Reduced width */}
-      <div className="flex h-screen flex-col justify-between pt-2 pb-6">
-        <div>
-          {/* Header */}
-          <div className="w-full p-2.5 flex flex-row">
-            <img src={SEMBOT_LOGO} alt="SEMBOT LOGO" />
-            <div className="text-white text-3xl mt-2 ml-2">SEMBOT</div>
+    <div>
+      <div className="w-full sidebar border-r w-56 bg-semesBlue">
+        <div className="flex h-screen flex-col justify-between pt-2 pb-6">
+          <div>
+            {/* 공통 header */}
+            <div className="w-full flex flex-row">
+              <img src={SEMBOT_LOGO} alt="SEMBOT LOGO" />
+              <div className="text-white text-xl mt-2 ml-1">SEMBOT</div>
+            </div>
+
+            {/* 추가되는 component */}
+            <div className="w-full flex flex-col space-y-2">
+              {components.map((buttonProps, index) => (
+                <React.Fragment key={index}>
+                  <ButtonWithIcon key={index} {...buttonProps} />
+
+                  {index === 0 && isRule ? (
+                    <div className="text-white text-xl ml-4">규정 즐겨찾기</div>
+                  ) : null}
+                </React.Fragment>
+              ))}
+            </div>
           </div>
 
           {/* Components */}
