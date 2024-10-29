@@ -4,7 +4,7 @@ export interface ButtonProps {
 	btnName: string;
 	styleName: string;
 	icon: string;
-	handleClick: () => void;
+	handleClick?: () => void;
 	isActive?: boolean;
 	isFooter?: boolean;
 }
@@ -23,10 +23,11 @@ const ButtonWithIcon: React.FC<ButtonProps> = ({
 
 	const footerStyle = isFooter ? "bg-semesBlue text-white" : "";
 	const combinedStyle = `${styleName} ${activeStyle}`;
+	const combinedFooterStyle = `${styleName} ${footerStyle}`;
 
 	return (
 		<div
-			className={footerStyle == "" ? combinedStyle : footerStyle}
+			className={footerStyle == "" ? combinedStyle : combinedFooterStyle}
 			data-ripple-light="true"
 			onClick={handleClick}
 		>
