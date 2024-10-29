@@ -25,11 +25,11 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="bg-white">
-      <div className="relative w-screen flex items-center mx-auto max-w-7xl px-2 sm:px-4">
-        <h2>{title}</h2>
+    <header>
+      <div className="relative mt-5 w-full flex items-center mx-auto py-4">
+        <div className="absolute left-5 text-2xl font-bold">{title}</div>
 
-        <div className="absolute flex items-center right-0 mr-4">
+        <div className="absolute flex items-center right-0">
           {/* 회원 정보 */}
           <div className="items-end end-0 justify-end">
             <div className="text-xs">{userNumber}</div>
@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({
 
         {/* Dropdown component */}
         {isProfileDropdownOpen && (
-          <div className="absolute z-50 right-0 top-8 mr-8 mt-2 px-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none items-center text-center">
+          <div className="absolute right-0 top-8 mr-8 mt-2 px-2 origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none items-center text-center">
             <div className="block px-2 py-2 text-sm">
               {userName}님 환영합니다!
             </div>
