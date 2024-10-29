@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({
 
         {/* Dropdown component */}
         {isProfileDropdownOpen && (
-          <div className="absolute right-0 top-8 mr-8 mt-2 px-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none items-center text-center">
+          <div className="absolute z-50 right-0 top-8 mr-8 mt-2 px-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none items-center text-center">
             <div className="block px-2 py-2 text-sm">
               {userName}님 환영합니다!
             </div>
