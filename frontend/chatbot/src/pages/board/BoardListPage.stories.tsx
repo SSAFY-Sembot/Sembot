@@ -1,7 +1,7 @@
 // newIndexPage.stories.tsx
 import React from "react";
 import { Meta, Story } from "@storybook/react";
-import BoardListPage from "./BoardListPage";
+import BoardListPage from "./index";
 
 export default {
   title: "Pages/BOARD/BOARDLISTPAGE",
