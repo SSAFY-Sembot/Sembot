@@ -15,12 +15,12 @@ const ButtonWithIcon: React.FC<ButtonProps> = ({
 	console.log(icon);
 	return (
 		<div
-			className={styleName}
+			className={`space-x-2 ${styleName}`}
 			data-ripple-light="true"
 			// onClick={onClick}
 		>
-			<img src={icon}></img>
-			{btnName}
+			<img width="15rem" src={icon}></img>
+			<div>{btnName}</div>
 		</div>
 	);
 };
