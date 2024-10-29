@@ -20,7 +20,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
     };
 
     return (
-        <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-100">
+        <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             {/* Top-left logo */}
             <img
                 src={topLeftLogo}
