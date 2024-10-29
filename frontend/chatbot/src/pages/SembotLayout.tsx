@@ -10,6 +10,7 @@ export interface SembotLayoutProps {
 	isRule?: boolean;
 	sidebarComponents?: React.ComponentProps<typeof ButtonWithIcon>[];
 	footerComponents?: React.ComponentProps<typeof ButtonWithIcon>[];
+	styleName?: string;
 }
 
 const SembotLayout: React.FC<SembotLayoutProps> = ({
@@ -40,6 +41,7 @@ const SembotLayout: React.FC<SembotLayoutProps> = ({
 			icon: "/src/assets/icons/plus.svg",
 		},
 	],
+	styleName,
 }) => {
 	return (
 		<div className="flex w-full h-full">
@@ -58,7 +60,7 @@ const SembotLayout: React.FC<SembotLayoutProps> = ({
 				<div className="my-4 mx-2">
 					<Header title={title} />
 				</div>
-				{children}
+				<div className={styleName}>{children}</div>
 			</div>
 		</div>
 	);
