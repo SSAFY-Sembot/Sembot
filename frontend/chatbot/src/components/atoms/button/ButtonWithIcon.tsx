@@ -1,25 +1,32 @@
+import React from "react";
+
 export interface ButtonProps {
 	btnName: string;
 	styleName: string;
 	icon: string;
-	// width: string
-	// TODO
-	// onClick: () => void;
+	handleClick: () => void;
+	isActive: boolean;
 }
 
 const ButtonWithIcon: React.FC<ButtonProps> = ({
 	btnName,
 	styleName,
 	icon,
+	handleClick,
+	isActive,
 }) => {
-	console.log(icon);
+	const activeStyle = isActive
+		? "bg-white text-semesBlue"
+		: "bg-gray-400 text-semesBlue";
+	const combinedStyle = `${styleName} ${activeStyle}`;
+
 	return (
 		<div
-			className={styleName}
+			className={combinedStyle}
 			data-ripple-light="true"
-			// onClick={onClick}
+			onClick={handleClick}
 		>
-			<img src={icon}></img>
+			<img src={icon} alt="icon" />
 			{btnName}
 		</div>
 	);
