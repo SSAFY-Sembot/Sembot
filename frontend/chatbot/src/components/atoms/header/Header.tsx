@@ -26,10 +26,10 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <header>
-      <div className="relative mt-5 w-full flex items-center mx-auto p-4 sm:px-4">
-        <div className="absolute left-10 text-2xl font-bold">{title}</div>
+      <div className="relative mt-5 w-full flex items-center mx-auto py-4">
+        <div className="absolute left-5 text-2xl font-bold">{title}</div>
 
-        <div className="absolute flex items-center right-0 mr-4">
+        <div className="absolute flex items-center right-0">
           {/* 회원 정보 */}
           <div className="items-end end-0 justify-end">
             <div className="text-xs">{userNumber}</div>
