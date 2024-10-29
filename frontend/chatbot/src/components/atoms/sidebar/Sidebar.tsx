@@ -21,9 +21,9 @@ const Sidebar: React.FC<SidebaProps> = ({
         <div className="flex h-screen flex-col justify-between pt-2 pb-6">
           <div>
             {/* 공통 header */}
-            <div className="w-full p-2.5 flex flex-row">
+            <div className="w-full flex flex-row">
               <img src={SEMBOT_LOGO} alt="SEMBOT LOGO" />
-              <div className="text-white text-3xl mt-2 ml-2">SEMBOT</div>
+              <div className="text-white text-xl mt-2 ml-1">SEMBOT</div>
             </div>
 
             {/* 추가되는 component */}
@@ -32,7 +32,9 @@ const Sidebar: React.FC<SidebaProps> = ({
                 <React.Fragment key={index}>
                   <ButtonWithIcon key={index} {...buttonProps} />
 
-                  {index === 0 && isRule ? <div className="text-white text-xl ml-4">규정 즐겨찾기</div> : null}
+                  {index === 0 && isRule ? (
+                    <div className="text-white text-xl ml-4">규정 즐겨찾기</div>
+                  ) : null}
                 </React.Fragment>
               ))}
             </div>
