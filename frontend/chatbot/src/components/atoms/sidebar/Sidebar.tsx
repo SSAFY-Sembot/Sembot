@@ -42,11 +42,15 @@ const Sidebar: React.FC<SidebaProps> = ({
 
           {/* Components */}
           <div className="w-full flex flex-col space-y-2">
-            {components.map((buttonProps, index) => (
+            <hr className="mb-3 border border-gray-500" />
+            {/* {components.map((buttonProps, index) => (
               <React.Fragment key={index}>
                 <ButtonWithIcon key={index} {...buttonProps} />
                 {index === 0 && isRule ? <div className="text-white text-xl ml-4">규정 즐겨찾기</div> : null}
               </React.Fragment>
+            ))} */}
+            {footerComponents.map((buttonProps, index) => (
+              <ButtonWithIcon key={index} {...buttonProps} />
             ))}
           </div>
         </div>
