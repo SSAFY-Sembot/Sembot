@@ -4,13 +4,13 @@ import ButtonWithIcon from "@components/atoms/button/ButtonWithIcon";
 
 type ButtonWithIconProps = React.ComponentProps<typeof ButtonWithIcon>;
 
-interface SidebarProps {
+interface SidebaProps {
   components: ButtonWithIconProps[]; // 메인 컴포넌트 리스트
   footerComponents: ButtonWithIconProps[]; // 하단에 위치할 컴포넌트 리스트
   isRule: boolean; // 현재 메인페이지가 규정인지, 채팅인지 확인하는 변수
 }
 
-const Siderbar: React.FC<SidebarProps> = ({
+const Sidebar: React.FC<SidebaProps> = ({
   components,
   footerComponents,
   isRule,
@@ -54,4 +54,4 @@ const Siderbar: React.FC<SidebarProps> = ({
   );
 };
 
-export default Siderbar;
+export default Sidebar;
