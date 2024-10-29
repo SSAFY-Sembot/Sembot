@@ -30,6 +30,7 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
   userImage = "/src/assets/icons/user-profile-ex.svg",
   pdfUrl = "/src/assets/icons/user-profile-ex.svg",
   title = "규정 정보",
+  userName = "작성자",
   userEmail = "semes@semes.com",
   date = "June 25, 2018, 3:26PM",
   boardTitle = "임직원 휴가 지침",
@@ -114,7 +115,7 @@ const RegulationPage: React.FC<RegulationPageProps> = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <img className="h-8 w-8 rounded-full" src={userImage} alt="" />
-              <span className="font-medium">{userEmail}</span>
+              <span className="font-medium font-semibold">{userName}</span>
               <span className="text-gray-500 text-xs">&lt;{userEmail}&gt;</span>
             </div>
             <div>
