@@ -20,7 +20,7 @@ const ButtonWithIcon: React.FC<ButtonProps> = ({
 			// onClick={onClick}
 		>
 			<img src={icon}></img>
-			{btnName}
+			<div>{btnName}</div>
 		</div>
 	);
 };
