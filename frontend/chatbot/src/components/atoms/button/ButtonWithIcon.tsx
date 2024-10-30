@@ -31,8 +31,12 @@ const ButtonWithIcon: React.FC<ButtonProps> = ({
 			data-ripple-light="true"
 			onClick={handleClick}
 		>
-			<img width="15rem" src={icon}></img>
-			<div>{btnName}</div>
+			<div className="flex">
+				<div className="w-1"></div>
+				<img width="15rem" src={icon}></img>
+				<div className="w-2"></div>
+				<div>{btnName}</div>
+			</div>
 		</div>
 	);
 };
