@@ -13,10 +13,7 @@ import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
 import com.chatbot.backend.domain.chatroom.repository.ChatRoomRepository;
 import com.chatbot.backend.domain.user.entity.User;
 import com.chatbot.backend.domain.user.repository.UserRepository;
-import com.chatbot.backend.global.security.CustomUserDetails;
-import com.chatbot.backend.global.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 
@@ -32,7 +29,6 @@ public class ChatRoomServiceImpl implements ChatRoomService{
     @Override
     public CreateChatRoomResponseDto createChatRoom(
             CreateChatRoomRequestDto createChatRoomRequestDto) {
-
 
         User user = userRepository.findUserById(createChatRoomRequestDto.getUserId());
 
