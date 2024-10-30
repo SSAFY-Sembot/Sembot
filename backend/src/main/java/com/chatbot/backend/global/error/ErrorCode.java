@@ -3,6 +3,7 @@ package com.chatbot.backend.global.error;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+// 사용되는 에러 코드를 정의하는 열거형 클래스
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
@@ -20,6 +21,7 @@ public enum ErrorCode {
 	INVALID_TOKEN(422, "INVALID_TOKEN", "유효하지 않은 토큰입니다."),
 	EXPIRED_TOKEN(401, "EXPIRED_TOKEN", "토큰이 만료되었습니다."),
 	UNSUPPORTED_TOKEN(400, "UNSUPPORTED_TOKEN", "지원되지 않는 토큰 형식입니다."),
+
 	;
 
 	private final int httpStatus;

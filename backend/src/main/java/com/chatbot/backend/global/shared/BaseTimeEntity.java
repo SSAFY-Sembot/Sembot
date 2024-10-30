@@ -11,6 +11,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 
+// 엔티티의 생성 시간과 수정 시간을 자동으로 관리하는 기본 엔티티 클래스
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)

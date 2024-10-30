@@ -11,6 +11,7 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 
+// Swagger (OpenAPI) 문서 설정을 담당
 @OpenAPIDefinition(info = @Info(
 	title = "SemBot API",
 	description = "SemBot 명세서",
@@ -20,7 +21,9 @@ public class SwaggerConfig {
 	@Bean
 	public OpenAPI openApi() {
 		String jwt = "JWT";
+		// JWT 인증 요구사항 설정
 		SecurityRequirement securityRequirement = new SecurityRequirement().addList("JWT");
+		// JWT 보안 스키마 설정
 		Components components = new Components().addSecuritySchemes(jwt, new SecurityScheme()
 			.name(jwt)
 			.type(SecurityScheme.Type.HTTP)
