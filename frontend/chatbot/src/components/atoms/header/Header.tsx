@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 
 interface HeaderProps {
-  /** 해당 페이지 정보 */
-  title?: string;
-  /** 사용자 이미지 */
-  userImage?: string;
-  /** 사용자 이름 */
-  userName?: string;
-  /** 사용자 사번 */
-  userNumber?: string;
+	/** 해당 페이지 정보 */
+	title?: string;
+	/** 사용자 이미지 */
+	userImage?: string;
+	/** 사용자 이름 */
+	userName?: string;
+	/** 사용자 사번 */
+	userNumber?: string;
 }
 
 const Header: React.FC<HeaderProps> = ({
-  /** 기본값 */
-  userImage = "/src/assets/icons/user-profile-ex.svg",
-  title = "전체",
-  userName = "SemBot",
-  userNumber = "12345678",
+	/** 기본값 */
+	userImage = "/src/assets/icons/user-profile-ex.svg",
+	title = "전체",
+	userName = "SemBot",
+	userNumber = "12345678",
 }) => {
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+	const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
-  const toggleProfileDropdown = () => {
-    setIsProfileDropdownOpen(!isProfileDropdownOpen);
-  };
+	const toggleProfileDropdown = () => {
+		setIsProfileDropdownOpen(!isProfileDropdownOpen);
+	};
 
   return (
     <header>
@@ -36,15 +36,15 @@ const Header: React.FC<HeaderProps> = ({
             <div className="text-xs">{userName}님</div>
           </div>
 
-          {/* 회원 이미지 */}
-          <button
-            type="button"
-            className="bg-transparent relative flex rounded-full focus:outline-none"
-            onClick={toggleProfileDropdown}
-          >
-            <img className="h-8 w-8 rounded-full" src={userImage} alt="" />
-          </button>
-        </div>
+					{/* 회원 이미지 */}
+					<button
+						type="button"
+						className="bg-transparent relative flex rounded-full focus:outline-none"
+						onClick={toggleProfileDropdown}
+					>
+						<img className="h-8 w-8 rounded-full" src={userImage} alt="" />
+					</button>
+				</div>
 
         {/* Dropdown component */}
         {isProfileDropdownOpen && (
