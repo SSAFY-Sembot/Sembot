@@ -15,6 +15,11 @@ public enum ErrorCode {
 	FORBIDDEN(403, "FORBIDDEN", "권한이 없습니다."),
 	NOT_FOUND(404, "NOT_FOUND", "리소스를 찾을 수 없습니다."),
 	CONFLICT(409, "CONFLICT", "리소스 충돌이 발생했습니다."),
+
+	// JWT 관련 오류
+	INVALID_TOKEN(422, "INVALID_TOKEN", "유효하지 않은 토큰입니다."),
+	EXPIRED_TOKEN(401, "EXPIRED_TOKEN", "토큰이 만료되었습니다."),
+	UNSUPPORTED_TOKEN(400, "UNSUPPORTED_TOKEN", "지원되지 않는 토큰 형식입니다."),
 	;
 
 	private final int httpStatus;
