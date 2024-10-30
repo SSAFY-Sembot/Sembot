@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import SembotLayout from "../SembotLayout"; // SembotLayout 컴포넌트 경로
 import Analystics from "./Analystics";
 import MemberManagement from "./MemberManagement";
+import FeedbackManagement from "./FeedbackManagement";
+import CategoryManagement from "./CategoryManagement";
 
 const SembotPage: React.FC = () => {
 	const [activeButton, setActiveButton] = useState<string>("통계");
@@ -69,6 +71,10 @@ const SembotPage: React.FC = () => {
 				return <Analystics />;
 			case "회원 관리":
 				return <MemberManagement />;
+			case "피드백 관리":
+				return <FeedbackManagement />;
+			case "카테고리 관리":
+				return <CategoryManagement />;
 		}
 	};
 
@@ -79,7 +85,7 @@ const SembotPage: React.FC = () => {
 			sidebarComponents={SidebarButtons}
 			footerComponents={FooterButtons}
 			children={getChildren()}
-			styleName="flex justify-center"
+			// styleName="flex justify-center"
 		/>
 	);
 };

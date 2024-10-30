@@ -12,7 +12,7 @@ import {
 	YAxis,
 } from "recharts";
 
-const analystics = () => {
+const Analystics = () => {
 	const categoryData = [
 		{ name: "유류비", 규정수: 30 },
 		{ name: "휴가", 규정수: 45 },
@@ -92,4 +92,4 @@ const analystics = () => {
 	);
 };
 
-export default analystics;
+export default Analystics;
