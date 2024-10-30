@@ -1,29 +1,28 @@
 package com.chatbot.backend.domain.board.service;
 
+import org.springframework.stereotype.Service;
 
-import com.chatbot.backend.domain.board.dto.request.CreateBoardRequestDto;
+import com.chatbot.backend.domain.board.dto.request.CreateBoardRequest;
 import com.chatbot.backend.domain.board.entity.Board;
 import com.chatbot.backend.domain.board.repository.BoardRepository;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
+	private final BoardRepository boardRepository;
 
-    private final BoardRepository boardRepository;
-
-    @Override
-    public void createBoard(CreateBoardRequestDto createBoardRequestDto) {
-
-        boardRepository.save(
-                Board.builder()
-                        .title(createBoardRequestDto.getTitle())
-                        .category(createBoardRequestDto.getCategory())
-                        .content(createBoardRequestDto.getContent())
-                        .ruleURL(createBoardRequestDto.getRuleURL())
-                        .level(createBoardRequestDto.getLevel())
-                        .build()
-        );
-    }
+	@Override
+	public void createBoard(CreateBoardRequest createBoardRequest) {
+		boardRepository.save(
+			Board.builder()
+				.title(createBoardRequest.getTitle())
+				.category(createBoardRequest.getCategory())
+				.content(createBoardRequest.getContent())
+				.ruleURL(createBoardRequest.getRuleURL())
+				.level(createBoardRequest.getLevel())
+				.build()
+		);
+	}
 }
