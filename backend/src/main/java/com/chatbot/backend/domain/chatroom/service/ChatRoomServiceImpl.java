@@ -24,14 +24,14 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 
     private final ChatRoomRepository chatRoomRepository;
     private final UserRepository userRepository;
-    private SecurityUtil securityUtil;
+
 
 
     @Override
     public CreateChatRoomResponseDto createChatRoom(CreateChatRoomRequestDto createChatRoomRequestDto) {
 
 
-        User user = userRepository.findUserById(SecurityUtil.getCurrentUserId());
+        User user = userRepository.findUserById();
 
         ChatRoom chatroom = chatRoomRepository.save(
                 ChatRoom.builder()

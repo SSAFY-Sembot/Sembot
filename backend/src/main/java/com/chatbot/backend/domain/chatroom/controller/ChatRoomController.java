@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/chatrooms")
+@RequestMapping("api/chatrooms")
 @RequiredArgsConstructor
 public class ChatRoomController {
 
