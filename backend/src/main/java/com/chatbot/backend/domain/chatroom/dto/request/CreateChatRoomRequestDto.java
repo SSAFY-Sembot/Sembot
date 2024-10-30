@@ -5,6 +5,5 @@ import lombok.Getter;
 @Getter
 public class CreateChatRoomRequestDto {
 
-    private Long memberId;
     private String content;
 }
