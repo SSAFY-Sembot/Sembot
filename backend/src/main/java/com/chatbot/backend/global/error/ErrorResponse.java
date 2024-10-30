@@ -1,5 +1,7 @@
 package com.chatbot.backend.global.error;
 
+// 에러 응답을 위한 레코드 클래스
+// record를 사용하여 불변 객체로 생성
 public record ErrorResponse(
 	int httpStatus,
 	String message,

@@ -1,5 +1,7 @@
 package com.chatbot.backend.domain.board.entity;
 
+import com.chatbot.backend.global.shared.BaseTimeEntity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
@@ -8,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Board {
+public class Board extends BaseTimeEntity {
 
 	@Id
 	private Long id;

@@ -23,6 +23,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
+// Authorization 헤더에서 토큰 추출
 @Component
 public class JwtProvider {
 	private static final String AUTHORITIES_KEY = "auth";
