@@ -9,6 +9,8 @@ import com.chatbot.backend.domain.chatroom.dto.response.CreateChatRoomResponseDt
 import com.chatbot.backend.domain.chatroom.dto.response.DeleteChatRoomResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.FindChatRoomDetailResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.FindChatRoomListResponseDto;
+import com.chatbot.backend.global.security.CustomUserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 public interface ChatRoomService {
 
