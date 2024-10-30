@@ -13,6 +13,9 @@ const Devpage = () => {
 				<li>
 					<Link to="/paging">paging</Link>
 				</li>
+				<li>
+					<Link to="/adminPage">admin page</Link>
+				</li>
 			</ul>
 		</div>
 	);
