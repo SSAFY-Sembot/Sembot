@@ -1,9 +1,15 @@
 package com.chatbot.backend.domain.chatroom.service;
 
+import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.chatbot.backend.domain.chatroom.dto.ChatRoomDto;
 import com.chatbot.backend.domain.chatroom.dto.request.CreateChatRoomRequestDto;
 import com.chatbot.backend.domain.chatroom.dto.request.DeleteChatRoomRequestDto;
-import com.chatbot.backend.domain.chatroom.dto.request.FindChatRoomDetailRequestDto;
 import com.chatbot.backend.domain.chatroom.dto.request.FindChatRoomListRequestDto;
 import com.chatbot.backend.domain.chatroom.dto.response.CreateChatRoomResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.DeleteChatRoomResponseDto;
@@ -13,46 +19,64 @@ import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
 import com.chatbot.backend.domain.chatroom.repository.ChatRoomRepository;
 import com.chatbot.backend.domain.user.entity.User;
 import com.chatbot.backend.domain.user.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ChatRoomServiceImpl implements ChatRoomService{
+public class ChatRoomServiceImpl implements ChatRoomService {
 
-    private final ChatRoomRepository chatRoomRepository;
-    private final UserRepository userRepository;
+	private final ChatRoomRepository chatRoomRepository;
+	private final UserRepository userRepository;
 
+	@Override
+	public CreateChatRoomResponseDto createChatRoom(
+		CreateChatRoomRequestDto createChatRoomRequestDto) {
 
+		User user = userRepository.findUserById(createChatRoomRequestDto.getUserId());
 
-    @Override
-    public CreateChatRoomResponseDto createChatRoom(
-            CreateChatRoomRequestDto createChatRoomRequestDto) {
+		ChatRoom chatroom = chatRoomRepository.save(
+			ChatRoom.builder()
+				.user(user)
+				.content(createChatRoomRequestDto.getContent())
+				.build());
 
-        User user = userRepository.findUserById(createChatRoomRequestDto.getUserId());
+		return new CreateChatRoomResponseDto(chatroom.getId(), chatroom.getTitle());
+	}
 
-        ChatRoom chatroom = chatRoomRepository.save(
-                ChatRoom.builder()
-                        .user(user)
-                        .content(createChatRoomRequestDto.getContent())
-                        .build());
+	@Override
+	public FindChatRoomListResponseDto findChatRoomList(FindChatRoomListRequestDto findChatRoomRequestDto,
+		Pageable pageable) {
 
-        return new CreateChatRoomResponseDto(chatroom.getId(), chatroom.getTitle());
-    }
+		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByUserIdAndDeletedFalseAndCreatedAtOrderByCreatedAtDesc(
+			findChatRoomRequestDto.getUserId(),
+			pageable);
 
-    @Override
-    public FindChatRoomListResponseDto findChatRoomList(FindChatRoomListRequestDto findChatRoomRequestDto) {
-        return null;
-    }
+		List<ChatRoomDto> chatRoomDtos = chatRooms.getContent().stream()
+			.map(chatRoom -> new ChatRoomDto(chatRoom.getId(), chatRoom.getTitle(), chatRoom.getCreatedAt()))
+			.toList();
 
-    @Override
-    public FindChatRoomDetailResponseDto findChatRoomDetail(FindChatRoomDetailRequestDto findChatRoomDetailRequestDto) {
-        return null;
-    }
+		Page<ChatRoomDto> chatRoomDtoPage = new PageImpl<>(chatRoomDtos, pageable, chatRooms.getTotalElements());
 
-    @Override
-    public DeleteChatRoomResponseDto deleteChatRoom(DeleteChatRoomRequestDto deleteChatRoomRequestDto) {
-        return null;
-    }
+		boolean hasNext = chatRoomDtoPage.hasNext();
+
+		return new FindChatRoomListResponseDto(chatRoomDtoPage, hasNext);
+	}
+
+	@Override
+	public FindChatRoomDetailResponseDto findChatRoomDetail(Long chatRoomId) {
+
+		ChatRoom chatRoom = chatRoomRepository.findChatRoomById(chatRoomId);
+
+		FindChatRoomDetailResponseDto response = new FindChatRoomDetailResponseDto(
+
+		)
+
+		return
+	}
+
+	@Override
+	public DeleteChatRoomResponseDto deleteChatRoom(DeleteChatRoomRequestDto deleteChatRoomRequestDto) {
+		return null;
+	}
 }

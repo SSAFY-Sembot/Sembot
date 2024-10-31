@@ -3,6 +3,10 @@ spring:
     hibernate:
       ddl-auto: update
 
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/sembot
+
   jackson:
     time-zone: Asia/Seoul
 
