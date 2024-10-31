@@ -88,14 +88,17 @@ const ChatView: React.FC<ChatViewProps> = ({ qnas, onSendMessage, onFeedback, is
               {qnas.map((qna: QnA, index) => (
                 <div key={index}>
                   <ChatMessage message={qna.question} />
-                  <div className="ml-16 my-6">
-                    <ChatDocs docs={qna.docs} />
-                  </div>
+                  <div className="my-6"></div>
                   <ChatMessage message={qna.answer} />
                   {qna.isAnswered &&
                     <>
-                      <div className="ml-16 flex justify-start items-center my-4 space-x-2">
-                        {renderFeedbackButton(qna)}
+                      <div className="ml-2">
+                        <div className="my-6">
+                          <ChatDocs docs={qna.docs} />
+                        </div>
+                        <div className="flex justify-start items-center my-4 space-x-2">
+                          {renderFeedbackButton(qna)}
+                        </div>
                       </div>
                       <hr className="my-6"/>
                     </>
@@ -104,7 +107,7 @@ const ChatView: React.FC<ChatViewProps> = ({ qnas, onSendMessage, onFeedback, is
               ))}
             </div>
           </div>
-          <div className="w-full max-w-3xl">
+          <div className="w-full max-w-3xl mt-3">
             <InputWithIcon
               isLoading={isLoading}
               iconPath={"/src/assets/icons/send.svg"}
