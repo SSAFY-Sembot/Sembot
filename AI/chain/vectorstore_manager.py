@@ -19,11 +19,9 @@ def create_vectorstore(pdf_path, vectorstore_path, embeddings):
     # 단계 2: 문서 분할
     recursive_text_splitter = RecursiveCharacterTextSplitter(
         # 정말 작은 청크 크기를 설정합니다.
-        separators=["\n\n", "\n", " ", ""],
-        chunk_size=512,
-        chunk_overlap=64,
-        length_function=len,
-        is_separator_regex=False,
+        chunk_size=1000,
+        chunk_overlap=50,
+        length_function=len
     )
 
     chunked_docs = recursive_text_splitter.split_documents(docs)

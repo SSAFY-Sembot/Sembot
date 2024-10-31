@@ -3,12 +3,17 @@ import os
 # Paths
 PDF_PATH = r"../kisa_pdf/"
 VECTORSTORE_PATH = r"./vector_store_path"
-MODEL_PATH = r"llama3.1"
+# MODEL_PATH = r"llama3.1"
+MODEL_PATH = r"gpt-4o-mini"
+
+VECTORSTORE_PATH = r"./vector_store_path_jhgan"
+EMBEDDINGS_MODEL_NAME = "jhgan/ko-sroberta-nli"
+
+# VECTORSTORE_PATH = r"./vector_store_path_intfloat"
+# EMBEDDINGS_MODEL_NAME = "intfloat/multilingual-e5-large"
 
 # Embeddings Configuration
-EMBEDDINGS_MODEL_NAME = "jhgan/ko-sroberta-nli"
-# EMBEDDINGS_MODEL_KWARGS = {"device": "cuda"}
-EMBEDDINGS_MODEL_KWARGS = {"device": "cpu"}
+EMBEDDINGS_MODEL_KWARGS = {"device": "cuda"}
 EMBEDDINGS_ENCODE_KWARGS = {"normalize_embeddings": True}
 
 # BASE_DIR = os.getenv('BASE_DIR')
