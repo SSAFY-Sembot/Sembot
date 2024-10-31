@@ -1,7 +1,10 @@
 package com.chatbot.backend.domain.board.service;
 
-import com.chatbot.backend.domain.board.dto.request.CreateBoardRequest;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.chatbot.backend.domain.board.dto.request.BoardCreateRequest;
+import com.chatbot.backend.domain.board.dto.response.BoardDetailResponse;
 
 public interface BoardService {
-	void createBoard(CreateBoardRequest createBoardRequest);
+	BoardDetailResponse createBoard(Long userId, BoardCreateRequest BoardCreateRequest, MultipartFile file);
 }
