@@ -6,7 +6,7 @@ import lombok.Data;
 public class CreateBoardRequest {
 	private String title;
 	private String category;
-	private String content;
+	private String contents;
 	private int level;
-	private String ruleURL;
+	private String fileUrl;
 }

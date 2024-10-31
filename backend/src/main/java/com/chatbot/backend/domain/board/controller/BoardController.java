@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Tag(name = "규정", description = "규정 관련 API")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/board")
+@RequestMapping("/api/boards")
 @Slf4j
 public class BoardController {
 	private final BoardService boardService;
