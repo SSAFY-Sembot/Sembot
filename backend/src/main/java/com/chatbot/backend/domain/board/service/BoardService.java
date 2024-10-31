@@ -1,8 +1,7 @@
 package com.chatbot.backend.domain.board.service;
 
-import com.chatbot.backend.domain.board.dto.request.CreateBoardRequestDto;
+import com.chatbot.backend.domain.board.dto.request.CreateBoardRequest;
 
 public interface BoardService {
-
-    void createBoard(CreateBoardRequestDto createBoardRequestDto);
+	void createBoard(CreateBoardRequest createBoardRequest);
 }
