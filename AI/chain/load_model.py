@@ -16,12 +16,10 @@ def create_model(model_name, model_path):
 
 def load_model(model_path):
     # 토크나이저와 모델 불러오기
-    tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
     # torch_dtype와 device_map 파라미터 적용
     model = AutoModelForCausalLM.from_pretrained(
-        model_path, 
-        trust_remote_code=True, 
-        torch_dtype=torch.bfloat16,  # bfloat16을 사용하여 메모리 절약
+        model_path,         
         device_map="auto"  # GPU 자동 분배
     )
 
@@ -30,9 +28,7 @@ def load_model(model_path):
         "text-generation", 
         model=model, 
         tokenizer=tokenizer, 
-        max_new_tokens=512,  # 생성할 토큰 수 설정
-        temperature=0.6,  # 텍스트 생성에 사용되는 온도값
-        top_p=0.9,  # top-p 샘플링
+        max_new_tokens=512,  # 생성할 토큰 수 설정        
         return_full_text=False,  # 답변만 출력
         eos_token_id=[tokenizer.eos_token_id, tokenizer.convert_tokens_to_ids("<|eot_id|>")]  # 문장 종료 토큰 설정
     )
