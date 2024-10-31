@@ -23,11 +23,8 @@ interface ChatMessageProps {
 const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   return (
     <div>
-      <div className={`flex justify-start items-center text-semesBlue`}>
-        {message.isUser() ? (
-          <div className="mr-3 flex items-center justify-center bg-blue-600 w-[3rem] h-[3rem] rounded-xl">
-            <img src="src/assets/icons/user_2.svg" alt="로고"/>
-          </div>) : (
+      <div className={`flex justify-${message.isUser() ? "end" : "start"} items-center text-semesBlue`}>
+        {!message.isUser() && (
           <div className="mr-3 flex items-center justify-center w-[3rem]">
             <img src="src/assets/images/logo.png" alt="로고"/>
           </div>
@@ -39,6 +36,11 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
         >
           {message.content}
         </div>
+        {/* {message.isUser() && (
+          <div className="ml-3 flex items-center justify-center bg-blue-600 w-[3rem] h-[3rem] rounded-full">
+            <img src="src/assets/icons/user_2.svg" alt="로고"/>
+          </div>
+        )} */}
       </div>
     </div>
   );
