@@ -10,7 +10,7 @@ import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
 @Repository
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
 
-	Page<ChatRoom> findAllByUserIdAndDeletedFalseAndCreatedAtOrderByCreatedAtDesc(Long userId, Pageable pageable);
+	Page<ChatRoom> findAllByUserIdAndDeletedFalseOrderByCreatedAtDesc(Long userId, Pageable pageable);
 
 	ChatRoom findChatRoomById(Long chatRoomId);
 }

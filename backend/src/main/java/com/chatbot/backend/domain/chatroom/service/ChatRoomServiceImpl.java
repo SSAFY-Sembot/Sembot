@@ -7,12 +7,12 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.chatbot.backend.domain.chat.entitiy.Chat;
+import com.chatbot.backend.domain.chat.repository.MongoChatRepository;
 import com.chatbot.backend.domain.chatroom.dto.ChatRoomDto;
 import com.chatbot.backend.domain.chatroom.dto.request.CreateChatRoomRequestDto;
-import com.chatbot.backend.domain.chatroom.dto.request.DeleteChatRoomRequestDto;
 import com.chatbot.backend.domain.chatroom.dto.request.FindChatRoomListRequestDto;
 import com.chatbot.backend.domain.chatroom.dto.response.CreateChatRoomResponseDto;
-import com.chatbot.backend.domain.chatroom.dto.response.DeleteChatRoomResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.FindChatRoomDetailResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.FindChatRoomListResponseDto;
 import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
@@ -28,6 +28,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
 	private final ChatRoomRepository chatRoomRepository;
 	private final UserRepository userRepository;
+	private final MongoChatRepository chatRepository;
 
 	@Override
 	public CreateChatRoomResponseDto createChatRoom(
@@ -48,7 +49,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	public FindChatRoomListResponseDto findChatRoomList(FindChatRoomListRequestDto findChatRoomRequestDto,
 		Pageable pageable) {
 
-		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByUserIdAndDeletedFalseAndCreatedAtOrderByCreatedAtDesc(
+		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByUserIdAndDeletedFalseOrderByCreatedAtDesc(
 			findChatRoomRequestDto.getUserId(),
 			pageable);
 
@@ -68,15 +69,22 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
 		ChatRoom chatRoom = chatRoomRepository.findChatRoomById(chatRoomId);
 
-		FindChatRoomDetailResponseDto response = new FindChatRoomDetailResponseDto(
+		List<Chat> chat = chatRepository.findAllByChatRoom_IdOrderByCreatedAtDesc(chatRoomId);
 
-		)
-
-		return
+		return new FindChatRoomDetailResponseDto(
+			chatRoomId,
+			chatRoom.getTitle(),
+			chatRoom.getCreatedAt(),
+			chat
+		);
 	}
 
 	@Override
-	public DeleteChatRoomResponseDto deleteChatRoom(DeleteChatRoomRequestDto deleteChatRoomRequestDto) {
-		return null;
+	public void deleteChatRoom(Long chatRoomId) {
+
+		ChatRoom chatRoom = chatRoomRepository.findChatRoomById(chatRoomId);
+
+		chatRoom.setDeleted(true);
+
 	}
 }
