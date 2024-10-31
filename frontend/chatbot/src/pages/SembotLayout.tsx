@@ -44,9 +44,9 @@ const SembotLayout: React.FC<SembotLayoutProps> = ({
   ],
 }) => {
 	return (
-		<div className="flex w-full h-full">
+		<div className="flex w-full h-full text-sm">
 			{/* 좌측 Sidebar 영역 */}
-			<div className="w-[14%] h-full fixed left-0 top-0">
+			<div className="w-[16rem] h-full fixed left-0 top-0">
 				<Sidebar
 					components={sidebarComponents}
 					footerComponents={footerComponents}
@@ -55,7 +55,7 @@ const SembotLayout: React.FC<SembotLayoutProps> = ({
 			</div>
 
       {/* 우측 콘텐츠 영역 */}
-      <div className="absolute left-[14%] h-full right-0">
+      <div className="absolute left-[16rem] h-full right-0">
         {/* Header 영역 */}
         <div className="my-4 mx-2" hidden={hideHeader}>
           <Header title={title} />
