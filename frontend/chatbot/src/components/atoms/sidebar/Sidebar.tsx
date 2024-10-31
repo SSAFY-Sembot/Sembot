@@ -42,7 +42,7 @@ const Sidebar: React.FC<SidebaProps> = ({
 
           {/* Components */}
           <div className="w-full flex flex-col space-y-2">
-            <hr className="mb-3 border border-gray-500" />
+            <hr className="mx-2 mb-3 border border-gray-100" />
             {/* {components.map((buttonProps, index) => (
               <React.Fragment key={index}>
                 <ButtonWithIcon key={index} {...buttonProps} />
