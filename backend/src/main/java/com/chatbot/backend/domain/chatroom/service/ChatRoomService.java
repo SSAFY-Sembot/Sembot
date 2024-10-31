@@ -1,24 +1,23 @@
 package com.chatbot.backend.domain.chatroom.service;
 
+import org.springframework.data.domain.Pageable;
 
 import com.chatbot.backend.domain.chatroom.dto.request.CreateChatRoomRequestDto;
 import com.chatbot.backend.domain.chatroom.dto.request.DeleteChatRoomRequestDto;
-import com.chatbot.backend.domain.chatroom.dto.request.FindChatRoomDetailRequestDto;
 import com.chatbot.backend.domain.chatroom.dto.request.FindChatRoomListRequestDto;
 import com.chatbot.backend.domain.chatroom.dto.response.CreateChatRoomResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.DeleteChatRoomResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.FindChatRoomDetailResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.FindChatRoomListResponseDto;
-import com.chatbot.backend.global.security.CustomUserDetails;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 public interface ChatRoomService {
 
-    CreateChatRoomResponseDto createChatRoom(CreateChatRoomRequestDto createChatRoomRequestDto);
+	CreateChatRoomResponseDto createChatRoom(CreateChatRoomRequestDto createChatRoomRequestDto);
 
-    FindChatRoomListResponseDto findChatRoomList(FindChatRoomListRequestDto findChatRoomRequestDto);
+	FindChatRoomListResponseDto findChatRoomList(FindChatRoomListRequestDto findChatRoomRequestDto,
+		Pageable pageable);
 
-    FindChatRoomDetailResponseDto findChatRoomDetail(FindChatRoomDetailRequestDto findChatRoomDetailRequestDto);
+	FindChatRoomDetailResponseDto findChatRoomDetail(Long chatRoomID);
 
-    DeleteChatRoomResponseDto deleteChatRoom(DeleteChatRoomRequestDto deleteChatRoomRequestDto);
+	DeleteChatRoomResponseDto deleteChatRoom(DeleteChatRoomRequestDto deleteChatRoomRequestDto);
 }
