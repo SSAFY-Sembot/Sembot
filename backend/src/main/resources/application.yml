@@ -5,6 +5,10 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
 
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/sembot
+
   jackson:
     time-zone: Asia/Seoul
 
