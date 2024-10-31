@@ -22,18 +22,23 @@ interface ChatMessageProps {
 
 const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   return (
-    <div className={`flex ${message.isUser() ? 'justify-end' : 'justify-start'}`}>
-      {!message.isUser() && (
-        <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-2 ">
-          <span>👤</span>
+    <div>
+      <div className={`flex justify-start items-center text-semesBlue`}>
+        {message.isUser() ? (
+          <div className="mr-3 flex items-center justify-center bg-blue-600 w-[3rem] h-[3rem] rounded-xl">
+            <img src="src/assets/icons/user_2.svg" alt="로고"/>
+          </div>) : (
+          <div className="mr-3 flex items-center justify-center w-[3rem]">
+            <img src="src/assets/images/logo.png" alt="로고"/>
+          </div>
+        )}
+        <div
+          className={`max-w-2xl p-4 rounded-lg text-sm ${
+            message.isUser() ? 'bg-blue-100 text-blue-900' : 'bg-gray-100'
+          }`}
+        >
+          {message.content}
         </div>
-      )}
-      <div
-        className={`max-w-2xl p-4 rounded-lg ${
-          message.isUser() ? 'bg-blue-100 text-blue-900' : 'bg-gray-100'
-        }`}
-      >
-        {message.content}
       </div>
     </div>
   );
