@@ -36,8 +36,6 @@ const Chat: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false); // 로딩 상태 추가
 
   const initChatroom = () => {
-    if(isLoading) return;
-    
     setCurChatroomId(-1);
     setQnAs([]);
   };
