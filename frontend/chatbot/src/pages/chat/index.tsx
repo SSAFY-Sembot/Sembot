@@ -36,13 +36,15 @@ const Chat: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false); // 로딩 상태 추가
 
   const initChatroom = () => {
+    if(isLoading) return;
+    
     setCurChatroomId(-1);
     setQnAs([]);
   };
 
   const newChatProp: ButtonWithIconProps = {
     btnName: "새채팅",
-    styleName: "flex bg-transparent border border-white text-white py-2 px-4 rounded mx-1",
+    styleName: "flex bg-transparent border border-white text-white py-2 px-4 rounded mx-1 hover:bg-blue-900 transition-colors duration-200 ease-in-out",
     icon: "/src/assets/icons/plus.svg",
     handleClick: initChatroom,
   };
