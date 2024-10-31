@@ -1,27 +1,42 @@
+import React from "react";
+
 export interface ButtonProps {
 	btnName: string;
 	styleName: string;
 	icon: string;
-	// width: string
-	// TODO
-	onClick?: () => void;
+	handleClick?: () => void;
+	isActive?: boolean;
+	isFooter?: boolean;
 }
 
 const ButtonWithIcon: React.FC<ButtonProps> = ({
 	btnName,
 	styleName,
 	icon,
-	onClick
+	handleClick,
+	isActive,
+	isFooter,
 }) => {
-	console.log(icon);
+	const activeStyle = isActive
+		? "bg-white text-semesBlue"
+		: "bg-gray-400 text-semesBlue";
+
+	const footerStyle = isFooter ? "bg-semesBlue text-white" : "";
+	const combinedStyle = `space-x-2 ${styleName} ${activeStyle}`;
+	const combinedFooterStyle = `space-x-2 ${styleName} ${footerStyle}`;
+
 	return (
 		<div
-			className={`space-x-2 ${styleName}`}
+			className={footerStyle == "" ? combinedStyle : combinedFooterStyle}
 			data-ripple-light="true"
-			onClick={onClick}
+			onClick={handleClick}
 		>
-			<img width="15rem" src={icon}></img>
-			<div>{btnName}</div>
+			<div className="flex">
+				<div className="w-1"></div>
+				<img width="15rem" src={icon}></img>
+				<div className="w-2"></div>
+				<div>{btnName}</div>
+			</div>
 		</div>
 	);
 };
