@@ -16,7 +16,7 @@ interface InputSearchProps {
 	/** icon 경로 */
 	iconPath?: string;
 	/** icon click event 함수 */
-	onIconClick?: (message: string) => void;
+	onIconClick?: () => void;
 	/** 추가될 속성값 */
 	className?: string;
 }
