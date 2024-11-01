@@ -10,9 +10,9 @@ import com.chatbot.backend.domain.board.entity.Board;
 import com.chatbot.backend.domain.board.repository.BoardRepository;
 import com.chatbot.backend.domain.category.entity.Category;
 import com.chatbot.backend.domain.category.repository.CategoryRepository;
+import com.chatbot.backend.domain.file.service.FileService;
 import com.chatbot.backend.domain.user.entity.User;
 import com.chatbot.backend.domain.user.repository.UserRepository;
-import com.chatbot.backend.global.file.FileService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
