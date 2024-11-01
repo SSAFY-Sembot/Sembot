@@ -2,10 +2,17 @@ package com.chatbot.backend.domain.board.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.chatbot.backend.domain.board.dto.request.CreateBoardRequest;
+import com.chatbot.backend.domain.board.dto.request.BoardCreateRequest;
+import com.chatbot.backend.domain.board.dto.response.BoardDetailResponse;
 import com.chatbot.backend.domain.board.entity.Board;
 import com.chatbot.backend.domain.board.repository.BoardRepository;
+import com.chatbot.backend.domain.category.entity.Category;
+import com.chatbot.backend.domain.category.repository.CategoryRepository;
+import com.chatbot.backend.domain.user.entity.User;
+import com.chatbot.backend.domain.user.repository.UserRepository;
+import com.chatbot.backend.global.file.FileService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,19 +20,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class BoardServiceImpl implements BoardService {
+	private static final String BOARD_UPLOAD_DIR = "boards";
+
 	private final BoardRepository boardRepository;
+	private final UserRepository userRepository;
+	private final FileService fileService;
+	private final CategoryRepository categoryRepository;
 
 	@Override
-	public void createBoard(CreateBoardRequest createBoardRequest) {
-		boardRepository.save(
-			Board.builder()
-				.title(createBoardRequest.getTitle())
-				.contents(createBoardRequest.getContents())
-				.fileUrl(createBoardRequest.getFileUrl())
-				.level(createBoardRequest.getLevel())
-				.build()
-		);
+	public BoardDetailResponse createBoard(Long userId, BoardCreateRequest boardCreateRequest, MultipartFile file) {
+		User user = userRepository.findByIdOrElseThrow(userId);
+		Category category = categoryRepository.findByNameOrElseThrow(boardCreateRequest.category());
+
+		// Board 생성
+		Board board = boardCreateRequest.toEntity(user, category, fileService.saveFile(file, BOARD_UPLOAD_DIR));
+		Board savedBoard = boardRepository.save(board);
+
+		return BoardDetailResponse.of(savedBoard, user);
 	}
 }
