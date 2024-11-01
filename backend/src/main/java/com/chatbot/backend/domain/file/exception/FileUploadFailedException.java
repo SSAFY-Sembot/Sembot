@@ -1,4 +1,4 @@
-package com.chatbot.backend.global.file.exception;
+package com.chatbot.backend.domain.file.exception;
 
 import com.chatbot.backend.global.error.ErrorCode;
 import com.chatbot.backend.global.error.ServiceException;
