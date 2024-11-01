@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class FileUploadFailedExceptionTest {
 
 	@Test
-	@DisplayName("기본 생성자 Test")
+	@DisplayName("예외 기본 생성자 Test")
 	void constructorTest() {
 		// given
 
@@ -21,7 +21,7 @@ public class FileUploadFailedExceptionTest {
 	}
 
 	@Test
-	@DisplayName("예외를 포함한 생성자 Test")
+	@DisplayName("예외 Cause를 포함한 생성자 Test")
 	void constructorWithCauseTest() {
 		// given
 		Exception cause = new RuntimeException("Test Cause Exception");
