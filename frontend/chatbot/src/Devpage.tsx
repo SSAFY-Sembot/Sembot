@@ -16,6 +16,9 @@ const Devpage = () => {
 				<li>
 					<Link to="/adminPage">admin page</Link>
 				</li>
+				<li>
+					<Link to="/chat">chat page</Link>
+				</li>
 			</ul>
 		</div>
 	);
