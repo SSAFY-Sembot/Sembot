@@ -8,10 +8,6 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
 
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/sembot
-
   jackson:
     time-zone: Asia/Seoul
 
@@ -19,6 +15,10 @@ spring:
     url: jdbc:mysql://localhost:3306/chatbot?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: ssafy
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/local
 
 jwt:
   access_secret: ${JWT_ACCESS_SECRET}
