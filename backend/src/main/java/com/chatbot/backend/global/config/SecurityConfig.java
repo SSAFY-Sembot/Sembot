@@ -52,16 +52,18 @@ public class SecurityConfig {
 					// URL 별 접근 권한 설정
 					.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 					.requestMatchers(CorsUtils::isCorsRequest).permitAll()
-					.requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()    // Swagger 문서 접근 허용
+					.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/**").permitAll()    // Swagger 문서 접근 허용
 					// 미인증 사용자 접근 허용
-					.requestMatchers("/", "/login", "/register","/**").permitAll()
-					// ADMIN 권한 설정
+					.requestMatchers("/", "/login", "/register").permitAll()
+				// TODO
+				// JWT 토큰을 사용하게 되면 주석 제거할 예정
+				// ADMIN 권한 설정
 					// .requestMatchers("/admin/**").hasRole(Role.ADMIN.getKey())
-					// // ADMIN과 USER 모두 접근 가능
+					// ADMIN과 USER 모두 접근 가능
 					// .requestMatchers("/board/**").hasAnyRole(Role.ADMIN.getKey(), Role.USER.getKey())
-					// // USER 권한 설정
+					// USER 권한 설정
 					// .requestMatchers("/chat/**").hasRole(Role.USER.getKey())
-					// // 그 외 모든 요청은 인증 필요
+					// 그 외 모든 요청은 인증 필요
 					// .anyRequest().authenticated()
 			)
 			// JWT 필터 추가
