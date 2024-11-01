@@ -1,8 +1,6 @@
 package com.chatbot.backend.domain.file.service;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -10,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.chatbot.backend.domain.file.exception.FileUploadFailedException;
+import com.chatbot.backend.domain.file.util.FileUtil;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,25 +31,12 @@ public class FileServiceImpl implements FileService {
 		}
 
 		try {
-			// 1. 업로드 될 디렉토리 생성
-			String uploadDir = uploadPath + "/" + dirName;
-			File directory = new File(uploadDir);
-			if (!directory.exists()) {
-				directory.mkdirs();
-			}
+			String uploadDir = FileUtil.createDirectory(uploadPath, dirName);
+			String saveFileName = FileUtil.generateFileName(file.getOriginalFilename());
+			String fullFilePath = FileUtil.createFullPath(uploadDir, saveFileName);
 
-			// 2. 저장될 파일명 생성 (UUID + 원본 확장자)
-			String originalFilename = file.getOriginalFilename();
-			String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-			String savedFilename = UUID.randomUUID() + extension;
-
-			// 3. 파일 저장
-			String fullPath = uploadDir + "/" + savedFilename;
-			File dest = new File(fullPath);
-			file.transferTo(dest);
-
-			log.info("파일 저장 완료: {}", fullPath);
-			return fullPath;
+			FileUtil.saveFile(file, fullFilePath);
+			return fullFilePath;
 		} catch (IOException ioException) {
 			throw new FileUploadFailedException();
 		}
