@@ -81,3 +81,8 @@ code.hljs {
 	padding: 0;
 	background-color: #FEFEFE;
 }
+
+.prose {
+	color: var(--tw-prose-body);
+	max-width: 75ch;
+}

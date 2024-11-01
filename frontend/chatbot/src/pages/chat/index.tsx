@@ -133,7 +133,7 @@ const Chat: React.FC = () => {
     } finally {
     
       // TODO : 채팅 저장하기
-      const chatId = 1;
+      const chatId = qnas[qnas.length - 1] ? qnas[qnas.length - 1].chatId + 1 : 1;
 
       // 채팅 id 및 답변 완료 여부 등록
       setQnAs((qnas) => {
@@ -166,7 +166,7 @@ const Chat: React.FC = () => {
       sidebarComponents={chatroomComponents}
       footerComponents={footerComponents}
     >
-      <div className="px-4 w-full h-full text-left">
+      <div className="w-full h-full text-left">
         <ChatView
           qnas={qnas}
           onSendMessage={sendMessage}

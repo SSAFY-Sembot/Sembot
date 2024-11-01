@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <header>
       <div className="relative mt-5 w-full flex items-center mx-auto py-4">
-        <div className="absolute left-5 text-2xl font-bold">{title}</div>
+        <div className="absolute sm:left-5 text-2xl font-bold left-16">{title}</div>
 
         <div className="absolute flex items-center right-0">
           {/* 회원 정보 */}

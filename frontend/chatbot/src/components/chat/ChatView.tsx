@@ -91,7 +91,7 @@ const ChatView: React.FC<ChatViewProps> = ({ qnas, onSendMessage, onFeedback, is
         </div>
       ) : (
         <div className="relative w-full h-full flex flex-col justify-center items-center">
-          <div ref={chatContainerRef} className="absolute top-0 w-full h-[88svh] overflow-auto flex justify-center">
+          <div ref={chatContainerRef} className="absolute top-0 w-full h-[88svh] overflow-auto flex justify-center pr-6 pl-2">
             <div className="w-full max-w-3xl h-full space-y-4 mt-6">
               {qnas.map((qna: QnA, index) => (
                 <div key={index}>
@@ -115,7 +115,7 @@ const ChatView: React.FC<ChatViewProps> = ({ qnas, onSendMessage, onFeedback, is
               ))}
             </div>
           </div>
-          <div className="absolute bottom-0 w-full max-w-3xl mb-10">
+          <div className="absolute bottom-0 w-full max-w-3xl mb-10 px-4">
             <InputWithIcon
               isLoading={isLoading}
               iconPath={"/src/assets/icons/send.svg"}

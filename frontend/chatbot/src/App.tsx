@@ -8,6 +8,7 @@ import Paging from "@components/atoms/paging/Paging";
 import AdminPage from "../src/pages/admin/index";
 import { useState } from "react";
 import Chat from "@pages/chat";
+import BoardListPage from "@pages/board";
 
 function App() {
 	const [curPage, setCurPage] = useState(4);
@@ -45,6 +46,10 @@ function App() {
 				<Route
 					path="/chat"
 					element={<Chat />}
+				/>
+				<Route
+					path="/board"
+					element={<BoardListPage />}
 				/>
 			</Routes>
 		</>
