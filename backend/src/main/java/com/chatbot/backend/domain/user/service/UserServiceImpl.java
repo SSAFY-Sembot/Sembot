@@ -1,6 +1,8 @@
 package com.chatbot.backend.domain.user.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.chatbot.backend.domain.user.dto.request.LoginRequestDto;
@@ -28,6 +30,9 @@ public class UserServiceImpl implements UserService{
 	private final JwtProvider jwtProvider;
 	@Value("${jwt.refresh_token_expiration}")
 	private long refreshTokenExpiration;
+
+	@Autowired
+	private RedisTemplate<String, Object> redisTemplate;
 
 	@Override
 	public void signUp(SignupRequestDto signupRequestDto) {
@@ -75,23 +80,30 @@ public class UserServiceImpl implements UserService{
 		cookie.setMaxAge((int)refreshTokenExpiration/1000);
 		cookie.setHttpOnly(true);
 		response.addCookie(cookie);
+
+		redisTemplate.opsForValue().set(loginUser.getId()+"",refreshToken);
 	}
 
 	@Override
 	public void logout(HttpServletRequest request, HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();
+		String rToken = "";
+
 		if(cookies != null) {
 			for (Cookie c : cookies) {
 				if (c.getName().equals("refreshToken")) {
 					c.setMaxAge(0);
 					c.setPath("/");
 					response.addCookie(c);
+					rToken = c.getValue();
 					break;
 				}
 			}
 		}
 
-		// TODO : redis에서 삭제
+		String userId = jwtProvider.parseClaims(rToken, true).getSubject();
+		User user = userRepository.findUserByEmail(userId);
+		redisTemplate.delete(user.getId()+"");
 		response.setHeader("accessToken",null);
 	}
 
@@ -131,6 +143,7 @@ public class UserServiceImpl implements UserService{
 
 
 		String userId = jwtProvider.parseClaims(refresh, true).getSubject();
+		log.info("Reissue userId : {}",userId);
 		Role role = getRole(userId);
 
 		String newAccessToken = jwtProvider.createAccessToken(userId, role);
@@ -143,6 +156,8 @@ public class UserServiceImpl implements UserService{
 		cookie.setMaxAge((int)refreshTokenExpiration/1000);
 		cookie.setHttpOnly(true);
 
+		User user = userRepository.findUserByEmail(userId);
+		redisTemplate.opsForValue().set(user.getId()+"",newRefreshToken);
 		// TODO : Redis에 refreshToken 저장하기 ^^
 	}
 }
