@@ -55,4 +55,9 @@ public class FileServiceImpl implements FileService {
 			throw new FileUploadFailedException();
 		}
 	}
+
+	@Override
+	public String saveFile(MultipartFile file) {
+		return saveFile(file, PROFILE_UPLOAD_DIR);
+	}
 }
