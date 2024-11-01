@@ -17,10 +17,6 @@ spring:
     username: root
     password: ssafy
 
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/local
-
 jwt:
   access_secret: ${JWT_ACCESS_SECRET}
   refresh_secret: ${JWT_REFRESH_SECRET}
@@ -34,4 +30,4 @@ cors:
 
 file:
   upload:
-    path: ${FILE_UPLOAD_PATH:/C:/Users/SSAFY/Image}
+    path: ${FILE_UPLOAD_PATH:C:/Users/SSAFY/Image}
