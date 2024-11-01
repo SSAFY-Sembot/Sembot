@@ -43,12 +43,14 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void updateBoard(Long userId, Long boardId, BoardUpdateRequest boardUpdateRequest,
+	public BoardDetailResponse updateBoard(Long userId, Long boardId, BoardUpdateRequest boardUpdateRequest,
 		MultipartFile file) {
 		User user = userRepository.findByIdOrElseThrow(userId);
 		Category category = categoryRepository.findByNameOrElseThrow(boardUpdateRequest.category());
 		Board board = boardRepository.findByIdOrElseThrow(boardId);
 
 		board.updateBoard(boardUpdateRequest, category, fileService.saveFile(file, BOARD_UPLOAD_DIR));
+
+		return BoardDetailResponse.of(board, user);
 	}
 }

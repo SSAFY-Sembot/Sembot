@@ -9,6 +9,6 @@ import com.chatbot.backend.domain.board.dto.response.BoardDetailResponse;
 public interface BoardService {
 	BoardDetailResponse createBoard(Long userId, BoardCreateRequest boardCreateRequest, MultipartFile file);
 
-	void updateBoard(Long userId, Long boardId, BoardUpdateRequest boardUpdateRequest,
+	BoardDetailResponse updateBoard(Long userId, Long boardId, BoardUpdateRequest boardUpdateRequest,
 		MultipartFile file);
 }
