@@ -21,8 +21,13 @@ public enum ErrorCode {
 	INVALID_TOKEN(422, "INVALID_TOKEN", "유효하지 않은 토큰입니다."),
 	EXPIRED_TOKEN(401, "EXPIRED_TOKEN", "토큰이 만료되었습니다."),
 	UNSUPPORTED_TOKEN(400, "UNSUPPORTED_TOKEN", "지원되지 않는 토큰 형식입니다."),
+	NO_REFRESH_TOKEN(404,"NO_REFRESH_TOKEN","토큰이 없습니다."),
 
-	;
+	// 회원가입 관련 오류
+	DUPLICATE_EMAIL(409,"DUPLICATE_EMAIL","이미 존재하는 이메일입니다."),
+
+	// 로그인 관련 오류
+	INCORRECT_ID_OR_PASSWORD(401,"INCORRECT_ID_OR_PASSWORD","아이디 혹은 비밀번호가 틀렸습니다.");
 
 	private final int httpStatus;
 	private final String code;
