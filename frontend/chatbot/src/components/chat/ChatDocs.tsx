@@ -14,7 +14,7 @@ const ChatDocs: React.FC<ChatDocsProps> = ({
       <div className='text-lg font-bold'>
         출처
       </div>
-      <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2'>
+      <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
         {docs.map((doc, index)=>(
           <CardWithLink key={index} content={doc.content} resourceLink={doc.metadata.source} />
         ))}
