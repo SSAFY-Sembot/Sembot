@@ -2,6 +2,7 @@ package com.chatbot.backend.domain.board.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,16 +52,15 @@ public class BoardController {
 	)
 	@PutMapping(value = "/{boardId}", consumes = {MediaType.APPLICATION_JSON_VALUE,
 		MediaType.MULTIPART_FORM_DATA_VALUE})
-	public ResponseEntity<Void> updateBoard(
+	public ResponseEntity<BoardDetailResponse> updateBoard(
 		// TODO
 		// User 구현 이후, token을 Header로 받는 방식으로 변경할 예정
 		// Authentication authentication,
 		@RequestParam Long userId,
-		@RequestParam Long boardId,
+		@PathVariable Long boardId,
 		@Valid @RequestPart(value = "request") BoardUpdateRequest boardUpdateRequest,
 		@RequestPart(value = "file", required = false) MultipartFile file) {
 		// Long userId = (long)authentication.getPrincipal();
-		boardService.updateBoard(userId, boardId, boardUpdateRequest, file);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(boardService.updateBoard(userId, boardId, boardUpdateRequest, file));
 	}
 }
