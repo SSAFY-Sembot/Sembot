@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import InputWithIcon from "@components/atoms/input/InputWithIcon";
 import { Message } from "@components/chat/ChatMessage";
 import ChatMessage from "@components/chat/ChatMessage";
@@ -48,6 +48,14 @@ const ChatView: React.FC<ChatViewProps> = ({ qnas, onSendMessage, onFeedback, is
     "국내외 출장 관련", "인사 규정", "회사 복지 규정",
   ];
 
+  const chatContainerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [qnas]);
+
   const onClickCategory = (category: string) => {
     console.log(category);
   };
@@ -83,8 +91,8 @@ const ChatView: React.FC<ChatViewProps> = ({ qnas, onSendMessage, onFeedback, is
         </div>
       ) : (
         <div className="relative w-full h-full flex flex-col justify-center items-center">
-          <div className="w-full h-[90svh] overflow-auto flex justify-center">
-            <div className="w-full max-w-3xl h-full space-y-4">
+          <div ref={chatContainerRef} className="absolute top-0 w-full h-[88svh] overflow-auto flex justify-center">
+            <div className="w-full max-w-3xl h-full space-y-4 mt-6">
               {qnas.map((qna: QnA, index) => (
                 <div key={index}>
                   <ChatMessage message={qna.question} />
@@ -92,7 +100,7 @@ const ChatView: React.FC<ChatViewProps> = ({ qnas, onSendMessage, onFeedback, is
                   <ChatMessage message={qna.answer} />
                   {qna.isAnswered &&
                     <>
-                      <div className="ml-2">
+                      <div className="ml-16">
                         <div className="my-6">
                           <ChatDocs docs={qna.docs} />
                         </div>
@@ -100,14 +108,14 @@ const ChatView: React.FC<ChatViewProps> = ({ qnas, onSendMessage, onFeedback, is
                           {renderFeedbackButton(qna)}
                         </div>
                       </div>
-                      <hr className="my-6"/>
+                      <hr className="ml-3 my-6"/>
                     </>
                   }
                 </div>
               ))}
             </div>
           </div>
-          <div className="w-full max-w-3xl mt-3">
+          <div className="absolute bottom-0 w-full max-w-3xl mb-10">
             <InputWithIcon
               isLoading={isLoading}
               iconPath={"/src/assets/icons/send.svg"}
