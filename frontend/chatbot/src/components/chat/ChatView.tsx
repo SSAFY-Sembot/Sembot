@@ -76,7 +76,7 @@ const ChatView: React.FC<ChatViewProps> = ({ qnas, onSendMessage, onFeedback, is
   return (
     <div className="mb-4 w-full h-full flex justify-center items-center text-gray-600">
       {qnas.length === 0 ? (
-        <div className="w-full max-w-3xl h-full flex flex-col justify-center items-center">
+        <div className="w-full max-w-3xl h-full flex flex-col justify-center items-center px-4">
           <div className="flex justify-center items-center">
             <img src="/src/assets/icons/logo.svg" alt="SEMES" width="300rem" />
           </div>
