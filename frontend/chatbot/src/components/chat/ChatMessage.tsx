@@ -30,13 +30,13 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
     <div>
       <div className={`flex justify-${message.isUser() ? "end text-semesBlue" : "start text-gray-600"} items-start`}>
         {!message.isUser() && (
-          <div className="mr-3 flex items-center justify-center w-[3rem]">
+          <div className="mr-3 flex items-center justify-center min-w-[3rem] w-[3rem]">
             <img src="src/assets/images/logo.png" alt="로고"/>
           </div>
         )}
         <div
-          className={`max-w-2xl text-base ${
-            message.isUser() ? 'bg-blue-100 text-blue-900 px-6 py-4 rounded-lg' : 'bg-gray-100 px-6 py-4 rounded-lg'
+          className={`max-w-3xl text-base ${
+            message.isUser() ? 'bg-blue-100 text-blue-900 px-6 py-4 rounded-lg' : 'bg-gray-100 px-6 py-4 rounded-lg '
           }`}
         >
           <Markdown className="prose" remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight, rehypeRaw]}>
