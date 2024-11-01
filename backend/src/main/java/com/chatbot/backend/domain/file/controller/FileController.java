@@ -31,6 +31,6 @@ public class FileController {
 	public ResponseEntity<String> createFile(
 		@RequestPart(value = "file", required = true) MultipartFile file
 	) {
-		return ResponseEntity.ok().body(fileService.saveFile(file));
+		return ResponseEntity.ok().body(fileService.saveProfileFile(file));
 	}
 }
