@@ -57,7 +57,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public String saveFile(MultipartFile file) {
+	public String saveProfileFile(MultipartFile file) {
 		return saveFile(file, PROFILE_UPLOAD_DIR);
 	}
 }

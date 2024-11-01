@@ -5,5 +5,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface FileService {
 	String saveFile(MultipartFile file, String dirName);
 
-	String saveFile(MultipartFile file);
+	String saveProfileFile(MultipartFile file);
 }
