@@ -1,6 +1,7 @@
 package com.chatbot.backend.domain.user.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import com.chatbot.backend.domain.user.dto.request.LoginRequestDto;
 import com.chatbot.backend.domain.user.dto.request.SignupRequestDto;
 import com.chatbot.backend.domain.user.service.UserService;
 import com.chatbot.backend.global.jwt.JwtProvider;
+import com.chatbot.backend.global.security.CustomUserDetails;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
