@@ -23,8 +23,8 @@ import lombok.NoArgsConstructor;
 public class User extends BaseTimeEntity {
 
 	@Builder
-	public User(String email, String password, String name, String employeeNum, String department, int level,
-		String profileUrl, boolean isDeleted, boolean canCreateBoard, Role role) {
+	public User(String email, String password, String name, String employeeNum, String department, Integer level,
+		String profileUrl, Boolean isDeleted, Boolean canCreateBoard, Role role) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
