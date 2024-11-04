@@ -2,8 +2,10 @@ import os
 
 from langchain.memory import ConversationBufferWindowMemory
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.document_loaders import PDFPlumberLoader, PyPDFDirectoryLoader
-from langchain_community.vectorstores import FAISS
+from langchain_community.document_loaders import PDFPlumberLoader
+from langchain_community.vectorstores import FAISS, MongoDBAtlasVectorSearch
+from config import MONGODB_CLUSTER_URI, MONGODB_DB_NAME
+from mongo_client import MongoDBClient
 
 
 # PDF 파일명들을 로드하는 함수
@@ -28,8 +30,8 @@ def pdf_splitter(pdf_path):
 
         # 텍스트를 작은 청크로 분할
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=512,  # 각 청크의 최대 문자 수
-            chunk_overlap=64,  # 청크 간 중복되는 문자 수
+            chunk_size=1000,  # 각 청크의 최대 문자 수
+            chunk_overlap=32,  # 청크 간 중복되는 문자 수
         )
         chunked_documents = text_splitter.split_documents(documents)
         all_documents.extend(chunked_documents)
@@ -37,14 +39,46 @@ def pdf_splitter(pdf_path):
     return all_documents
 
 
-def load_vectorstore(vectorstore_path, embeddings):
-    """Load an existing vectorstore."""
-    return FAISS.load_local(
-        vectorstore_path, embeddings=embeddings, allow_dangerous_deserialization=True
+def get_connection():
+    # MongoDBClient 인스턴스를 애플리케이션에서 전역적으로 사용
+    mongo_client = MongoDBClient(uri=MONGODB_CLUSTER_URI, db_name=MONGODB_DB_NAME)
+    collection = mongo_client.get_collection()
+
+    return collection
+
+
+def create_vectorstore_from_Mongo(pdf_path, embeddings):
+
+    # create mongodb vectore store
+    collection = get_connection()
+    chunked_docs = pdf_splitter(pdf_path)
+
+    vector_store = MongoDBAtlasVectorSearch.from_documents(
+        documents=chunked_docs,
+        collection=collection,
+        embedding=embeddings,
+        index_name="vector_index",
+        relevance_score_fn="cosine",
     )
 
+    return vector_store
 
-def create_vectorstore(pdf_path, vectorstore_path, embeddings):
+
+def load_vectorestore_from_Mongo(embeddings):
+
+    # create mongodb vectore store
+    collection = get_connection()
+
+    vector_store = MongoDBAtlasVectorSearch(
+        collection=collection,
+        embedding=embeddings,
+        index_name="vector_index",
+    )
+
+    return vector_store
+
+
+def create_vectorstore_from_FAISS(pdf_path, vectorstore_path, embeddings):
 
     chunked_docs = pdf_splitter(pdf_path)
 
@@ -55,6 +89,13 @@ def create_vectorstore(pdf_path, vectorstore_path, embeddings):
     vectorstore.save_local(vectorstore_path)
 
     return vectorstore
+
+
+def load_vectorstore_from_FAISS(vectorstore_path, embeddings):
+    """Load an existing vectorstore."""
+    return FAISS.load_local(
+        vectorstore_path, embeddings=embeddings, allow_dangerous_deserialization=True
+    )
 
 
 def create_conversaion_memory(memory_key, output_key):
