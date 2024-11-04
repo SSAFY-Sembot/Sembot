@@ -46,8 +46,7 @@ public enum ErrorCode {
 	BOARD_FILE_URL_INVALID(400, "BOARD_FILE_URL_INVALID", "잘못된 파일 URL입니다."),
 
 	// 게시글 수정 삭제 관련 오류
-	BOARD_MODIFY_UNAUTHORIZED(403, "BOARD_MODIFY_UNAUTHORIZED", "게시글 수정 권한이 없습니다."),
-	BOARD_DELETE_UNAUTHORIZED(403, "BOARD_DELETE_UNAUTHORIZED", "게시글 삭제 권한이 없습니다."),
+	BOARD_UNAUTHORIZED(403, "BOARD_UNAUTHORIZED", "게시글 수정 / 삭제 권한이 없습니다."),
 
 	// 게시글 좋아요 관련 오류
 	BOARD_LIKE_ALREADY_EXISTS(409, "BOARD_LIKE_ALREADY_EXISTS", "이미 좋아요를 누른 게시글입니다."),
