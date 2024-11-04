@@ -1,5 +1,9 @@
 package com.chatbot.backend.domain.user.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
 import com.chatbot.backend.global.jwt.Role;
 import com.chatbot.backend.global.shared.BaseTimeEntity;
 
@@ -7,11 +11,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +29,7 @@ public class User extends BaseTimeEntity {
 
 	@Builder
 	public User(String email, String password, String name, String employeeNum, String department, Integer level,
-		String profileUrl, Boolean isDeleted, Boolean canCreateBoard, Role role) {
+		String profileUrl, Boolean isDeleted, Role role) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
@@ -33,7 +38,6 @@ public class User extends BaseTimeEntity {
 		this.level = level;
 		this.profileUrl = profileUrl;
 		this.isDeleted = isDeleted;
-		this.canCreateBoard = canCreateBoard;
 		this.role = role;
 	}
 
@@ -68,6 +72,9 @@ public class User extends BaseTimeEntity {
 
 	@Column(name = "can_create_board", nullable = false)
 	private boolean canCreateBoard;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private List<ChatRoom> chatRoom = new ArrayList<>();
 
 	// 지연로딩 : 필요할때만 가져온다.
 	@Enumerated(EnumType.STRING)
