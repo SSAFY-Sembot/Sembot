@@ -68,16 +68,16 @@ public class SecurityConfig {
 					// ADMIN과 USER 모두 접근 가능
 					// 권한에 따른 board 접근 제어
 					.requestMatchers(HttpMethod.GET, "/api/boards/**")
-					.hasAnyRole(Role.ADMIN.getKey(), Role.USER.getKey())
+					.hasAnyAuthority(Role.ADMIN.getKey(), Role.USER.getKey(), Role.USER_WRITE.getKey())
 
 					.requestMatchers(HttpMethod.POST, "/api/boards/**")
-					.hasRole(Role.USER_WRITE.getKey())
+					.hasAuthority(Role.USER_WRITE.getKey())
 
 					.requestMatchers(HttpMethod.PUT, "/api/boards/**")
-					.hasRole(Role.USER_WRITE.getKey())
+					.hasAuthority(Role.USER_WRITE.getKey())
 
 					.requestMatchers(HttpMethod.DELETE, "/api/boards/**")
-					.hasRole(Role.USER_WRITE.getKey())
+					.hasAuthority(Role.USER_WRITE.getKey())
 
 					// USER 권한 설정
 					.requestMatchers("/api/chats/**", "/api/chatrooms/**")
