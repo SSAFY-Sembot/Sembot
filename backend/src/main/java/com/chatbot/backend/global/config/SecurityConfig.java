@@ -50,21 +50,42 @@ public class SecurityConfig {
 			.authorizeHttpRequests(authorizeRequests ->
 				authorizeRequests
 					// URL 별 접근 권한 설정
-					.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-					.requestMatchers(CorsUtils::isCorsRequest).permitAll()
-					.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/**").permitAll()    // Swagger 문서 접근 허용
+					.requestMatchers(HttpMethod.OPTIONS, "/**")
+					.permitAll()
+					.requestMatchers(CorsUtils::isCorsRequest)
+					.permitAll()
+					.requestMatchers("/v3/api-docs/**", "/swagger-ui/**")
+					.permitAll()    // Swagger 문서 접근 허용
+
 					// 미인증 사용자 접근 허용
-					.requestMatchers("/", "/login", "/register").permitAll()
-				// TODO
-				// JWT 토큰을 사용하게 되면 주석 제거할 예정
-				// ADMIN 권한 설정
-					// .requestMatchers("/admin/**").hasRole(Role.ADMIN.getKey())
+					.requestMatchers("/api/", "/api/users/**", "/api/categories", "/api/files")
+					.permitAll()
+
+					// ADMIN 권한 설정
+					.requestMatchers("/api/admin/**")
+					.hasRole(Role.ADMIN.getKey())
+
 					// ADMIN과 USER 모두 접근 가능
-					// .requestMatchers("/board/**").hasAnyRole(Role.ADMIN.getKey(), Role.USER.getKey())
+					// 권한에 따른 board 접근 제어
+					.requestMatchers(HttpMethod.GET, "/api/boards/**")
+					.hasAnyRole(Role.ADMIN.getKey(), Role.USER.getKey())
+
+					.requestMatchers(HttpMethod.POST, "/api/boards/**")
+					.hasRole(Role.USER_WRITE.getKey())
+
+					.requestMatchers(HttpMethod.PUT, "/api/boards/**")
+					.hasRole(Role.USER_WRITE.getKey())
+
+					.requestMatchers(HttpMethod.DELETE, "/api/boards/**")
+					.hasRole(Role.USER_WRITE.getKey())
+
 					// USER 권한 설정
-					// .requestMatchers("/chat/**").hasRole(Role.USER.getKey())
+					.requestMatchers("/api/chats/**", "/api/chatrooms/**")
+					.hasAnyRole(Role.USER.getKey(), Role.USER_WRITE.getKey())
+
 					// 그 외 모든 요청은 인증 필요
-					// .anyRequest().authenticated()
+					.anyRequest()
+					.authenticated()
 			)
 			// JWT 필터 추가
 			.addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
