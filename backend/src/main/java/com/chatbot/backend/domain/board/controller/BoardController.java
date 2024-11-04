@@ -4,6 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -72,5 +73,18 @@ public class BoardController {
 		Long userId = userDetails.getId();
 		boardService.deleteBoard(userId, boardId);
 		return ResponseEntity.ok().build();
+	}
+
+	@Operation(
+		summary = "게시글 상세 조회",
+		description = "게시글을 상세 조회합니다.  게시글 제목, 내용, 카테고리, 레벨 정보와 선택적으로 파일, 작성자의 정보를 가져올 수 있습니다."
+	)
+	@GetMapping("/{boardId}")
+	public ResponseEntity<BoardDetailResponse> getBoard(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@PathVariable Long boardId
+	) {
+		Long userId = userDetails.getId();
+		return ResponseEntity.ok(boardService.getBoard(userId, boardId));
 	}
 }
