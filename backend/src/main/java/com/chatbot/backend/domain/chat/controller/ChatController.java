@@ -1,7 +1,6 @@
 package com.chatbot.backend.domain.chat.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +12,6 @@ import com.chatbot.backend.domain.chat.dto.request.CreateChatRequestDto;
 import com.chatbot.backend.domain.chat.dto.response.CreateChatFeedBackResponseDto;
 import com.chatbot.backend.domain.chat.dto.response.CreateChatResponseDto;
 import com.chatbot.backend.domain.chat.service.ChatService;
-import com.chatbot.backend.global.security.CustomUserDetails;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,10 +24,8 @@ public class ChatController {
 
 	@PostMapping("")
 	public ResponseEntity<CreateChatResponseDto> createChat(
-		@AuthenticationPrincipal CustomUserDetails customUserDetails,
 		CreateChatRequestDto createChatRequestDto
 	) {
-		createChatRequestDto.setUserId(customUserDetails.getId());
 		CreateChatResponseDto createChatResponseDto = chatService.createChat(createChatRequestDto);
 
 		return ResponseEntity.ok().body(createChatResponseDto);
@@ -37,7 +33,7 @@ public class ChatController {
 
 	@PostMapping("/{chatId}/feedback")
 	public ResponseEntity<CreateChatFeedBackResponseDto> createChatFeedBack(
-		@PathVariable Long chatId,
+		@PathVariable String chatId,
 		@RequestBody CreateChatFeedBackRequestDto createChatFeedBackRequestDto) {
 
 		CreateChatFeedBackResponseDto chatFeedBack = chatService.createChatFeedBack(chatId,
