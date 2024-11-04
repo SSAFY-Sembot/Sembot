@@ -19,6 +19,7 @@ import com.chatbot.backend.global.jwt.JwtProvider;
 import com.chatbot.backend.global.jwt.Role;
 import com.chatbot.backend.global.jwt.exception.NoTokenException;
 
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -70,8 +71,8 @@ public class UserServiceImpl implements UserService{
 
 		// 새로운 accessToken과 refreshToken 생성
 		Role role = loginUser.getRole();
-		String accessToken = jwtProvider.createAccessToken(loginRequestDto.getEmail(), role);
-		String refreshToken = jwtProvider.createRefreshToken(loginRequestDto.getEmail());
+		String accessToken = jwtProvider.createAccessToken(loginUser.getId(), loginRequestDto.getEmail(), role);
+		String refreshToken = jwtProvider.createRefreshToken(loginUser.getId(), loginRequestDto.getEmail());
 
 		// accessToken 헤더에 저장
 		response.setHeader("accessToken","Bearer "+accessToken);
@@ -145,10 +146,14 @@ public class UserServiceImpl implements UserService{
 		jwtProvider.validateToken(rToken, true);
 
 		// 새 accessToken, refreshToken 만들어서
-		String userId = jwtProvider.parseClaims(rToken, true).getSubject();
-		Role role = userRepository.findByEmailOrElseThrow(userId).getRole();
-		String newAccessToken = jwtProvider.createAccessToken(userId, role);
-		String newRefreshToken = jwtProvider.createRefreshToken(userId);
+		Claims claims = jwtProvider.parseClaims(rToken, true);
+		Long userId = ((Number)claims.get("userId")).longValue();
+		String email = claims.getSubject();
+		User user = userRepository.findByEmailOrElseThrow(email);
+		Role role = user.getRole();
+
+		String newAccessToken = jwtProvider.createAccessToken(userId, email, role);
+		String newRefreshToken = jwtProvider.createRefreshToken(userId, email);
 
 		// accessTokenn 헤더에 저장
 		response.setHeader("accessToken","Bearer "+newAccessToken);
@@ -158,7 +163,6 @@ public class UserServiceImpl implements UserService{
 		cookie.setPath("/");
 		cookie.setMaxAge((int)refreshTokenExpiration/1000);
 		cookie.setHttpOnly(true);
-		User user = userRepository.findByEmailOrElseThrow(userId);
 		redisTemplate.opsForValue().set(user.getEmail(),newRefreshToken);
 	}
 
