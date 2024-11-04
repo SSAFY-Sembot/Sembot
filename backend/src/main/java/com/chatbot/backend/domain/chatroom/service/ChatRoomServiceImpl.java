@@ -19,6 +19,10 @@ import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
 import com.chatbot.backend.domain.chatroom.repository.ChatRoomRepository;
 import com.chatbot.backend.domain.user.entity.User;
 import com.chatbot.backend.domain.user.repository.UserRepository;
+import com.chatbot.backend.global.security.CustomUserDetails;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 
 import lombok.RequiredArgsConstructor;
 
