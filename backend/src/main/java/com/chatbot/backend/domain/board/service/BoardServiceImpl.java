@@ -48,7 +48,7 @@ public class BoardServiceImpl implements BoardService {
 		Board board = boardCreateRequest.toEntity(user, category, fileService.saveFile(file, BOARD_UPLOAD_DIR));
 		Board savedBoard = boardRepository.save(board);
 
-		return BoardDetailResponse.of(savedBoard, user);
+		return BoardDetailResponse.of(savedBoard);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class BoardServiceImpl implements BoardService {
 		// Board 수정 (비즈니스 로직)
 		board.updateBoard(boardUpdateRequest, category, fileService.saveFile(file, BOARD_UPLOAD_DIR));
 
-		return BoardDetailResponse.of(board, user, boardLike);
+		return BoardDetailResponse.of(board, boardLike);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class BoardServiceImpl implements BoardService {
 		BoardLike boardLike = boardLikeRepository.findByBoardIdAndUserId(boardId, userId).orElse(null);
 		validateUserHasAccess(user, board);
 
-		return BoardDetailResponse.of(board, board.getUser(), boardLike);
+		return BoardDetailResponse.of(board, boardLike);
 	}
 
 	// 사용자가 쓰기 권한이 있는 지 검증 (검증 로직)
