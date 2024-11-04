@@ -58,7 +58,7 @@ public class SecurityConfig {
 					.permitAll()    // Swagger 문서 접근 허용
 
 					// 미인증 사용자 접근 허용
-					.requestMatchers("/api/", "/api/users/**", "/api/categories", "/api/files")
+					.requestMatchers("/api/", "/api/users/**", "/api/files")
 					.permitAll()
 
 					// ADMIN 권한 설정
@@ -67,7 +67,7 @@ public class SecurityConfig {
 
 					// ADMIN과 USER 모두 접근 가능
 					// 권한에 따른 board 접근 제어
-					.requestMatchers(HttpMethod.GET, "/api/boards/**")
+					.requestMatchers(HttpMethod.GET, "/api/boards/**", "/api/categories")
 					.hasAnyAuthority(Role.ADMIN.getKey(), Role.USER.getKey(), Role.USER_WRITE.getKey())
 
 					.requestMatchers(HttpMethod.POST, "/api/boards/**")
@@ -78,6 +78,13 @@ public class SecurityConfig {
 
 					.requestMatchers(HttpMethod.DELETE, "/api/boards/**")
 					.hasAuthority(Role.USER_WRITE.getKey())
+
+					// 권한에 따른 ADMIN 접근 제어
+					.requestMatchers(HttpMethod.POST, "/api/categories/**")
+					.hasAuthority(Role.ADMIN.getKey())
+
+					.requestMatchers(HttpMethod.DELETE, "/api/categories/**")
+					.hasAuthority(Role.ADMIN.getKey())
 
 					// USER 권한 설정
 					.requestMatchers("/api/chats/**", "/api/chatrooms/**")
