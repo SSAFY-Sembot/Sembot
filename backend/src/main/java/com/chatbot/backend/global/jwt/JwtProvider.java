@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.chatbot.backend.global.jwt.exception.ExpiredTokenException;
 import com.chatbot.backend.global.jwt.exception.InvalidTokenException;
+import com.chatbot.backend.global.security.CustomUserDetails;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -29,6 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class JwtProvider {
 	private static final String AUTHORITIES_KEY = "auth";
+	private static final String USER_ID_KEY = "userId";
+	private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
 
 	@Value("${jwt.access_secret}")
 	private String accessSecret;
@@ -71,16 +74,22 @@ public class JwtProvider {
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
 
-		String userId = claims.getSubject();
-		return new UsernamePasswordAuthenticationToken(userId, null, authorities);
+		Long userId = ((Number)claims.get(USER_ID_KEY)).longValue();
+		String email = claims.getSubject();
+		Role role = Role.valueOf(claims.get(AUTHORITIES_KEY).toString());
+
+		CustomUserDetails userDetails = CustomUserDetails.of(userId, email, role);
+
+		return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
 	}
 
-	public String createAccessToken(String userId, Role role) {
+	public String createAccessToken(Long userId, String email, Role role) {
 		Date now = new Date();
 		Date expiryDate = new Date(now.getTime() + accessTokenExpiration);
 
 		return Jwts.builder()
-			.setSubject(userId)
+			.setSubject(email)
+			.claim(USER_ID_KEY, userId)
 			.claim(AUTHORITIES_KEY, role.getKey())
 			.setIssuedAt(now)
 			.setExpiration(expiryDate)
@@ -88,12 +97,13 @@ public class JwtProvider {
 			.compact();
 	}
 
-	public String createRefreshToken(String userId) {
+	public String createRefreshToken(Long userId, String email) {
 		Date now = new Date();
 		Date expiryDate = new Date(now.getTime() + refreshTokenExpiration);
 
 		return Jwts.builder()
-			.setSubject(userId)
+			.setSubject(email)
+			.claim(USER_ID_KEY, userId)
 			.setIssuedAt(now)
 			.setExpiration(expiryDate)
 			.signWith(SignatureAlgorithm.HS512, refreshSecret)
