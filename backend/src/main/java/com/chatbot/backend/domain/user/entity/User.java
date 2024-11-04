@@ -24,7 +24,7 @@ public class User extends BaseTimeEntity {
 
 	@Builder
 	public User(String email, String password, String name, String employeeNum, String department, Integer level,
-		String profileUrl, Boolean isDeleted, Boolean canCreateBoard, Role role) {
+		String profileUrl, Boolean isDeleted, Role role) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
@@ -33,7 +33,6 @@ public class User extends BaseTimeEntity {
 		this.level = level;
 		this.profileUrl = profileUrl;
 		this.isDeleted = isDeleted;
-		this.canCreateBoard = canCreateBoard;
 		this.role = role;
 	}
 
@@ -65,9 +64,6 @@ public class User extends BaseTimeEntity {
 
 	@Column(name = "is_deleted", nullable = false)
 	private boolean isDeleted;
-
-	@Column(name = "can_create_board", nullable = false)
-	private boolean canCreateBoard;
 
 	// 지연로딩 : 필요할때만 가져온다.
 	@Enumerated(EnumType.STRING)
