@@ -57,9 +57,12 @@ public enum ErrorCode {
 	USER_NOT_FOUND(404, "USER_NOT_FOUND", "사용자를 찾을 수 없습니다."),
 	USER_DELETED(400, "USER_DELETED", "삭제된 사용자입니다."),
 	USER_NULL(400, "USER_NULL", "사용자의 값이 NULL 입니다."),
+	NO_AUTHORITY(403, "NO_AUTHORITY", "권한이 없습니다"),
 
 	// 카테고리 관련 오류
 	CATEGORY_NOT_FOUND(404, "CATEGORY_NOT_FOUND", "카테고리를 찾을 수 없습니다."),
+	CATEGORY_ALREADY_EXISTS(409, "CATEGORY_ALREADY_EXISTS", "이미 존재하는 카테고리입니다."),
+
 	// 로그인 관련 오류
 	INCORRECT_ID_OR_PASSWORD(401, "INCORRECT_ID_OR_PASSWORD", "아이디 혹은 비밀번호가 틀렸습니다."),
 

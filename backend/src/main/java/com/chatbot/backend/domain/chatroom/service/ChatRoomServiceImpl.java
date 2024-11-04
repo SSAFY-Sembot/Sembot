@@ -11,7 +11,6 @@ import com.chatbot.backend.domain.chat.entitiy.Chat;
 import com.chatbot.backend.domain.chat.repository.MongoChatRepository;
 import com.chatbot.backend.domain.chatroom.dto.ChatRoomDto;
 import com.chatbot.backend.domain.chatroom.dto.request.CreateChatRoomRequestDto;
-import com.chatbot.backend.domain.chatroom.dto.request.FindChatRoomListRequestDto;
 import com.chatbot.backend.domain.chatroom.dto.response.CreateChatRoomResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.FindChatRoomDetailResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.FindChatRoomListResponseDto;
@@ -19,10 +18,6 @@ import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
 import com.chatbot.backend.domain.chatroom.repository.ChatRoomRepository;
 import com.chatbot.backend.domain.user.entity.User;
 import com.chatbot.backend.domain.user.repository.UserRepository;
-import com.chatbot.backend.global.security.CustomUserDetails;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,10 +31,10 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
 	@Override
 	public CreateChatRoomResponseDto createChatRoom(
+		Long userId,
 		CreateChatRoomRequestDto createChatRoomRequestDto) {
 
-		User user = userRepository.findUserById(createChatRoomRequestDto.getUserId());
-
+		User user = userRepository.findUserById(userId);
 		ChatRoom chatroom = chatRoomRepository.save(
 			ChatRoom.builder()
 				.user(user)
@@ -50,11 +45,11 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	}
 
 	@Override
-	public FindChatRoomListResponseDto findChatRoomList(FindChatRoomListRequestDto findChatRoomRequestDto,
+	public FindChatRoomListResponseDto findChatRoomList(Long userId,
 		Pageable pageable) {
 
 		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByUserIdAndDeletedFalseOrderByCreatedAtDesc(
-			findChatRoomRequestDto.getUserId(),
+			userId,
 			pageable);
 
 		List<ChatRoomDto> chatRoomDtos = chatRooms.getContent().stream()
