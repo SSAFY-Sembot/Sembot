@@ -28,8 +28,9 @@ public class AdminServiceImpl implements AdminService {
 	private final UserRepository userRepository;
 
 	@Override
-	public void postCategory(HttpServletRequest request, @RequestBody String name) {
-		if(getRequestUser(request).getRole() != Role.ADMIN){
+	public void createCategory(Long userId, String name) {
+		User user = userRepository.findByIdOrElseThrow(userId);
+		if(user.getRole() != Role.ADMIN){
 			throw new NoAuthorityException();
 		}
 
@@ -38,12 +39,11 @@ public class AdminServiceImpl implements AdminService {
 			throw new CategoryAlreadyExistsException();
 		}
 
-		Category adminCategory = new Category(name, null);
+		Category adminCategory = Category.builder()
+			.name(name)
+			.isDeleted(false)  // isDeleted 기본값 설정
+			.build();
 		categoryRepository.save(adminCategory);
 	}
 
-	public User getRequestUser(HttpServletRequest request){
-		String requestUserEmail = jwtProvider.parseClaims(request.getHeader("Authorization").substring(7), false).getSubject();
-		return userRepository.findByEmailOrElseThrow(requestUserEmail);
-	}
 }

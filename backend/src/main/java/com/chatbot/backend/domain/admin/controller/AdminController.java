@@ -1,15 +1,17 @@
 package com.chatbot.backend.domain.admin.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chatbot.backend.domain.admin.service.AdminService;
-import com.chatbot.backend.domain.category.dto.response.CategoryResponseDto;
+import com.chatbot.backend.domain.category.dto.request.CategoryFindRequestDto;
+import com.chatbot.backend.domain.category.dto.response.CategoryFindResponseDto;
+import com.chatbot.backend.global.security.CustomUserDetails;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,8 +31,11 @@ public class AdminController {
 	// }
 
 	@PostMapping("/categories")
-	public ResponseEntity<CategoryResponseDto> postCategory(HttpServletRequest request, @RequestBody String name){
-		adminService.postCategory(request, name);
+	public ResponseEntity<CategoryFindResponseDto> createCategory(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@RequestBody String name){
+		Long userId = userDetails.getId();
+		adminService.createCategory(userId, name);
 		return ResponseEntity.ok().build();
 	}
 

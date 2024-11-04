@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.chatbot.backend.domain.category.dto.response.CategoryItem;
-import com.chatbot.backend.domain.category.dto.response.CategoryResponseDto;
+import com.chatbot.backend.domain.category.dto.response.CategoryItemDto;
+import com.chatbot.backend.domain.category.dto.response.CategoryFindResponseDto;
 import com.chatbot.backend.domain.category.entity.Category;
 import com.chatbot.backend.domain.category.repository.CategoryRepository;
 
@@ -20,13 +20,13 @@ public class CategoryServiceImpl implements CategoryService {
 	private final CategoryRepository categoryRepository;
 
 	@Override
-	public CategoryResponseDto getCategories() {
+	public CategoryFindResponseDto getCategoryList() {
 		List<Category> categories = categoryRepository.findAll();
-		List<CategoryItem> categoryItemList =
+		List<CategoryItemDto> categoryItemList =
 			categories.stream()
-				.map(category -> new CategoryItem(category.getId(), category.getName().trim()))
+				.map(category -> new CategoryItemDto(category.getId(), category.getName().trim()))
 				.toList();
 
-		return new CategoryResponseDto(categoryItemList);
+		return new CategoryFindResponseDto(categoryItemList);
 	}
 }

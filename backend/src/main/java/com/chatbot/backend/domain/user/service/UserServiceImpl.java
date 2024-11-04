@@ -111,8 +111,8 @@ public class UserServiceImpl implements UserService{
 		if(rToken != null){
 
 			// refreshToken redis에서 지우고
-			String userId = jwtProvider.parseClaims(rToken, true).getSubject();
-			redisTemplate.delete(userId);
+			String userEmail = jwtProvider.parseClaims(rToken, true).getSubject();
+			redisTemplate.delete(userEmail);
 
 			// accessToken 헤더에서 지우기
 			response.setHeader("Authorization",null);
@@ -142,9 +142,9 @@ public class UserServiceImpl implements UserService{
 			throw new NoTokenException();
 
 
-		String userId = jwtProvider.parseClaims(rToken, true).getSubject();
+		String userEmail = jwtProvider.parseClaims(rToken, true).getSubject();
 
-		String storedToken = (String)redisTemplate.opsForValue().get(userId);
+		String storedToken = (String)redisTemplate.opsForValue().get(userEmail);
 
 		if(storedToken == null || !storedToken.equals(rToken)){
 			// redis의 값과 일치하지 않으면 던지기
