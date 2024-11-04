@@ -1,17 +1,38 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
+
+  
   jpa:
     hibernate:
       ddl-auto: update
 
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/sembot
-
+ 
   jackson:
     time-zone: Asia/Seoul
-
 
   datasource:
     url: jdbc:mysql://localhost:3306/chatbot?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: ssafy
+  data:
+    redis:
+      host: localhost
+    mongodb:
+      uri: mongodb://localhost:27017/sembot
+
+
+jwt:
+  access_secret: ${JWT_ACCESS_SECRET}
+  refresh_secret: ${JWT_REFRESH_SECRET}
+  access_token_expiration: ${JWT_ACCESS_TOKEN_EXPIRATION:7200000}
+  refresh_token_expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:1209600000}
+
+cors:
+  origin:
+    development: ${CORS_ORIGIN_DEVELOPMENT}
+    production: ${CORS_ORIGIN_PRODUCTION}
+
+file:
+  upload:
+    path: ${FILE_UPLOAD_PATH:C:/Users/SSAFY/Image}

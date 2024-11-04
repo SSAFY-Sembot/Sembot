@@ -6,13 +6,14 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
 	private Long id;
-	private String username;
 	private Collection<? extends GrantedAuthority> authorities;
 
 	@Override
