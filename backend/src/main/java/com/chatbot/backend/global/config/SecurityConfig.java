@@ -81,7 +81,7 @@ public class SecurityConfig {
 
 					// USER 권한 설정
 					.requestMatchers("/api/chats/**", "/api/chatrooms/**")
-					.hasAnyRole(Role.USER.getKey(), Role.USER_WRITE.getKey())
+					.hasAnyAuthority(Role.USER.getKey(), Role.USER_WRITE.getKey())
 
 					// 그 외 모든 요청은 인증 필요
 					.anyRequest()
