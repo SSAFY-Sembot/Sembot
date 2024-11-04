@@ -40,4 +40,17 @@ public class BoardLikeServiceImpl implements BoardLikeService {
 				.board(board)
 				.build());
 	}
+
+	@Override
+	public void deleteBoardLike(Long userId, Long boardId) {
+		// 검증 & 조회
+		User user = userRepository.findByIdOrElseThrow(userId);
+		Board board = boardRepository.findByIdOrElseThrow(boardId);
+		boardValidator.validateBoardAccess(user, board);
+
+		BoardLike boardLike = boardLikeRepository.findByBoardIdAndUserIdOrElseThrow(boardId, userId);
+
+		// 즐겨찾기 삭제 (비즈니스 로직)
+		boardLikeRepository.delete(boardLike);
+	}
 }
