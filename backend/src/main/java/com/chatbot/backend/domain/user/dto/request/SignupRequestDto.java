@@ -27,7 +27,7 @@ public class SignupRequestDto {
 	private String department;
 	private String profileUrl;
 
-	public User toEntity(String password, Integer level, Boolean isDeleted, Boolean canCreateBoard, Role role){
+	public User toEntity(String password, Integer level, Boolean isDeleted, Role role){
 		return User.builder()
 			.email(email)
 			.password(password)
@@ -38,13 +38,12 @@ public class SignupRequestDto {
 			.profileUrl(profileUrl != null ? profileUrl : "")
 			.level(level != null ? level : 1)
 			.isDeleted(isDeleted != null ? isDeleted : false)
-			.canCreateBoard(canCreateBoard != null ? canCreateBoard : department.equals("인사과"))
 			.role(role != null ? role : (department.equals("인사과") ? Role.USER_WRITE : Role.USER))
 			.build();
 	}
 
 	public User toEntity(String password) {
-		return toEntity(password, null, null, null, null);
+		return toEntity(password, null, null, null);
 	}
 
 

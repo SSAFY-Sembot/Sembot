@@ -39,7 +39,7 @@ public class UserController {
 
 	@PostMapping("/logout")
 	public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response){
-		userService.logout(request, response);
+		userService.logout( request, response);
 		return ResponseEntity.ok().build();
 	}
 
