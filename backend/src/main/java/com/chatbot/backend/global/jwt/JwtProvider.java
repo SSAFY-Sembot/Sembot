@@ -22,8 +22,10 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import lombok.extern.slf4j.Slf4j;
 
 // Authorization 헤더에서 토큰 추출
+@Slf4j
 @Component
 public class JwtProvider {
 	private static final String AUTHORITIES_KEY = "auth";

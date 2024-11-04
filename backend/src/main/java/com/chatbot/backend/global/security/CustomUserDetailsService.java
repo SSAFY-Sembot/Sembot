@@ -1,15 +1,14 @@
 package com.chatbot.backend.global.security;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
-public class CustomUserDetailsService implements UserDetailsService {
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+import com.chatbot.backend.domain.user.repository.UserRepository;
 
-		return null;
-	}
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class CustomUserDetailsService {
+
+	private final UserRepository userRepository;
 }
