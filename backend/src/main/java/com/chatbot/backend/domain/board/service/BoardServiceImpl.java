@@ -66,6 +66,15 @@ public class BoardServiceImpl implements BoardService {
 		return BoardDetailResponse.of(board, user, boardLike);
 	}
 
+	@Override
+	public void deleteBoard(Long userId, Long boardId) {
+		User user = userRepository.findByIdOrElseThrow(userId);
+		Board board = boardRepository.findByIdOrElseThrow(boardId);
+		validateUserAuthorizationForBoard(user, board);
+
+		board.deleteBoard();
+	}
+
 	// 사용자가 쓰기 권한이 있는 지 검증 (검증 로직)
 	private void validateUserWriteAuthorized(User user) {
 		if (user.getRole() != Role.USER_WRITE) {
