@@ -7,6 +7,5 @@ import lombok.Setter;
 @Setter
 public class CreateChatRoomRequestDto {
 
-	private Long userId;
 	private String content;
 }
