@@ -4,7 +4,7 @@ import com.chatbot.backend.global.error.ErrorCode;
 import com.chatbot.backend.global.error.ServiceException;
 
 public class BoardUnauthorizedException extends ServiceException {
-	private static final ErrorCode errorCode = ErrorCode.BOARD_MODIFY_UNAUTHORIZED;
+	private static final ErrorCode errorCode = ErrorCode.BOARD_UNAUTHORIZED;
 
 	public BoardUnauthorizedException() {
 		super(errorCode);
