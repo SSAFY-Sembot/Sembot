@@ -3,6 +3,7 @@ package com.chatbot.backend.domain.board.controller;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -57,5 +58,19 @@ public class BoardController {
 		@RequestPart(value = "file", required = false) MultipartFile file) {
 		Long userId = userDetails.getId();
 		return ResponseEntity.ok(boardService.updateBoard(userId, boardId, boardUpdateRequest, file));
+	}
+
+	@Operation(
+		summary = "게시글 삭제",
+		description = "게시글을 삭제합니다."
+	)
+	@DeleteMapping("/{boardId}")
+	public ResponseEntity<Void> deleteBoard(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@PathVariable Long boardId
+	) {
+		Long userId = userDetails.getId();
+		boardService.deleteBoard(userId, boardId);
+		return ResponseEntity.ok().build();
 	}
 }
