@@ -17,11 +17,11 @@ const Sidebar: React.FC<SidebaProps> = ({
 }) => {
 	return (
 		<div>
-			<div className="w-full sidebar border-r w-56 bg-semesBlue">
+			<div className="w-full sidebar border-r bg-semesBlue">
 				<div className="flex h-screen flex-col justify-between pt-2 pb-6">
 					<div>
 						{/* 공통 header */}
-						<div className="w-full flex flex-row">
+						<div className="w-full flex flex-row mb-2">
 							<img src={SEMBOT_LOGO} alt="SEMBOT LOGO" />
 							<div className="text-white text-xl mt-2 ml-1">SEMBOT</div>
 						</div>
@@ -42,7 +42,7 @@ const Sidebar: React.FC<SidebaProps> = ({
 
           {/* Components */}
           <div className="w-full flex flex-col space-y-2">
-            <hr className="mb-3 border border-gray-500" />
+            <hr className="mx-2 mb-3 border border-gray-100" />
             {/* {components.map((buttonProps, index) => (
               <React.Fragment key={index}>
                 <ButtonWithIcon key={index} {...buttonProps} />
