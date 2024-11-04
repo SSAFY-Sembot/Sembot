@@ -102,5 +102,17 @@ public class BoardController {
 		boardLikeService.createBoardLike(userDetails.getId(), boardId);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
+
+	@Operation(
+		summary = "게시글 즐겨찾기 취소",
+		description = "게시글에 추가된 즐겨찾기를 취소합니다."
+	)
+	@DeleteMapping("/{boardId}/favorite")
+	public ResponseEntity<Void> deleteBoardLike(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@PathVariable Long boardId
+	) {
+		boardLikeService.deleteBoardLike(userDetails.getId(), boardId);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 }
