@@ -58,7 +58,7 @@ public class SecurityConfig {
 					.permitAll()    // Swagger 문서 접근 허용
 
 					// 미인증 사용자 접근 허용
-					.requestMatchers("/api/", "/api/users/**", "/api/categories", "/api/files")
+					.requestMatchers("/api/", "/api/users/**", "/api/files")
 					.permitAll()
 
 					// ADMIN 권한 설정
