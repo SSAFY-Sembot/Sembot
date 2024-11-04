@@ -1,15 +1,10 @@
 package com.chatbot.backend.domain.user.service;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +14,10 @@ import com.chatbot.backend.domain.user.entity.User;
 import com.chatbot.backend.domain.user.exception.DuplicateEmailException;
 import com.chatbot.backend.domain.user.exception.NotLoginException;
 import com.chatbot.backend.domain.user.repository.UserRepository;
-import com.chatbot.backend.global.config.SecurityConfig;
 import com.chatbot.backend.global.jwt.JwtProvider;
 import com.chatbot.backend.global.jwt.Role;
 import com.chatbot.backend.global.jwt.exception.InvalidTokenException;
 import com.chatbot.backend.global.jwt.exception.NoTokenException;
-import com.chatbot.backend.global.security.CustomUserDetails;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
