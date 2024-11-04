@@ -9,6 +9,6 @@ public interface ChatService {
 
 	CreateChatResponseDto createChat(CreateChatRequestDto createChatRequestDto);
 
-	CreateChatFeedBackResponseDto createChatFeedBack(Long chatId,
-		CreateChatFeedBackRequestDto sendChatFeedBackRequestDto);
+	CreateChatFeedBackResponseDto createChatFeedBack(String chatId,
+		CreateChatFeedBackRequestDto createChatFeedBackRequestDto);
 }
