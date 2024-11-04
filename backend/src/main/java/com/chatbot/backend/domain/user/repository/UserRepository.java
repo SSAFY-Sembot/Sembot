@@ -1,12 +1,16 @@
 package com.chatbot.backend.domain.user.repository;
 
-
-import com.chatbot.backend.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserRepository extends JpaRepository<User,Long> {
+import com.chatbot.backend.domain.user.entity.User;
+import com.chatbot.backend.domain.user.exception.UserNotFoundException;
 
-    User findUserById(Long id);
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+	User findUserById(Long id);
+
+	default User findByIdOrElseThrow(Long id) {
+		return findById(id).orElseThrow(UserNotFoundException::new);
+	}
 }

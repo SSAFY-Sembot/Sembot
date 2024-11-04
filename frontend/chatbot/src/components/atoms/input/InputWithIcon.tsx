@@ -11,6 +11,7 @@ interface InputWithIconProps {
   iconPath: string;
   /** icon click event 함수 */
   onIconClick: (message: string) => void;
+  isLoading? : boolean;
   className?: string;
 }
 
@@ -22,17 +23,21 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
   textColor = "#737373",
   iconPath,
   onIconClick,
+  isLoading = false,
   className,
 }) => {
   const [inputValue, setInputValue] = useState("");
+  const loadingIconPath ="/src/assets/icons/loading.svg";
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
   const onClick = () => {
-    onIconClick(inputValue);
-    setInputValue("");
+    if(!isLoading){
+      setInputValue("");
+      onIconClick(inputValue);
+    }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -42,7 +47,7 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
   };
 
   return (
-    <div className="relative text-gray-600 w-full max-w-3xl">
+    <div className="relative text-gray-600 w-full">
       <input
         type="text"
         value={inputValue}
@@ -50,10 +55,10 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         style={{ backgroundColor: bgColor, borderColor, color: textColor }}
-        className={`rounded-md h-12 w-full max-w-3xl px-5 pr-10 text-sm border border-gray-300 focus:outline-none focus:ring-0 ${className}`}
+        className={`rounded-md h-12 w-full px-5 pr-10 text-sm border border-gray-300 focus:outline-none focus:ring-0 ${className}`}
       />
       <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pr-3">
-        <ButtonWithIcon icon={iconPath} onClick={onClick} />
+        <ButtonWithIcon icon={isLoading ? loadingIconPath : iconPath} onClick={onClick} />
       </div>
     </div>
   );
