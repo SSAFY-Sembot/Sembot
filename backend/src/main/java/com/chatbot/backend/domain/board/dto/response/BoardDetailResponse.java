@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import com.chatbot.backend.domain.board.entity.Board;
 import com.chatbot.backend.domain.board.entity.BoardLike;
-import com.chatbot.backend.domain.user.entity.User;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -45,7 +44,7 @@ public record BoardDetailResponse(
 	Boolean isFavorite
 ) {
 	// 게시글, 사용자, 좋아요 정보를 조합하여 응답 DTO 생성
-	public static BoardDetailResponse of(Board board, User user, BoardLike boardLike) {
+	public static BoardDetailResponse of(Board board, BoardLike boardLike) {
 		return BoardDetailResponse.builder()
 			.boardId(board.getId())
 			.title(board.getTitle())
@@ -55,13 +54,13 @@ public record BoardDetailResponse(
 			.fileUrl(board.getFileUrl())
 			.createdAt(board.getCreatedAt())
 
-			.writer(BoardWriterResponse.of(user))
+			.writer(BoardWriterResponse.of(board.getUser()))
 
 			.isFavorite(boardLike == null ? false : true)
 			.build();
 	}
 
-	public static BoardDetailResponse of(Board board, User user) {
-		return BoardDetailResponse.of(board, user, null);
+	public static BoardDetailResponse of(Board board) {
+		return BoardDetailResponse.of(board, null);
 	}
 }
