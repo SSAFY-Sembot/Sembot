@@ -21,10 +21,10 @@ public enum ErrorCode {
 	INVALID_TOKEN(422, "INVALID_TOKEN", "유효하지 않은 토큰입니다."),
 	EXPIRED_TOKEN(401, "EXPIRED_TOKEN", "토큰이 만료되었습니다."),
 	UNSUPPORTED_TOKEN(400, "UNSUPPORTED_TOKEN", "지원되지 않는 토큰 형식입니다."),
-	NO_REFRESH_TOKEN(404,"NO_REFRESH_TOKEN","토큰이 없습니다."),
+	NO_REFRESH_TOKEN(404, "NO_REFRESH_TOKEN", "토큰이 없습니다."),
 
 	// 회원가입 관련 오류
-	DUPLICATE_EMAIL(409,"DUPLICATE_EMAIL","이미 존재하는 이메일입니다."),
+	DUPLICATE_EMAIL(409, "DUPLICATE_EMAIL", "이미 존재하는 이메일입니다."),
 
 	// 게시글 관련 오류
 	BOARD_NOT_FOUND(404, "BOARD_NOT_FOUND", "해당 게시글을 찾을 수 없습니다."),
@@ -46,8 +46,7 @@ public enum ErrorCode {
 	BOARD_FILE_URL_INVALID(400, "BOARD_FILE_URL_INVALID", "잘못된 파일 URL입니다."),
 
 	// 게시글 수정 삭제 관련 오류
-	BOARD_MODIFY_UNAUTHORIZED(403, "BOARD_MODIFY_UNAUTHORIZED", "게시글 수정 권한이 없습니다."),
-	BOARD_DELETE_UNAUTHORIZED(403, "BOARD_DELETE_UNAUTHORIZED", "게시글 삭제 권한이 없습니다."),
+	BOARD_UNAUTHORIZED(403, "BOARD_UNAUTHORIZED", "게시글 수정 / 삭제 권한이 없습니다."),
 
 	// 게시글 좋아요 관련 오류
 	BOARD_LIKE_ALREADY_EXISTS(409, "BOARD_LIKE_ALREADY_EXISTS", "이미 좋아요를 누른 게시글입니다."),
@@ -60,7 +59,10 @@ public enum ErrorCode {
 	// 카테고리 관련 오류
 	CATEGORY_NOT_FOUND(404, "CATEGORY_NOT_FOUND", "카테고리를 찾을 수 없습니다."),
 	// 로그인 관련 오류
-	INCORRECT_ID_OR_PASSWORD(401,"INCORRECT_ID_OR_PASSWORD","아이디 혹은 비밀번호가 틀렸습니다.");
+	INCORRECT_ID_OR_PASSWORD(401, "INCORRECT_ID_OR_PASSWORD", "아이디 혹은 비밀번호가 틀렸습니다."),
+
+	//채팅 관련 오류
+	CHAT_NOT_FOUND(404, "CHAT_ID_NOT_FOUND", "채팅을 찾을 수 없습니다");
 
 	private final int httpStatus;
 	private final String code;
