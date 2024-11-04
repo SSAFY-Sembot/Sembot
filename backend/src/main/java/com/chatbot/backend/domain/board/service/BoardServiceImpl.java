@@ -9,6 +9,7 @@ import com.chatbot.backend.domain.board.dto.request.BoardUpdateRequest;
 import com.chatbot.backend.domain.board.dto.response.BoardDetailResponse;
 import com.chatbot.backend.domain.board.entity.Board;
 import com.chatbot.backend.domain.board.entity.BoardLike;
+import com.chatbot.backend.domain.board.exception.BoardAccessDeniedException;
 import com.chatbot.backend.domain.board.exception.BoardCreationNotAuthorizedException;
 import com.chatbot.backend.domain.board.exception.BoardUnauthorizedException;
 import com.chatbot.backend.domain.board.repository.BoardLikeRepository;
@@ -75,6 +76,16 @@ public class BoardServiceImpl implements BoardService {
 		board.deleteBoard();
 	}
 
+	@Override
+	public BoardDetailResponse getBoard(Long userId, Long boardId) {
+		User user = userRepository.findByIdOrElseThrow(userId);
+		Board board = boardRepository.findByIdOrElseThrow(boardId);
+		BoardLike boardLike = boardLikeRepository.findByBoardIdAndUserId(boardId, userId).orElse(null);
+		validateUserHasAccess(user, board);
+
+		return BoardDetailResponse.of(board, board.getUser(), boardLike);
+	}
+
 	// 사용자가 쓰기 권한이 있는 지 검증 (검증 로직)
 	private void validateUserWriteAuthorized(User user) {
 		if (user.getRole() != Role.USER_WRITE) {
@@ -86,6 +97,12 @@ public class BoardServiceImpl implements BoardService {
 	private void validateUserAuthorizationForBoard(User user, Board board) {
 		if (user.getId() != board.getUser().getId()) {
 			throw new BoardUnauthorizedException();
+		}
+	}
+
+	private void validateUserHasAccess(User user, Board board) {
+		if (user.getLevel() < board.getLevel()) {
+			throw new BoardAccessDeniedException();
 		}
 	}
 }

@@ -13,4 +13,6 @@ public interface BoardService {
 		MultipartFile file);
 
 	void deleteBoard(Long userId, Long boardId);
+
+	BoardDetailResponse getBoard(Long userId, Long boardId);
 }
