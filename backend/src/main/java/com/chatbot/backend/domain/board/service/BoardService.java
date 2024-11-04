@@ -11,4 +11,8 @@ public interface BoardService {
 
 	BoardDetailResponse updateBoard(Long userId, Long boardId, BoardUpdateRequest boardUpdateRequest,
 		MultipartFile file);
+
+	void deleteBoard(Long userId, Long boardId);
+
+	BoardDetailResponse getBoard(Long userId, Long boardId);
 }
