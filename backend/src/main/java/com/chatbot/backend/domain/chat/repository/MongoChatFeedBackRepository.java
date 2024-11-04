@@ -1,14 +1,12 @@
 package com.chatbot.backend.domain.chat.repository;
 
-import java.util.List;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.chatbot.backend.domain.chat.entitiy.Chat;
+import com.chatbot.backend.domain.chat.entitiy.ChatFeedBack;
 
 @Repository
-public interface MongoChatRepository extends MongoRepository<Chat, String> {
-
-	List<Chat> findAllByChatRoom_IdOrderByCreatedAtDesc(Long chatRoomId);
+public interface MongoChatFeedBackRepository extends MongoRepository<ChatFeedBack, String> {
+	ChatFeedBack findChatFeedBackByChat(Chat chat);
 }
