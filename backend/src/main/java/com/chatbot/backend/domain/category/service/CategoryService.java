@@ -1,7 +1,7 @@
 package com.chatbot.backend.domain.category.service;
 
-import com.chatbot.backend.domain.category.dto.response.CategoryResponseDto;
+import com.chatbot.backend.domain.category.dto.response.CategoryFindResponseDto;
 
 public interface CategoryService {
-	CategoryResponseDto getCategories();
+	CategoryFindResponseDto getCategoryList();
 }
