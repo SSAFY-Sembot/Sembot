@@ -1,17 +1,29 @@
 import React from "react";
 import CardWithButton from "@components/atoms/card/CardWithButton";
 import ButtonWithIcon from "@components/atoms/button/ButtonWithIcon";
+import { useState } from "react";
 
-const contents = ["뉴진스♪", "아이브♨", "에스파♥", "프로미스나인★"];
+const initialContents = ["뉴진스♪", "아이브♨", "에스파♥", "프로미스나인★"];
 
 const CategoryManagement = () => {
+	const [contents, setContents] = useState(initialContents);
+
+	const handleClick = (index: number) => {
+		setContents((prevContents) => prevContents.filter((_, i) => i !== index));
+	};
+
 	return (
 		<div className="flex flex-col items-center space-y-4">
 			{" "}
 			{/* flex-col로 세로 정렬, items-center로 중앙 정렬 */}
-			{contents.map((content) => (
-				<div className="w-[40%]" key={content}>
-					<CardWithButton content={content} />
+			{contents.map((content, index) => (
+				<div className="w-[40%]" key={index}>
+					<CardWithButton
+						content={content}
+						handleClick={() => {
+							handleClick(index);
+						}}
+					/>
 				</div>
 			))}
 			<ButtonWithIcon
