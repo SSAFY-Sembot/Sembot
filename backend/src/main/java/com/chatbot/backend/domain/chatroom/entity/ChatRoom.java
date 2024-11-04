@@ -30,11 +30,12 @@ public class ChatRoom {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID")
+	@JoinColumn(name = "USERS_ID")
 	private User user;
 
 	private String title;
 	private LocalDateTime createdAt;
+	@Column(nullable = true)
 	private LocalDateTime modifiedAt;
 
 	@ColumnDefault("false")
@@ -43,7 +44,7 @@ public class ChatRoom {
 	@Builder
 	public ChatRoom(User user, String content) {
 		this.user = user;
-		this.title = content.substring(0, 8);
+		this.title = content.length() >= 8 ? content.substring(0, 8) : content;
 		this.createdAt = LocalDateTime.now();
 	}
 

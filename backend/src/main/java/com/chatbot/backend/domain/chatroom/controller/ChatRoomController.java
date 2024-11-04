@@ -34,10 +34,13 @@ public class ChatRoomController {
 
 	@PostMapping("")
 	public ResponseEntity<CreateChatRoomResponseDto> createChatRoom(
-		@AuthenticationPrincipal String userId,
+		@AuthenticationPrincipal CustomUserDetails customUserDetails,
 		@RequestBody CreateChatRoomRequestDto createChatRoomRequestDto) {
-		createChatRoomRequestDto.setUserId(Long.parseLong(userId));
-		CreateChatRoomResponseDto response = chatRoomService.createChatRoom(createChatRoomRequestDto);
+
+		CreateChatRoomResponseDto response = chatRoomService.createChatRoom(
+			customUserDetails.getId(),
+			createChatRoomRequestDto);
+		
 		return ResponseEntity.ok().body(response);
 	}
 
@@ -48,11 +51,10 @@ public class ChatRoomController {
 		@RequestParam(defaultValue = "10") int size,
 		@RequestBody FindChatRoomListRequestDto findChatRoomListRequestDto
 	) {
-		findChatRoomListRequestDto.setUserId(userDetails.getId());
 
 		Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
 
-		FindChatRoomListResponseDto response = chatRoomService.findChatRoomList(findChatRoomListRequestDto, pageable);
+		FindChatRoomListResponseDto response = chatRoomService.findChatRoomList(userDetails.getId(), pageable);
 
 		return ResponseEntity.ok().body(response);
 	}
