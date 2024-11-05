@@ -68,7 +68,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
 		ChatRoom chatRoom = chatRoomRepository.findChatRoomById(chatRoomId);
 
-		List<Chat> chat = chatRepository.findAllByChatRoom_IdOrderByCreatedAtDesc(chatRoomId);
+		List<Chat> chat = chatRepository.findAllByChatRoomIdOrderByCreatedAtDesc(chatRoomId);
 
 		return new FindChatRoomDetailResponseDto(
 			chatRoomId,
