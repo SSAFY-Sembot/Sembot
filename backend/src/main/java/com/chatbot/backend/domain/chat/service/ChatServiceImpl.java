@@ -1,5 +1,6 @@
 package com.chatbot.backend.domain.chat.service;
 
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import com.chatbot.backend.domain.chat.dto.request.CreateChatFeedBackRequestDto;
@@ -37,6 +38,7 @@ public class ChatServiceImpl implements ChatService {
 				.answer(createChatRequestDto.getAnswer())
 				.build()
 		);
+
 		return new CreateChatResponseDto(
 			savedChat.getChatId().toHexString(),
 			savedChat.getQuestion(),
