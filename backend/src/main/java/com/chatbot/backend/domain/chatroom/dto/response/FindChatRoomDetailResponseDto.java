@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.chatbot.backend.domain.chat.entitiy.Chat;
+import com.chatbot.backend.domain.chat.entity.Chat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

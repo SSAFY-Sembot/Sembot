@@ -1,10 +1,9 @@
-package com.chatbot.backend.domain.chat.entitiy;
+package com.chatbot.backend.domain.chat.entity;
 
 import java.time.LocalDateTime;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Builder;
@@ -25,9 +24,7 @@ public class Chat {
 	@Setter
 	private Long chatRoomId;
 
-	@DBRef
-	@Setter
-	private ChatFeedBack chatFeedBack;
+	private boolean hasFeedBack;
 
 	@Builder
 	public Chat(String question, String answer, Long chatRoomId) {
