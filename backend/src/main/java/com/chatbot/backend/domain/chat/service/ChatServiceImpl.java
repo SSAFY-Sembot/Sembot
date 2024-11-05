@@ -14,9 +14,11 @@ import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
 import com.chatbot.backend.domain.chatroom.repository.ChatRoomRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ChatServiceImpl implements ChatService {
 
 	private final MongoChatRepository mongoChatRepository;
@@ -47,7 +49,7 @@ public class ChatServiceImpl implements ChatService {
 	public CreateChatFeedBackResponseDto createChatFeedBack(String chatId,
 		CreateChatFeedBackRequestDto createChatFeedBackRequestDto) {
 
-		Chat chat = mongoChatRepository.findById(chatId).
+		Chat chat = mongoChatRepository.findById(new ObjectId(chatId)).
 			orElseThrow();
 
 		ChatFeedBack savedFeedBack = chatFeedBackRepository.save(
@@ -59,7 +61,7 @@ public class ChatServiceImpl implements ChatService {
 		);
 
 		return new CreateChatFeedBackResponseDto(
-			savedFeedBack.getChat().getChatId().toHexString(),
+			savedFeedBack.getChat().getChatId(),
 			savedFeedBack.isPositive(),
 			savedFeedBack.getNegativeReason()
 		);
