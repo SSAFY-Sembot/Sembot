@@ -11,5 +11,5 @@ import com.chatbot.backend.domain.chat.entitiy.Chat;
 @Repository
 public interface MongoChatRepository extends MongoRepository<Chat, ObjectId> {
 
-	List<Chat> findAllByChatRoom_IdOrderByCreatedAtDesc(Long chatRoomId);
+	List<Chat> findAllByChatRoomIdOrderByCreatedAtDesc(Long chatRoomId);
 }

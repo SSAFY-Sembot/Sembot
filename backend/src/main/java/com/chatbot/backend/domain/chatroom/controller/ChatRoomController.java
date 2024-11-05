@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chatbot.backend.domain.chatroom.dto.request.CreateChatRoomRequestDto;
-import com.chatbot.backend.domain.chatroom.dto.request.FindChatRoomListRequestDto;
 import com.chatbot.backend.domain.chatroom.dto.response.CreateChatRoomResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.DeleteChatRoomResponseDto;
 import com.chatbot.backend.domain.chatroom.dto.response.FindChatRoomDetailResponseDto;
@@ -48,8 +47,7 @@ public class ChatRoomController {
 	public ResponseEntity<FindChatRoomListResponseDto> findChatRoomList(
 		@AuthenticationPrincipal CustomUserDetails userDetails,
 		@RequestParam(defaultValue = "0") int page,
-		@RequestParam(defaultValue = "10") int size,
-		@RequestBody FindChatRoomListRequestDto findChatRoomListRequestDto
+		@RequestParam(defaultValue = "10") int size
 	) {
 
 		Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());

@@ -11,8 +11,6 @@ import com.chatbot.backend.domain.chat.entitiy.Chat;
 import com.chatbot.backend.domain.chat.entitiy.ChatFeedBack;
 import com.chatbot.backend.domain.chat.repository.MongoChatFeedBackRepository;
 import com.chatbot.backend.domain.chat.repository.MongoChatRepository;
-import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
-import com.chatbot.backend.domain.chatroom.repository.ChatRoomRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,17 +21,14 @@ import lombok.extern.slf4j.Slf4j;
 public class ChatServiceImpl implements ChatService {
 
 	private final MongoChatRepository mongoChatRepository;
-	private final ChatRoomRepository chatRoomRepository;
 	private final MongoChatFeedBackRepository chatFeedBackRepository;
 
 	@Override
 	public CreateChatResponseDto createChat(CreateChatRequestDto createChatRequestDto) {
 
-		ChatRoom chatRoom = chatRoomRepository.findChatRoomById(createChatRequestDto.getChatRoomId());
-
 		Chat savedChat = mongoChatRepository.save(
 			Chat.builder()
-				.chatRoom(chatRoom)
+				.chatRoomId(createChatRequestDto.getChatRoomId())
 				.question(createChatRequestDto.getQuestion())
 				.answer(createChatRequestDto.getAnswer())
 				.build()
@@ -56,14 +51,14 @@ public class ChatServiceImpl implements ChatService {
 
 		ChatFeedBack savedFeedBack = chatFeedBackRepository.save(
 			ChatFeedBack.builder()
-				.chat(chat)
+				.chatId(chat.getChatId())
 				.isPositive(createChatFeedBackRequestDto.isPositive())
 				.negativeReason(createChatFeedBackRequestDto.getNegativeReason())
 				.build()
 		);
 
 		return new CreateChatFeedBackResponseDto(
-			savedFeedBack.getChat().getChatId(),
+			savedFeedBack.getChatId(),
 			savedFeedBack.isPositive(),
 			savedFeedBack.getNegativeReason()
 		);

@@ -41,6 +41,9 @@ public enum ErrorCode {
 
 	// 파일 관련 오류
 	FILE_UPLOAD_FAILED(500, "FILE_UPLOAD_FAILED", "파일 업로드에 실패했습니다."),
+	FILE_DOWNLOAD_FAILED(500, "FILE_DOWNLOAD_FAILED", "파일 다운로드에 실패했습니다."),
+	FILE_DIRECTORY_INVALID(400, "FILE_DIRECTORY_INVALID", "잘못된 파일 디렉토리입니다."),
+	FILE_NOT_FOUND(400, "FILE_NOT_FOUND", "존재하지 않는 파일입니다."),
 	BOARD_FILE_SIZE_EXCEEDED(400, "BOARD_FILE_SIZE_EXCEEDED", "파일 크기가 제한을 초과했습니다."),
 	BOARD_FILE_TYPE_NOT_SUPPORTED(400, "BOARD_FILE_TYPE_NOT_SUPPORTED", "지원하지 않는 파일 형식입니다."),
 	BOARD_FILE_URL_INVALID(400, "BOARD_FILE_URL_INVALID", "잘못된 파일 URL입니다."),
@@ -67,8 +70,7 @@ public enum ErrorCode {
 	INCORRECT_ID_OR_PASSWORD(401, "INCORRECT_ID_OR_PASSWORD", "아이디 혹은 비밀번호가 틀렸습니다."),
 
 	//채팅 관련 오류
-	CHAT_NOT_FOUND(404, "CHAT_ID_NOT_FOUND", "채팅을 찾을 수 없습니다")
-	;
+	CHAT_NOT_FOUND(404, "CHAT_ID_NOT_FOUND", "채팅을 찾을 수 없습니다");
 
 	private final int httpStatus;
 	private final String code;
