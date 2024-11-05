@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 
 import com.chatbot.backend.domain.board.dto.request.BoardSearchCondition;
 import com.chatbot.backend.domain.board.entity.Board;
-import com.chatbot.backend.domain.board.entity.BoardLike;
 import com.chatbot.backend.domain.board.entity.QBoard;
 import com.chatbot.backend.global.querydsl.Querydsl4RepositorySupport;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -41,7 +40,7 @@ public class BoardQueryRepositoryImpl extends Querydsl4RepositorySupport<Board, 
 				.leftJoin(board.user, user).fetchJoin()
 				.leftJoin(boardLike).on(boardLike.board.eq(board).and(boardLike.user.id.eq(userId)))
 				.where(
-					isAccessibleByLevel(boardSearchCondition.level(), userId),
+					isAccessibleByLevel(boardSearchCondition.level()),
 					hasName(boardSearchCondition.name()),
 					hasTitle(boardSearchCondition.title()),
 					board.isDeleted.isFalse()
@@ -50,16 +49,8 @@ public class BoardQueryRepositoryImpl extends Querydsl4RepositorySupport<Board, 
 
 	// 게시글 접근 권한 확인을 위한 메소드
 	// 사용자 레벨에 따른 접근 가능 여부 판단
-	private BooleanExpression isAccessibleByLevel(Integer level, Long userId) {
-		if (level != null) {
-			return board.level.loe(level);
-		} else {
-			Integer userLevel = select(user.level)
-				.from(user)
-				.where(user.id.eq(userId))
-				.fetchOne();
-			return userLevel != null ? board.level.loe(userLevel) : board.level.loe(Integer.MAX_VALUE);
-		}
+	private BooleanExpression isAccessibleByLevel(Integer level) {
+		return level != null ? board.level.eq(level).and(board.level.loe(user.level)) : board.level.loe(user.level);
 	}
 
 	// 이름으로 게시글 작성자 필터링
@@ -70,12 +61,5 @@ public class BoardQueryRepositoryImpl extends Querydsl4RepositorySupport<Board, 
 	// 제목으로 게시글 필터링
 	private BooleanExpression hasTitle(String title) {
 		return title != null ? board.title.contains(title) : null;
-	}
-
-	// 게시글 좋아요 여부 확인
-	private BoardLike findBoardLike(Long boardId, Long userId) {
-		return selectFrom(boardLike)
-			.where(boardLike.board.id.eq(boardId).and(boardLike.user.id.eq(userId)))
-			.fetchOne();
 	}
 }
