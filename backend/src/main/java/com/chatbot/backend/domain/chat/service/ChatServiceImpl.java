@@ -1,5 +1,6 @@
 package com.chatbot.backend.domain.chat.service;
 
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import com.chatbot.backend.domain.chat.dto.request.CreateChatFeedBackRequestDto;
@@ -13,12 +14,17 @@ import com.chatbot.backend.domain.chat.repository.MongoChatRepository;
 import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
 import com.chatbot.backend.domain.chatroom.repository.ChatRoomRepository;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class ChatServiceImpl implements ChatService {
 
-	MongoChatRepository mongoChatRepository;
-	ChatRoomRepository chatRoomRepository;
-	MongoChatFeedBackRepository chatFeedBackRepository;
+	private final MongoChatRepository mongoChatRepository;
+	private final ChatRoomRepository chatRoomRepository;
+	private final MongoChatFeedBackRepository chatFeedBackRepository;
 
 	@Override
 	public CreateChatResponseDto createChat(CreateChatRequestDto createChatRequestDto) {
@@ -32,8 +38,9 @@ public class ChatServiceImpl implements ChatService {
 				.answer(createChatRequestDto.getAnswer())
 				.build()
 		);
+
 		return new CreateChatResponseDto(
-			savedChat.getChatId(),
+			savedChat.getChatId().toHexString(),
 			savedChat.getQuestion(),
 			savedChat.getAnswer()
 		);
@@ -44,7 +51,7 @@ public class ChatServiceImpl implements ChatService {
 	public CreateChatFeedBackResponseDto createChatFeedBack(String chatId,
 		CreateChatFeedBackRequestDto createChatFeedBackRequestDto) {
 
-		Chat chat = mongoChatRepository.findById(chatId).
+		Chat chat = mongoChatRepository.findById(new ObjectId(chatId)).
 			orElseThrow();
 
 		ChatFeedBack savedFeedBack = chatFeedBackRepository.save(
