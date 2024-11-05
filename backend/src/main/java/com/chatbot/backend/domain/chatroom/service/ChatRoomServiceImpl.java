@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.chatbot.backend.domain.chat.entitiy.Chat;
+import com.chatbot.backend.domain.chat.entity.Chat;
 import com.chatbot.backend.domain.chat.repository.MongoChatRepository;
 import com.chatbot.backend.domain.chatroom.dto.ChatRoomDto;
 import com.chatbot.backend.domain.chatroom.dto.request.CreateChatRoomRequestDto;
@@ -48,7 +48,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	public FindChatRoomListResponseDto findChatRoomList(Long userId,
 		Pageable pageable) {
 
-		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByUserIdAndDeletedFalseOrderByCreatedAtDesc(
+		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByUserIdAndIsDeletedFalseOrderByCreatedAtDesc(
 			userId,
 			pageable);
 
