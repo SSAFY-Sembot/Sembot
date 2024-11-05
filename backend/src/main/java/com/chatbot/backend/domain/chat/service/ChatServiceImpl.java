@@ -13,12 +13,15 @@ import com.chatbot.backend.domain.chat.repository.MongoChatRepository;
 import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
 import com.chatbot.backend.domain.chatroom.repository.ChatRoomRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class ChatServiceImpl implements ChatService {
 
-	MongoChatRepository mongoChatRepository;
-	ChatRoomRepository chatRoomRepository;
-	MongoChatFeedBackRepository chatFeedBackRepository;
+	private final MongoChatRepository mongoChatRepository;
+	private final ChatRoomRepository chatRoomRepository;
+	private final MongoChatFeedBackRepository chatFeedBackRepository;
 
 	@Override
 	public CreateChatResponseDto createChat(CreateChatRequestDto createChatRequestDto) {
@@ -33,7 +36,7 @@ public class ChatServiceImpl implements ChatService {
 				.build()
 		);
 		return new CreateChatResponseDto(
-			savedChat.getChatId(),
+			savedChat.getChatId().toHexString(),
 			savedChat.getQuestion(),
 			savedChat.getAnswer()
 		);
@@ -56,7 +59,7 @@ public class ChatServiceImpl implements ChatService {
 		);
 
 		return new CreateChatFeedBackResponseDto(
-			savedFeedBack.getChat().getChatId(),
+			savedFeedBack.getChat().getChatId().toHexString(),
 			savedFeedBack.isPositive(),
 			savedFeedBack.getNegativeReason()
 		);
