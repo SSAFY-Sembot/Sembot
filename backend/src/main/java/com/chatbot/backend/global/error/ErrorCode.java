@@ -44,6 +44,7 @@ public enum ErrorCode {
 	BOARD_FILE_SIZE_EXCEEDED(400, "BOARD_FILE_SIZE_EXCEEDED", "파일 크기가 제한을 초과했습니다."),
 	BOARD_FILE_TYPE_NOT_SUPPORTED(400, "BOARD_FILE_TYPE_NOT_SUPPORTED", "지원하지 않는 파일 형식입니다."),
 	BOARD_FILE_URL_INVALID(400, "BOARD_FILE_URL_INVALID", "잘못된 파일 URL입니다."),
+	BOARD_NULL(400, "BOARD_NULL", "게시판의 값이 NULL 입니다."),
 
 	// 게시글 수정 삭제 관련 오류
 	BOARD_UNAUTHORIZED(403, "BOARD_UNAUTHORIZED", "게시글 수정 / 삭제 권한이 없습니다."),
@@ -55,6 +56,7 @@ public enum ErrorCode {
 	// 사용자 관련 오류
 	USER_NOT_FOUND(404, "USER_NOT_FOUND", "사용자를 찾을 수 없습니다."),
 	USER_DELETED(400, "USER_DELETED", "삭제된 사용자입니다."),
+	USER_NULL(400, "USER_NULL", "사용자의 값이 NULL 입니다."),
 	NO_AUTHORITY(403, "NO_AUTHORITY", "권한이 없습니다"),
 
 	// 카테고리 관련 오류
@@ -65,7 +67,8 @@ public enum ErrorCode {
 	INCORRECT_ID_OR_PASSWORD(401, "INCORRECT_ID_OR_PASSWORD", "아이디 혹은 비밀번호가 틀렸습니다."),
 
 	//채팅 관련 오류
-	CHAT_NOT_FOUND(404, "CHAT_ID_NOT_FOUND", "채팅을 찾을 수 없습니다");
+	CHAT_NOT_FOUND(404, "CHAT_ID_NOT_FOUND", "채팅을 찾을 수 없습니다")
+	;
 
 	private final int httpStatus;
 	private final String code;
