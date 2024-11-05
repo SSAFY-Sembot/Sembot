@@ -4,14 +4,9 @@ import java.time.LocalDateTime;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.chatbot.backend.domain.chatroom.entity.ChatRoom;
-
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,19 +23,17 @@ public class Chat {
 	private LocalDateTime createdAt;
 
 	@Setter
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CHATFEEDBACK_ID")
+	private Long chatRoomId;
+
+	@DBRef
+	@Setter
 	private ChatFeedBack chatFeedBack;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CHATROOM_ID")
-	private ChatRoom chatRoom;
-
 	@Builder
-	public Chat(String question, String answer, ChatRoom chatRoom) {
+	public Chat(String question, String answer, Long chatRoomId) {
 		this.question = question;
 		this.answer = answer;
-		this.chatRoom = chatRoom;
+		this.chatRoomId = chatRoomId;
 		this.createdAt = LocalDateTime.now();
 	}
 

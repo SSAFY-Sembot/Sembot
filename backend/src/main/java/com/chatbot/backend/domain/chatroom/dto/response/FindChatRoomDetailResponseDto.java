@@ -7,8 +7,10 @@ import java.util.List;
 import com.chatbot.backend.domain.chat.entitiy.Chat;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @AllArgsConstructor
+@Data
 public class FindChatRoomDetailResponseDto {
 
 	private Long chatRoomId;
