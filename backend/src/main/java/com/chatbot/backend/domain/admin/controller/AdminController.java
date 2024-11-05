@@ -1,8 +1,14 @@
 package com.chatbot.backend.domain.admin.controller;
 
+
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +35,12 @@ public class AdminController {
 	@GetMapping("/feedbacks")
 	public ResponseEntity<FeedbackResponseDto> findCategoryByPage(
 		@AuthenticationPrincipal CustomUserDetails userDetails,
-		FeedbackRequestDto request){
+		@ModelAttribute FeedbackRequestDto request){
 		Long userId = userDetails.getId();
-		FeedbackResponseDto response = adminService.findCategoryByPage(userId, request);
+
+		// TODO : createdAt을 그냥 박아뒀는데 이거 필요하면 정렬기준으로 바꿔야함
+		Pageable pageable = PageRequest.of(request.getPage(), request.getSize(), Sort.by("createdAt").descending());
+		FeedbackResponseDto response = adminService.findFeedbackByPage(userId, pageable);
 		return ResponseEntity.ok().body(response);
 	}
 
