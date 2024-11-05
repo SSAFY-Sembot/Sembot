@@ -1,7 +1,10 @@
 package com.chatbot.backend.domain.admin.service;
 
+import java.awt.print.Pageable;
+import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -11,8 +14,10 @@ import com.chatbot.backend.domain.admin.exception.NoAuthorityException;
 import com.chatbot.backend.domain.category.entity.Category;
 import com.chatbot.backend.domain.category.exception.CategoryAlreadyExistsException;
 import com.chatbot.backend.domain.category.repository.CategoryRepository;
+import com.chatbot.backend.domain.chat.entitiy.Chat;
 import com.chatbot.backend.domain.chat.entitiy.ChatFeedBack;
 import com.chatbot.backend.domain.chat.repository.MongoChatFeedBackRepository;
+import com.chatbot.backend.domain.chat.repository.MongoChatRepository;
 import com.chatbot.backend.domain.user.entity.User;
 import com.chatbot.backend.domain.user.repository.UserRepository;
 import com.chatbot.backend.global.jwt.JwtProvider;
@@ -30,6 +35,7 @@ public class AdminServiceImpl implements AdminService {
 	private final CategoryRepository categoryRepository;
 	private final UserRepository userRepository;
 	private final MongoChatFeedBackRepository mongoChatFeedBackRepository;
+	private final MongoChatRepository mongoChatRepository;
 
 	@Override
 	public FeedbackResponseDto findCategoryByPage(Long userId, FeedbackRequestDto request) {
@@ -38,7 +44,9 @@ public class AdminServiceImpl implements AdminService {
 			throw new NoAuthorityException();
 		}
 
-		// ChatFeedBack chatFeedBack = mongoChatFeedBackRepository.findChatFeedBackByChat();
+
+		List<Chat> chats = mongoChatRepository.findAllByChatRoomIdOrderByCreatedAtDesc();
+		ChatFeedBack chatFeedBack = mongoChatFeedBackRepository.findChatFeedBackByChatId(new ObjectId());
 		return null;
 	}
 
