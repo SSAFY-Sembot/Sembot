@@ -1,4 +1,4 @@
-package com.chatbot.backend.domain.chat.entitiy;
+package com.chatbot.backend.domain.chat.entity;
 
 import java.time.LocalDateTime;
 
