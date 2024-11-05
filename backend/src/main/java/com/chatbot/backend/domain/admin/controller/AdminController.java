@@ -2,11 +2,14 @@ package com.chatbot.backend.domain.admin.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chatbot.backend.domain.admin.dto.request.FeedbackRequestDto;
+import com.chatbot.backend.domain.admin.dto.response.FeedbackResponseDto;
 import com.chatbot.backend.domain.admin.service.AdminService;
 import com.chatbot.backend.domain.category.dto.request.CategoryFindRequestDto;
 import com.chatbot.backend.domain.category.dto.response.CategoryFindResponseDto;
@@ -23,12 +26,14 @@ public class AdminController {
 
 	private final AdminService adminService;
 
-	// @GetMapping("/feedbacks")
-	// public ResponseEntity<Page<FeedbackResponseDto>> getFeedbacks(@RequestParam Boolean isPositive, @RequestParam Integer page,
-	// 	@RequestParam Integer size, @RequestParam String sortBy, @RequestParam String sortDir) {
-	// 	ResponseEntity<?> response = adminService.getFeedbacks(isPositive,page,size,sortBy,sortDir);
-	// 	return ResponseEntity.ok().body(response);
-	// }
+	@GetMapping("/feedbacks")
+	public ResponseEntity<FeedbackResponseDto> findCategoryByPage(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		FeedbackRequestDto request){
+		Long userId = userDetails.getId();
+		FeedbackResponseDto response = adminService.findCategoryByPage(userId, request);
+		return ResponseEntity.ok().body(response);
+	}
 
 	@PostMapping("/categories")
 	public ResponseEntity<CategoryFindResponseDto> createCategory(
