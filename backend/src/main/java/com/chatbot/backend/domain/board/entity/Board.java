@@ -79,8 +79,18 @@ public class Board extends BaseTimeEntity {
 		this.fileUrl = fileUrl;
 	}
 
-	// Board 삭제
+	// Board 삭제로 표시
 	public void deleteBoard() {
 		this.isDeleted = true;
+	}
+
+	// Board 작성자 여부를 확인
+	public boolean isOwnedByUser(User user) {
+		return this.user.getId().equals(user.getId());
+	}
+
+	// 사용자 접근 권한을 확인
+	public boolean isAccessibleByUser(User user) {
+		return user.getLevel() >= this.level;
 	}
 }

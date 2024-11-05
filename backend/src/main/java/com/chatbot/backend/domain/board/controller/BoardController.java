@@ -1,5 +1,6 @@
 package com.chatbot.backend.domain.board.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.chatbot.backend.domain.board.dto.request.BoardCreateRequest;
 import com.chatbot.backend.domain.board.dto.request.BoardUpdateRequest;
 import com.chatbot.backend.domain.board.dto.response.BoardDetailResponse;
+import com.chatbot.backend.domain.board.service.BoardLikeService;
 import com.chatbot.backend.domain.board.service.BoardService;
 import com.chatbot.backend.global.security.CustomUserDetails;
 
@@ -32,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BoardController {
 	private final BoardService boardService;
+	private final BoardLikeService boardLikeService;
 
 	@Operation(
 		summary = "게시글 생성",
@@ -42,8 +45,8 @@ public class BoardController {
 		@AuthenticationPrincipal CustomUserDetails userDetails,
 		@Valid @RequestPart(value = "request") BoardCreateRequest boardCreateRequest,
 		@RequestPart(value = "file", required = false) MultipartFile file) {
-		Long userId = userDetails.getId();
-		return ResponseEntity.ok(boardService.createBoard(userId, boardCreateRequest, file));
+		return ResponseEntity.status(HttpStatus.CREATED)
+			.body(boardService.createBoard(userDetails.getId(), boardCreateRequest, file));
 	}
 
 	@Operation(
@@ -57,8 +60,8 @@ public class BoardController {
 		@PathVariable Long boardId,
 		@Valid @RequestPart(value = "request") BoardUpdateRequest boardUpdateRequest,
 		@RequestPart(value = "file", required = false) MultipartFile file) {
-		Long userId = userDetails.getId();
-		return ResponseEntity.ok(boardService.updateBoard(userId, boardId, boardUpdateRequest, file));
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(boardService.updateBoard(userDetails.getId(), boardId, boardUpdateRequest, file));
 	}
 
 	@Operation(
@@ -70,9 +73,8 @@ public class BoardController {
 		@AuthenticationPrincipal CustomUserDetails userDetails,
 		@PathVariable Long boardId
 	) {
-		Long userId = userDetails.getId();
-		boardService.deleteBoard(userId, boardId);
-		return ResponseEntity.ok().build();
+		boardService.deleteBoard(userDetails.getId(), boardId);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 
 	@Operation(
@@ -84,7 +86,33 @@ public class BoardController {
 		@AuthenticationPrincipal CustomUserDetails userDetails,
 		@PathVariable Long boardId
 	) {
-		Long userId = userDetails.getId();
-		return ResponseEntity.ok(boardService.getBoard(userId, boardId));
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(boardService.getBoard(userDetails.getId(), boardId));
+	}
+
+	@Operation(
+		summary = "게시글 즐겨찾기 생성",
+		description = "게시글에 즐겨찾기를 추가합니다."
+	)
+	@PostMapping("/{boardId}/favorite")
+	public ResponseEntity<Void> createBoardLike(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@PathVariable Long boardId
+	) {
+		boardLikeService.createBoardLike(userDetails.getId(), boardId);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
+	}
+
+	@Operation(
+		summary = "게시글 즐겨찾기 취소",
+		description = "게시글에 추가된 즐겨찾기를 취소합니다."
+	)
+	@DeleteMapping("/{boardId}/favorite")
+	public ResponseEntity<Void> deleteBoardLike(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@PathVariable Long boardId
+	) {
+		boardLikeService.deleteBoardLike(userDetails.getId(), boardId);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 }
