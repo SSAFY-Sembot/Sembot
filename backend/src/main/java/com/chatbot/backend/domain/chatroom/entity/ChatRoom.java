@@ -48,7 +48,7 @@ public class ChatRoom {
 		this.createdAt = LocalDateTime.now();
 	}
 
-	public void setDeleted(boolean isDeleted) {
+	public void setDeleted(boolean deleted) {
 		this.isDeleted = isDeleted;
 	}
 
