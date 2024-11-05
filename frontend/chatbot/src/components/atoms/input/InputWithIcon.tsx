@@ -20,7 +20,7 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
   placeholder = "",
   bgColor = "#EAF1FB",
   borderColor = "#004F9F",
-  textColor = "#737373",
+  textColor = "#434343",
   iconPath,
   onIconClick,
   isLoading = false,
@@ -47,7 +47,7 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
   };
 
   return (
-    <div className="relative text-gray-600 w-full">
+    <div className="relative text-gray-800 w-full">
       <input
         type="text"
         value={inputValue}
@@ -55,7 +55,7 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         style={{ backgroundColor: bgColor, borderColor, color: textColor }}
-        className={`rounded-md h-12 w-full px-5 pr-10 text-sm border border-gray-300 focus:outline-none focus:ring-0 ${className}`}
+        className={`rounded-md h-12 w-full px-5 pr-10 text-base border focus:outline-none focus:ring-0 ${className}`}
       />
       <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pr-3">
         <ButtonWithIcon icon={isLoading ? loadingIconPath : iconPath} onClick={onClick} />
