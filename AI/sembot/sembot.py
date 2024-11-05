@@ -323,5 +323,50 @@ class Sembot:
 
         return generation_kwargs
 
-    def docs_invoke(self, question):        
+    def docs_invoke(self, question):
         return self.retriever.invoke(question)
+
+
+if __name__ == "__main__":
+    from threading import Thread
+
+    sembot = Sembot()
+
+    model = sembot.get_model()
+    streamer = sembot.get_streamer()
+
+    input_data = {
+        "memory": [
+            {
+                "question": "유류비 청구는 어떻게 할 수 있나요? 제가 3박 4일로 부산에 갓다오는데 비용은 대충 어떻게 계산하죠?",
+                "doc": {
+                    "metadata": {"source": "유류비_소스.pdf"},
+                    "page_content": "유류비 청구와 관련된 내용",
+                },
+                "answer": "안녕하세요! 부산으로 출장가는 경우, 유류비 청구는 다음과 같은 절차를 따르면 됩니다.",
+            },
+            {
+                "question": "연차는 어떻게 신청할 수 있나요?",
+                "doc": {
+                    "metadata": {"source": "연차_소스.pdf"},
+                    "page_content": "연차와 관련된 내용",
+                },
+                "answer": "안녕하세요! 연차는 다음과 같은 절차를 따르면 신청할 수 있습니다.",
+            },
+        ],
+        "question": "제가 아까 무슨 질문 했죠? 기억나시나요??",
+    }
+
+    generation_kwargs = sembot.chain(input_data)
+
+    # Thread 객체를 사용하기 때문에 동시성 이슈를 신경써야함
+    thread = Thread(target=model.generate, kwargs=generation_kwargs)
+
+    thread.start()
+
+    for new_text in streamer:
+
+        # print가 아니라 프론트로 전송하는 걸로 바꾸면 될 듯
+        print(new_text, end="", flush=True)
+
+    thread.join()
