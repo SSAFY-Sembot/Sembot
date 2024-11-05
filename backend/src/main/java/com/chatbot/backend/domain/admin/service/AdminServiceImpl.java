@@ -1,29 +1,24 @@
 package com.chatbot.backend.domain.admin.service;
 
-import java.awt.print.Pageable;
-import java.util.List;
 import java.util.Optional;
 
-import org.bson.types.ObjectId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import com.chatbot.backend.domain.admin.dto.request.FeedbackRequestDto;
 import com.chatbot.backend.domain.admin.dto.response.FeedbackResponseDto;
 import com.chatbot.backend.domain.admin.exception.NoAuthorityException;
 import com.chatbot.backend.domain.category.entity.Category;
 import com.chatbot.backend.domain.category.exception.CategoryAlreadyExistsException;
 import com.chatbot.backend.domain.category.repository.CategoryRepository;
-import com.chatbot.backend.domain.chat.entitiy.Chat;
-import com.chatbot.backend.domain.chat.entitiy.ChatFeedBack;
+import com.chatbot.backend.domain.chat.entity.Chat;
+import com.chatbot.backend.domain.chat.entity.ChatFeedBack;
 import com.chatbot.backend.domain.chat.repository.MongoChatFeedBackRepository;
 import com.chatbot.backend.domain.chat.repository.MongoChatRepository;
 import com.chatbot.backend.domain.user.entity.User;
 import com.chatbot.backend.domain.user.repository.UserRepository;
-import com.chatbot.backend.global.jwt.JwtProvider;
 import com.chatbot.backend.global.jwt.Role;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,15 +33,24 @@ public class AdminServiceImpl implements AdminService {
 	private final MongoChatRepository mongoChatRepository;
 
 	@Override
-	public FeedbackResponseDto findCategoryByPage(Long userId, FeedbackRequestDto request) {
+	public FeedbackResponseDto findFeedbackByPage(Long userId, Pageable pageable) {
+		// admin 경우에만 feedback 조회 허용
 		User user = userRepository.findByIdOrElseThrow(userId);
 		if(user.getRole() != Role.ADMIN){
 			throw new NoAuthorityException();
 		}
 
+		Page<ChatFeedBack> feedBacks = mongoChatFeedBackRepository.findAllOrderByCreatedAtByChatFeedBackIdDesc(pageable);
+		log.info("피드백 : {} {} {} {}", feedBacks.getSize(), feedBacks.getNumber(), feedBacks.getTotalPages(),
+			feedBacks.getTotalElements());
 
-		List<Chat> chats = mongoChatRepository.findAllByChatRoomIdOrderByCreatedAtDesc();
-		ChatFeedBack chatFeedBack = mongoChatFeedBackRepository.findChatFeedBackByChatId(new ObjectId());
+		// FeedbackResponseDto.builder()
+		// 	.page(pageable.getPageNumber())
+		// 	.size(pageable.getPageSize())
+		// 	.build();
+		//
+		// feedBacks.stream()
+		// 	.map(chatFeedBack -> {})
 		return null;
 	}
 
