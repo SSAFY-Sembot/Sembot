@@ -7,8 +7,8 @@ import com.chatbot.backend.domain.chat.dto.request.CreateChatFeedBackRequestDto;
 import com.chatbot.backend.domain.chat.dto.request.CreateChatRequestDto;
 import com.chatbot.backend.domain.chat.dto.response.CreateChatFeedBackResponseDto;
 import com.chatbot.backend.domain.chat.dto.response.CreateChatResponseDto;
-import com.chatbot.backend.domain.chat.entitiy.Chat;
-import com.chatbot.backend.domain.chat.entitiy.ChatFeedBack;
+import com.chatbot.backend.domain.chat.entity.Chat;
+import com.chatbot.backend.domain.chat.entity.ChatFeedBack;
 import com.chatbot.backend.domain.chat.repository.MongoChatFeedBackRepository;
 import com.chatbot.backend.domain.chat.repository.MongoChatRepository;
 
