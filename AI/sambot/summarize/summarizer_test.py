@@ -11,7 +11,8 @@ async def main():
 
     llm=llm_factory.get_llm("gpt")
     summarizer = PDFSummarizer(llm)
-    result = await summarizer.summarize(pdf_path, use_parallel=True)
+    result = await summarizer.summarize(pdf_path, use_parallel=True, extractor="pdfplumber")
+    # result = await summarizer.summarize(pdf_path, use_parallel=True, extractor="pypdf")
 
     # 결과를 다룰 때
     if result["success"]:
