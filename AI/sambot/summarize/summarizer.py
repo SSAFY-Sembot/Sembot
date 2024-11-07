@@ -1,9 +1,10 @@
 from tempfile import NamedTemporaryFile
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Literal
 from pathlib import Path
 
 from fastapi import UploadFile, File
 from pypdf import PdfReader
+import pdfplumber
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnableSequence
 from langchain_core.output_parsers import StrOutputParser
@@ -104,8 +105,18 @@ class PDFSummarizer:
         combined_summary = self.combine_chain.invoke({"text": "\n\n".join(summaries)})
         return combined_summary
 
+
     @staticmethod
-    def _extract_text_from_pdf(pdf_path: str | Path) -> str:
+    def _extract_text_with_pdfplumber(pdf_path: str | Path) -> str:
+        """pdfplumber를 사용하여 PDF에서 텍스트 추출"""
+        text = ""
+        with pdfplumber.open(pdf_path) as pdf:
+            for page in pdf.pages:
+                text += page.extract_text() + " "
+        return text
+
+    @staticmethod
+    def _extract_text_with_pypdf(pdf_path: str | Path) -> str:
         """PDF에서 텍스트 추출"""
         try:
             pdf_reader = PdfReader(pdf_path)
@@ -113,9 +124,33 @@ class PDFSummarizer:
         except Exception as e:
             raise ValueError(f"PDF 텍스트 추출 중 오류 발생: {str(e)}")
 
+    @timeit
+    def _extract_text_from_pdf(
+            self,
+            pdf_path: str | Path,
+            extractor: Literal["pypdf", "pdfplumber"] = "pdfplumber",
+    ) -> str:
+        """PDF에서 텍스트, 이미지, 테이블 추출"""
+        try:
+            # 텍스트 추출
+            if extractor == "pypdf":
+                text = self._extract_text_with_pypdf(pdf_path)
+            elif extractor == "pdfplumber":
+                text = self._extract_text_with_pdfplumber(pdf_path)
+            else:
+                raise ValueError(f"지원하지 않는 추출기: {extractor}")
+
+            return text
+        except Exception as e:
+            raise ValueError(f"PDF 콘텐츠 추출 중 오류 발생: {str(e)}")
+
     @staticmethod
-    async def _extract_text_from_upload_file(file: UploadFile) -> str:
-        """UploadFile에서 텍스트 추출"""
+    async def _extract_text_from_upload_file(
+            self,
+            file: UploadFile,
+            extractor: Literal["pypdf", "pdfplumber"] = "pdfplumber",
+    ) -> Dict[str, Any]:
+        """UploadFile에서 텍스트, 이미지, 테이블 추출"""
         try:
             # 임시 파일로 저장
             with NamedTemporaryFile(delete=False, suffix='.pdf') as tmp_file:
@@ -123,13 +158,15 @@ class PDFSummarizer:
                 tmp_file.write(content)
                 tmp_file.flush()
 
-                # PDF 읽기
-                pdf_reader = PdfReader(tmp_file.name)
-                text = " ".join(page.extract_text() for page in pdf_reader.pages)
+                # 선택된 추출기로 PDF 읽기
+                result = self._extract_text_from_pdf(
+                    tmp_file.name,
+                    extractor
+                )
 
             # 임시 파일 삭제
             os.unlink(tmp_file.name)
-            return text
+            return result
         except Exception as e:
             raise ValueError(f"업로드된 PDF 파일 처리 중 오류 발생: {str(e)}")
 
@@ -190,7 +227,11 @@ class PDFSummarizer:
         return sum(self.llm.get_num_tokens(content) for content in contents)
 
     @async_timeit
-    async def summarize(self, pdf_info: str | Path | UploadFile, use_parallel: bool = False) -> Dict[str, Any]:
+    async def summarize(
+            self,
+            pdf_info: str | Path | UploadFile,
+            use_parallel: bool = False,
+            extractor: Literal["pypdf", "pdfplumber"] = "pdfplumber") -> Dict[str, Any]:
         """
         PDF 파일을 요약
 
@@ -206,10 +247,10 @@ class PDFSummarizer:
             text = ""
             if isinstance(pdf_info, (str, Path)):
                 logging.info("input 형식 : path")
-                text = self._extract_text_from_pdf(pdf_info)
+                text = self._extract_text_from_pdf(pdf_info,extractor)
             else:
                 logging.info("input 형식 : file")
-                text = await self._extract_text_from_upload_file(pdf_info)
+                text = await self._extract_text_from_upload_file(pdf_info,extractor)
 
             # 텍스트 분할
             docs = self.text_splitter.create_documents([text])
