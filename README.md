@@ -90,7 +90,7 @@
 - 이메일 | 이름 | 사번 | 부서 | 비밀번호
 
 <div align="center">
-<img src="./assets/회원가입.gif" alt="회원가입" style="border-radius: 10px;"/>
+<img src="./assets/회원가입.gif" alt="회원가입" style="border-radius: 10px; width: 700px;"/>
 </div>
 
 #### **로그인**
@@ -101,7 +101,7 @@
     - 관리자 ⇒ 관리자 페이지
 
 <div align="center">
-<img src="./assets/로그인.gif" alt="로그인" style="border-radius: 10px;"/>
+<img src="./assets/로그인.gif" alt="로그인" style="border-radius: 10px; width: 700px;"/>
 </div>
 
 ### **1. 자연어 이해를 통한 질문 응답**
@@ -111,14 +111,16 @@
 - 채팅 화면은 아래와 같습니다. 
 
 <div align="center">
-<img src="./assets/채팅1.png" alt="채팅1" style="border-radius: 10px;"/>
+<img src="./assets/채팅1.png" alt="채팅1" style="border-radius: 10px; width: 700px;"/>
 </div>
 
 - 실제 채팅이 진행되는 화면입니다.
 
+
 <div align="center">
-<img src="./assets/채팅1.gif" alt="채팅1" style="border-radius: 10px;"/>
+<img src="./assets/채팅1.gif" alt="채팅1" style="border-radius: 10px; width: 700px;"/>
 </div>
+
 
 - **기술 요소:**
     - **RAG(Retrieval-Augmented Generation):** 유사도 기반 검색을 통해 관련 규정 데이터를 추출한 후, 답변에 포함.
@@ -140,13 +142,13 @@
 - 코로나와 관련된 내용입니다. 
 
 <div align="center">
-<img src="./assets/코로나등록1.gif" alt="코로나등록1" style="border-radius: 10px;"/>
+<img src="./assets/코로나등록1.gif" alt="코로나등록1" style="border-radius: 10px; width: 700px;"/>
 </div>
 
 - 육아 휴직과 관련된 내용입니다.
 
 <div align="center">
-<img src="./assets/육아휴직.gif" alt="육아휴직" style="border-radius: 10px;"/>
+<img src="./assets/육아휴직.gif" alt="육아휴직" style="border-radius: 10px; width: 700px;"/>
 </div>
 
 ---
@@ -160,7 +162,7 @@
     - 직원의 레벨보다 높은 정보에 대해 질문할 경우,
 
 <div align="center">
-<img src="./assets/사용자레벨.png" alt="User Level" style="border-radius: 10px;"/>
+<img src="./assets/사용자레벨.PNG" alt="User Level" style="border-radius: 10px; width: 700px;"/>
 </div>
 
 ---
@@ -180,13 +182,13 @@
 #### 회원 정보 변경
 
 <div align="center">
-<img src="./assets/회원관리.png" alt="회원관리" style="border-radius: 10px;"/>
+<img src="./assets/회원관리.png" alt="회원관리" style="border-radius: 10px; width: 700px;"/>
 </div>
 
 - 관리자는 회원 관리 페이지에 접속할 수 있습니다. 
 
 <div align="center">
-<img src="./assets/회원관리모달.png" alt="회원관리모달" style="border-radius: 10px;"/>
+<img src="./assets/회원관리모달.PNG" alt="회원관리모달" style="border-radius: 10px; width: 700px;"/>
 </div>
 - 변경 버튼을 누르면 변경 모달 창을 확인할 수 있습니다.
 - 회원의 답변 레벨을 변경할 수 있습니다.
@@ -199,7 +201,7 @@
 #### 피드백 관리
 
 <div align="center">
-<img src="./assets/피드백관리.png" alt="피드백관리" style="border-radius: 10px;"/>
+<img src="./assets/피드백관리.PNG" alt="피드백관리" style="border-radius: 10px; width: 700px;"/>
 </div>
 
 
@@ -209,7 +211,7 @@
 #### 카테고리 관리
 
 <div align="center">
-<img src="./assets/카테고리관리.png" alt="카테고리관리" style="border-radius: 10px;"/>
+<img src="./assets/카테고리관리.png" alt="카테고리관리" style="border-radius: 10px; width: 700px;"/>
 </div>
 
 - 규정 카테고리를 추가, 삭제할 수 있습니다.
