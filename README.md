@@ -83,56 +83,136 @@
 
 ## 📌 주요 기능
 
+### **0. 회원가입 | 로그인**
+
+#### **회원가입**
+
+- 이메일 | 이름 | 사번 | 부서 | 비밀번호
+
+<div align="center">
+<img src="./assets/회원가입.gif" alt="회원가입" style="border-radius: 10px;"/>
+</div>
+
+#### **로그인**
+
+- 이메일 | 비밀번호
+- 로그인시 다음과 같이 이동
+    - 일반 사용자 ⇒ 채팅 페이지
+    - 관리자 ⇒ 관리자 페이지
+
+<div align="center">
+<img src="./assets/로그인.gif" alt="로그인" style="border-radius: 10px;"/>
+</div>
+
 ### **1. 자연어 이해를 통한 질문 응답**
 
 - **기능 설명:** 사용자가 자연어로 질문을 입력하면, LLM이 질문의 문맥과 의미를 분석하여 적합한 답변을 제공합니다.
-- **기술 요소:**
-  - **RAG(Retrieval-Augmented Generation):** 유사도 기반 검색을 통해 관련 규정 데이터를 추출한 후, 답변에 포함.
-  - **LLM 모델:** 한국어 성능에 최적화된 Llama-VARCO-8B 모델 사용.
+
+- 채팅 화면은 아래와 같습니다. 
 
 <div align="center">
-  <img src="./assets/Question_Answer.png" alt="Question Answer" style="border-radius: 10px;"/>
+<img src="./assets/채팅1.png" alt="채팅1" style="border-radius: 10px;"/>
 </div>
+
+- 실제 채팅이 진행되는 화면입니다.
+
+<div align="center">
+<img src="./assets/채팅1.gif" alt="채팅1" style="border-radius: 10px;"/>
+</div>
+
+- **기술 요소:**
+    - **RAG(Retrieval-Augmented Generation):** 유사도 기반 검색을 통해 관련 규정 데이터를 추출한 후, 답변에 포함.
+    - **LLM 모델:** 한국어 성능에 최적화된 Llama-VARCO-8B 모델 사용.
+
 
 ---
 
 ### **2. 규정 업데이트 자동화**
 
-- **기능 설명:** 관리자 페이지를 통해 신규 규정 작성 및 기존 규정 수정 시, 벡터 데이터베이스가 자동으로 갱신됩니다.
+- **기능 설명:** 관리자 페이지를 통해 신규 규정 작성 및 기존 규정 수정 시, 벡터 데이터베이스(Faiss)가 자동으로 갱신됩니다.
+
 - **주요 과정:**
-  1. 관리자가 규정을 입력하거나 수정.
-  2. 변경 사항이 JSON 포맷으로 변환.
-  3. 벡터 데이터베이스(Faiss)를 재구성하여 최신 데이터 반영.
+    1. 관리자가 규정을 입력하거나 수정. (파일 혹은 직접 입력을 통한 업로드)
+    2. 변경 사항이 JSON 포맷으로 변환.
+    3. 벡터 데이터베이스(Faiss)를 재구성하여 최신 데이터 반영.
+        
+
+- 코로나와 관련된 내용입니다. 
 
 <div align="center">
-  <img src="./assets/Regulation_Update.png" alt="Regulation Update" style="border-radius: 10px;"/>
+<img src="./assets/코로나등록1.gif" alt="코로나등록1" style="border-radius: 10px;"/>
+</div>
+
+- 육아 휴직과 관련된 내용입니다.
+
+<div align="center">
+<img src="./assets/육아휴직.gif" alt="육아휴직" style="border-radius: 10px;"/>
 </div>
 
 ---
 
 ### **3. 사용자 레벨 기반 정보 접근 제어**
 
-- **기능 설명:** 직원의 직급과 부서에 따라 정보 접근 권한을 제한합니다.
-- **예시:** 
-  - 신입 직원은 일반적인 규정만 접근 가능.
-  - 인사팀 직원은 민감한 인사 규정에도 접근 가능.
+- **기능 설명:** 직원의 레벨(1,2,3)에 따라 정보 접근 권한을 제한합니다. 정보의 레벨 이하인 직원만 해당 정보에 접근할 수 있습니다.
+- **예시:**
+    - 레벨 1의 직원은 답변 레벨 1이하인 규정만 접근 및 답변 형성 가능
+    - 레벨 2의 직원은 답변 레벨 1, 2인 정보만 접근 및 답변 형성 가능
+    - 직원의 레벨보다 높은 정보에 대해 질문할 경우,
 
 <div align="center">
-  <img src="./assets/User_Level.png" alt="User Level" style="border-radius: 10px;"/>
+<img src="./assets/사용자레벨.png" alt="User Level" style="border-radius: 10px;"/>
 </div>
 
 ---
 
 ### **4. 피드백 기능**
 
-- **기능 설명:** 사용자가 응답 품질에 대해 피드백을 남길 수 있으며, 이를 통해 챗봇의 학습 데이터가 개선됩니다.
-- **주요 기능:** 
-  - 응답 정확성 평가.
-  - 추가 학습 데이터로 활용 가능.
+- **기능 설명:** 사용자가 응답 품질에 대해 긍정/부정 피드백을 남길 수 있으며, 이를 통해 챗봇 학습 데이터 개선에 활용할 수 있습니다.
+- **주요 기능:**
+    - 응답 정확성 평가.
+    - 추가 학습 데이터로 활용 가능.
+
+
+### 5. 관리자 기능
+
+- **기능 설명**:
+
+#### 회원 정보 변경
 
 <div align="center">
-  <img src="./assets/Feedback.png" alt="Feedback" style="border-radius: 10px;"/>
+<img src="./assets/회원관리.png" alt="회원관리" style="border-radius: 10px;"/>
 </div>
+
+- 관리자는 회원 관리 페이지에 접속할 수 있습니다. 
+
+<div align="center">
+<img src="./assets/회원관리모달.png" alt="회원관리모달" style="border-radius: 10px;"/>
+</div>
+- 변경 버튼을 누르면 변경 모달 창을 확인할 수 있습니다.
+- 회원의 답변 레벨을 변경할 수 있습니다.
+    - 답변 레벨 1 ~ 3
+- 회원의 권한을 변경할 수 있습니다.
+    - USER: 일반 회원
+    - USER_WRITE: 규정 작성이 가능한 회원
+    - ADMIN: 관리자 회원
+
+#### 피드백 관리
+
+<div align="center">
+<img src="./assets/피드백관리.png" alt="피드백관리" style="border-radius: 10px;"/>
+</div>
+
+
+- 회원이 작성한 sembot 답변 피드백을 확인할 수 있습니다.
+
+
+#### 카테고리 관리
+
+<div align="center">
+<img src="./assets/카테고리관리.png" alt="카테고리관리" style="border-radius: 10px;"/>
+</div>
+
+- 규정 카테고리를 추가, 삭제할 수 있습니다.
 
 ---
 
@@ -203,9 +283,7 @@
 ## 📂 문서 자료
 
 - [포팅 메뉴얼](./exec/SEMBOT_포팅_메뉴얼.md)
-- [시연 시나리오](./exec/시연_시나리오_S102.pdf)
-- [발표 자료](./exec/최종_발표자료_S102.pdf)
+- [사용자 가이드](./exec/사용자_가이드.pdf)
+- [발표 자료](./exec/최종_발표자료.pdf)
 
 ---
-
-
