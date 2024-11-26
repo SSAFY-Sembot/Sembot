@@ -13,6 +13,15 @@ const Devpage = () => {
 				<li>
 					<Link to="/paging">paging</Link>
 				</li>
+				<li>
+					<Link to="/adminPage">admin page</Link>
+				</li>
+				<li>
+					<Link to="/chat">chat page</Link>
+				</li>
+				<li>
+					<Link to="/board">board page</Link>
+				</li>
 			</ul>
 		</div>
 	);

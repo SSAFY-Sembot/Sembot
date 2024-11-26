@@ -1,63 +1,112 @@
-import React from "react";
-import SEMBOT_LOGO from "@/assets/images/logo.png";
+import React, { useEffect, useRef } from "react";
+import SEMBOT_LOGO from "@assets/images/logo.png";
 import ButtonWithIcon from "@components/atoms/button/ButtonWithIcon";
 
 type ButtonWithIconProps = React.ComponentProps<typeof ButtonWithIcon>;
 
-interface SidebaProps {
-  components: ButtonWithIconProps[]; // 메인 컴포넌트 리스트
-  footerComponents: ButtonWithIconProps[]; // 하단에 위치할 컴포넌트 리스트
-  isRule: boolean; // 현재 메인페이지가 규정인지, 채팅인지 확인하는 변수
+export interface SidebarProps {
+  components: ButtonWithIconProps[];
+  footerComponents: ButtonWithIconProps[];
+  isRule: boolean;
+  hasMore?: boolean;
+  onLoadMore?: () => void;
+  isLoading?: boolean;
 }
 
-const Sidebar: React.FC<SidebaProps> = ({
-  components = [], // Default to empty array
-  footerComponents = [], // Default to empty array
+const Sidebar: React.FC<SidebarProps> = ({
+  components = [],
+  footerComponents = [],
   isRule,
+  hasMore = false,
+  onLoadMore = () => {},
+  isLoading = false,
 }) => {
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const lastItemRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const firstEntry = entries[0];
+        if (firstEntry.isIntersecting && hasMore && !isLoading) {
+          onLoadMore();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (lastItemRef.current) {
+      observerRef.current.observe(lastItemRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [hasMore, isLoading, onLoadMore]);
+
   return (
-    <div>
-      <div className="w-full sidebar border-r w-56 bg-semesBlue">
-        <div className="flex h-screen flex-col justify-between pt-2 pb-6">
-          <div>
-            {/* 공통 header */}
-            <div className="w-full flex flex-row">
+    <div className="h-full">
+      <div className="w-full h-full border-r border-indigo-900 bg-semesBlue">
+        <div className="flex h-full flex-col">
+          {/* Logo Header - Fixed height */}
+          <div className="flex-none p-2">
+            <div className="w-full flex flex-row mb-2">
               <img src={SEMBOT_LOGO} alt="SEMBOT LOGO" />
               <div className="text-white text-xl mt-2 ml-1">SEMBOT</div>
             </div>
+          </div>
 
-            {/* 추가되는 component */}
-            <div className="w-full flex flex-col space-y-2">
+          <div className="flex-1 overflow-hidden flex flex-col min-h-0">
+            <div className="flex-1 overflow-y-auto px-2 [&::-webkit-scrollbar]:w-0">
               {components.map((buttonProps, index) => (
                 <React.Fragment key={index}>
-                  <ButtonWithIcon key={index} {...buttonProps} />
-
-                  {index === 0 && isRule ? (
-                    <div className="text-white text-xl ml-4">규정 즐겨찾기</div>
-                  ) : null}
+                  <div
+                    className="mb-2"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      buttonProps.handleClick?.(e);
+                    }}
+                  >
+                    <ButtonWithIcon
+                      {...buttonProps}
+                      className={`${buttonProps.styleName} ${
+                        buttonProps.isActive ? "bg-white text-semesBlue" : "text-white hover:bg-white/10"
+                      }`}
+                    />
+                  </div>
+                  {index === 0 && isRule && <div className="text-white text-xl mb-2">규정 즐겨찾기</div>}
                 </React.Fragment>
               ))}
+
+              {/* Loading indicator and sentinel */}
+              <div ref={lastItemRef}>{isLoading && <div className="text-white text-center py-2">Loading...</div>}</div>
             </div>
           </div>
 
-          {/* Components */}
-          <div className="w-full flex flex-col space-y-2">
-            {components.map((buttonProps, index) => (
-              <React.Fragment key={index}>
-                <ButtonWithIcon key={index} {...buttonProps} />
-                {index === 0 && isRule ? <div className="text-white text-xl ml-4">규정 즐겨찾기</div> : null}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div>
-          <hr className="mb-3 border border-gray-500" />
-          <div className="w-full mb-3 flex flex-col space-y-2">
-            {footerComponents.map((buttonProps, index) => (
-              <ButtonWithIcon key={index} {...buttonProps} />
-            ))}
+          <div className="flex-none px-2 pb-6">
+            <hr className="mb-3 border border-gray-100" />
+            <div className="space-y-2">
+              {footerComponents.map((buttonProps, index) => (
+                <div
+                  key={index}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    buttonProps.handleClick?.(e);
+                  }}
+                >
+                  <ButtonWithIcon
+                    {...buttonProps}
+                    className={`${buttonProps.styleName} text-white hover:bg-white/10`}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

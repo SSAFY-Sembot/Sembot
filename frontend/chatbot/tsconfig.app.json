@@ -18,16 +18,20 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    
+    "baseUrl": "src", // src 폴더를 기준으로 설정
+    "paths": {
+      "@*": ["./*"],
+      "@assets/*": ["assets/*"],
+      "@configs/*": ["configs/*"],
+      "@apis/*": ["apis/*"],
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"] // 이 부분 확인
+    }
   },
  
   "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "baseUrl": "src", // src 폴더를 기준으로 설정
-    "paths": {
-      "@components/*": ["components/*"] // 절대 경로 설정 예시
-    }
-  },
   "include": ["src/**/*"], // 포함할 파일 경로
   "exclude": ["node_modules", "build"] // 제외할 파일 경로
 }

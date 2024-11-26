@@ -1,17 +1,31 @@
 export type ButtonProps = {
 	icon: string;
 	styleName?: string;
-	// width: string
+	width?: number | string;
 	// TODO
 	onClick?: () => void;
+	disabled?: boolean;
 };
 
-const ButtonWithIcon = ({ icon, styleName, onClick }: ButtonProps) => {
-	return (
-		<div data-ripple-light="true" className={styleName} onClick={onClick}>
-			<img src={icon}></img>
-		</div>
-	);
+const ButtonOnlyIcon = ({
+  icon,
+  styleName,
+  width = 24,
+  onClick = () => {},
+}: ButtonProps) => {
+  return (
+    <div
+      data-ripple-light="true"
+      className={styleName}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+    >
+      <img src={icon} width={width} />{" "}
+      {/* width를 설정하여 아이콘 크기를 변경 */}
+    </div>
+  );
 };
 
-export default ButtonWithIcon;
+export default ButtonOnlyIcon;
